@@ -9,7 +9,7 @@
 		top:78%;
  		left :22.5%;
        position: absolute;
-       width: 52%;/* 68.5em; */
+       width: 74.5%;/* 68.5em; */
        height: 22%;
 	}
 	#chat{
@@ -34,23 +34,44 @@
 		position: absolute;
 		top:4.3em;
  		left: 22.5%;
-       width: 75%;
+       width: 74.5%;
 		height:21px;	/* Height of tabs */
 		border-bottom:1px solid #919b9c;
 	}
+	
+	.dhtmlgoodies_aTab .dhtmlgoodies_aTab-resizer {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+	
 	
 	.dhtmlgoodies_aTab{
 	 	top:5.7em;
 	    left :22.5%;
 	    position: absolute;
-	    width: 52%;
+	    width: 74.5%;
 		border-left:1px solid #919b9c;
 		border-right:1px solid #919b9c;
 		border-bottom:1px solid #919b9c;
 		font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
 		padding:0.2em;
-			
-		
+	}
+	
+	
+	.dhtmlgoodies_aTab-resizer{
+	 	top:5.7em;
+	    left :12.5%;
+	    position: absolute;
+	    width: 74.5%;
+		border-left:1px solid #919b9c;
+		border-right:1px solid #919b9c;
+		border-bottom:1px solid #919b9c;
+		font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+		padding:0.2em;
 	}
 	.dhtmlgoodies_tabPane DIV{
 		float:left;

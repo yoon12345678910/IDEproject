@@ -18,12 +18,16 @@
 	<script type="text/javascript" src="../js/ajax.js"></script>
 	<script type="text/javascript" src="../js/tab-view.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+	
+	<!-- page  -->
+	<link rel="stylesheet" type="text/css" href="../css/page-css/custom.css" />
+	<script src="../js/page-js/modernizr.custom.79639.js"></script>
+
 </head>
 
 <body>
-
-
-            <div class="bs-component">
+            <div>
               <div class="navbar navbar-inverse">
                 <div class="navbar-header">
                   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
@@ -96,8 +100,9 @@
                 </div>
               </div>
             </div><!-- /example -->
-            
-    <div id="workspace">
+
+
+<div id="workspace">
 		<div id = "workspace-nav">
 		 	<b>Workspace</b>
 		</div>
@@ -106,8 +111,7 @@
 			<my-accordion></my-accordion>
 		</div>
 	</div>
-	
-	
+
 	<div id="dhtmlgoodies_tabView1">
 	
 	<div class="dhtmlgoodies_aTab">
@@ -129,15 +133,31 @@
 </div>
 
 
-	 <div id="terminal"></div>
-	 <div id="chat">
-	 	<textarea id='chattextarea' ></textarea>
-	 	<div id='array'>
-	 	<input type="text" id='chatinput'></input>
-	 	<input type="button" id='chatbutton'></input>
-	 	 </div>
-	 	
+ <div id="terminal"></div>
+
+<span id="tblcontents" class="menu-button">Taable of Contents</span>
+
+	<div id="container" class="container">	
+
+			<div class="menu-panel">
+			
+				
+					<h3>Table of Contents</h3>
+					<ul id="menu-toc" class="menu-toc">
+					</ul>
+ 					
+					<div>
+					<textarea id='chattextarea' ></textarea>
+						 <div id='array'>
+	 						<input type="text" id='chatinput'></input>
+	 						<input type="button" id='chatbutton'></input>
+						</div>
+					</div>
+					
+				</div>
+				
 	 </div> 
+
 	
 	
                    <!-- jQuery -->
@@ -151,13 +171,28 @@
 	<script>
    		 var editor = ace.edit("editor");
     	 editor.setTheme("ace/theme/eclipse");
-   		 editor.getSession().setMode("ace/mode/html");
+   		 editor.getSession().setMode("ace/mode/javascript");
 	</script>            
                
     <!-- Tab -->
     <script type="text/javascript">
 		initTabs('dhtmlgoodies_tabView1',Array('untitled01.html', 'untitled02.html'),0,500,400,Array(true,true));
 	</script>
+	
+	
+	<!-- page right  -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script src="../js/page-js/jquery.mousewheel.js"></script>
+		<script src="../js/page-js/jquery.jscrollpane.min.js"></script>
+		<script src="../js/page-js/jquerypp.custom.js"></script>
+		<script src="../js/page-js/jquery.bookblock.js"></script>
+		<script src="../js/page-js/page.js"></script>
+		
+		<script>
+			$(function() {
+				Page.init();
+			});
+		</script>
                
 </body>
 </html>

@@ -1,0 +1,77 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1091" measuredH="670" mockupW="950" mockupH="600">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="141" y="70" w="950" h="600" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>A%20Web%20Page%0Ahttp%3A//homepage/username/</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::MenuBar" x="141" y="141" w="950" h="29" measuredW="733" measuredH="29" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>ContactIcon%7Csmall</icon>
+        <selectedIndex>0</selectedIndex>
+        <text>File%2C%20Edit%2C%20Find%2C%20View%2C%20Window%2C%20Help%2C%20Preview%2C%20%3ERun%2C%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20username%2C%20%20%20%20Share</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Tree" x="141" y="193" w="230" h="450" measuredW="300" measuredH="225" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>.</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::TabBar" x="370" y="170" w="694" h="372" measuredW="150" measuredH="100" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Canvas" x="370" y="542" w="694" h="101" measuredW="100" measuredH="70" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Button" x="141" y="169" w="-1" h="-1" measuredW="89" measuredH="27" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Workspace</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::Label" x="1057" y="204" w="-1" h="-1" measuredW="21" measuredH="66" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Collaborate</text>
+        <textOrientation>down</textOrientation>
+      </controlProperties>
+    </control>
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::Button" x="1057" y="196" w="31" h="115" measuredW="22" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="23" controlTypeID="com.balsamiq.mockups::Icon" x="792" y="143" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>GearIcon%7Csmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="24" controlTypeID="com.balsamiq.mockups::TextArea" x="371" y="197" w="691" h="346" measuredW="200" measuredH="140" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::Menu" x="186" y="168" w="-1" h="-1" measuredW="150" measuredH="167" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>06_beginning_Platform_menu_newfile_project%26bm%3B06_beginning_Platform_menu_newfile_project.bmml%26bm%3B06_beginning_Platform_menu_newfile_project.bmml%26bm%3B06_beginning_Platform_menu_newfile_project.bmml%2C%2C%2C%2C%2C%2C%2C%2C</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2245%2C103%2C195%2C124%22%20href%3D%2206_beginning_Platform_menu_newfile_project.bmml%22%20alt%3D%2206_beginning_Platform_menu_newfile_project%22%20id%3D%2226%22/%3E</map>
+        <selectedIndex>0</selectedIndex>
+        <text>New%20File%0AOpen%0AOpen%20Recent%20%3E%0A---%0ASave%0ASave%20As...%0A%3D%0Aimport%0Aexport</text>
+      </controlProperties>
+    </control>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::Button" x="1058" y="311" w="31" h="65" measuredW="22" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16777215</color>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="28" controlTypeID="com.balsamiq.mockups::Label" x="1059" y="316" w="-1" h="-1" measuredW="21" measuredH="48" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Drawing</text>
+        <textOrientation>down</textOrientation>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
