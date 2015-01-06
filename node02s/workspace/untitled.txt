@@ -10,7 +10,7 @@ var editor = {
 			extraKeys: {
 				"Ctrl-S": function(cm) {
 					self.save();
-				}
+				
 			}
 		});
 		
