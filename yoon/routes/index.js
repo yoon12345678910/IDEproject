@@ -13,7 +13,8 @@ exports.index = function(req, res){
 
 exports.jqFileTree = function(req, res){
 	res.send(jqueryFileTree.getDirList(req, res));
-	//console.log(req.body);
+	//console.log("****************************************req",req);
+	
 };
 
 exports.get_file_contents = function(req, res){
