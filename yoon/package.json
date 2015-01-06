@@ -1,0 +1,26 @@
+{
+  "name": "node02s",
+  "version": "0.0.1",
+  "description": "node02",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yoon",
+  "license": "yoon",
+  "dependencies": {
+  	"colors": ">= 0.6.0-1",
+    "ejs": "0.8.4",
+    "express": "~3.4.8",
+    "socket.io": ">= 0.9.10",
+    "jade": "*",
+    "mysql": "^2.5.3",
+    "rimraf": ">= 2.0.2",
+    "walk": ">= 2.2.1"
+  },
+  "preferGlobal": "true",
+  "devDependencies": {},
+  "keywords": [
+    "test"
+  ]
+}
