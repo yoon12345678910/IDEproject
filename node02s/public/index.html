@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- web terminal -->
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0" />
+        <link rel="stylesheet" href="main.css" type="text/css" />
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+	<!-- Bootstrap Core CSS -->
+    <link href="stylesheets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="stylesheets/css/custom.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+	<!-- Tab CSS && JS -->
+	<link rel="stylesheet" href="stylesheets/css/tab-view.css" type="text/css" media="screen">
+	<script type="text/javascript" src="stylesheets/js/ajax.js"></script>
+	<script type="text/javascript" src="stylesheets/js/tab-view.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+	<!-- page  -->
+	<link rel="stylesheet" type="text/css" href="stylesheets/css/page-css/custom.css" />
+	<script src="stylesheets/js/page-js/modernizr.custom.79639.js"></script>
+	
+	<!-- treeview easyui-->
+	<link rel="stylesheet" type="text/css" href="stylesheets/css/treeview/easyui.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/css/treeview/icon.css">
+ 	<script type="text/javascript" src="stylesheets/js/treeview/jquery.easyui.min.js"></script>
+	
+	<!-- treeview YUI -->
+<script src="http://yui.yahooapis.com/3.11.0pr1/yui/yui-min.js"></script>
+</head>
+
+
+	<!-- realtime -->
+	 <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
+    <script src="/codemirror/lib/codemirror.js"></script>
+    <script src="/codemirror/mode/css/css.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/modules/editor.js"></script>
+    <script src="/modules/collaboration.js"></script>
+    <link rel="stylesheet" href="codemirror/doc/docs.css">
+    <link rel='stylesheet' href="/stylesheets/css/style-editor.css" />
+
+
+<body>
+	<!--navbar  -->
+      <div class="easyui-panel" style="padding:5px;">
+		<a href="#" class="easyui-linkbutton" data-options="plain:true">IDE</a>
+		<a href="#" class="easyui-menubutton" data-options="menu:'#File',iconCls:'icon-edit'">File</a>
+		<a href="#" class="easyui-menubutton" data-options="menu:'#Edit',iconCls:'icon-help'">Edit</a>
+		<a href="#" class="easyui-menubutton" data-options="menu:'#About'">About</a>
+	</div>
+	<div id="File" style="width:150px;">
+		<div>New File</div>
+		<div>Open</div>
+		<div>
+			<span>Open Recent</span>
+			<div>
+				<div>test01.html</div>
+			</div>
+		</div>
+		
+		<div class="menu-sep"></div>
+		<div>Save</div>
+		<div>Save As...</div>
+		
+		<div class="menu-sep"></div>
+		<div>import</div>
+		<div>export</div>
+	</div>
+	
+	<div id="Edit" style="width:100px;">
+		<div>Setting</div>
+	</div>
+	
+	<div id="About" style="width:100px;">
+		<div>About</div>
+	</div>
+
+<!--workspace  -->
+<div id="workspace">
+		<div id = "workspace-nav">
+		 	<b>Workspace</b>
+		</div>
+		
+		<div id="workspace-list">
+			<div id='project_explorer' class='directory_treeview'></div>
+		</div>
+	</div>
+
+
+
+<!--editor-->
+ <div id= "edit_content">
+	<div id="dhtmlgoodies_tabView1">
+		<div class="dhtmlgoodies_aTab">
+			 <textarea id="code" name="code"></textarea>
+		</div>
+		
+		<div class="dhtmlgoodies_aTab">
+			<a href="#" onclick="deleteTab('untitled02.html')">ddd</a>dd<br>
+		</div>
+		<div class="dhtmlgoodies_aTab">
+			<a href="#" onclick="deleteTab('untitled03.html')"></a><br>
+		</div>
+	</div>
+	
+	
+	 <div id="content"></div>
+ </div> 
+ 
+ 
+ <!--Collaborate-->
+ <div id="right_bar">
+ 	<div id="right_bar_back">
+ 		<button id="Collaborate_btn" class="vertical_btn">Collaborate</button>
+ 	</div>
+ </div>
+
+	<!--Chat -->
+	
+	<div id="container" class="container">	
+			<div class="menu-panel">
+
+			<!-- member -->
+					<div id="member_top"><b>Members</b></div>
+						<div class="member_layout">
+					</div>
+					
+			<!-- ot_chat -->		
+					<div id="chat_top"><b>GropChat</b></div>
+					<div class="chatText">
+					
+					
+						<!-- <p id="ot_chat">
+							<span class ="chatBorder"></span>
+							<a href="#" class="authorName">
+								<b>종익</b>
+							</a>
+							<span id="chatmessage">"어허허"<br></span>
+						</p>
+						
+						<p id="ot_chat">
+							<span class ="chatBorder1"></span>
+							<a href="#" class="authorName">
+								<b>원기</b>
+							</a>
+							<span id="chatmessage">"헤헤"<br></span>
+						</p>
+						
+						<p id="ot_chat">
+							<span class ="chatBorder2"></span>
+							<a href="#" class="authorName">
+								<b>You</b>
+							</a>
+							<span id="chatmessage">"김종서ㅎ"<br></span>
+						</p> -->
+						
+						
+					</div>
+						
+				<!-- chat_input  -->
+					<div class="chatContainer">
+						 		<input class="text-input"/>
+					</div>
+					
+			</div>
+	 	</div> 
+
+	<!-- web terminal  -->
+   <script src="/socket.io/socket.io.js"></script>
+   <script src="jquery.js"></script>
+   <script src="init.js"></script>
+   <script src="init-mobile.js"></script>
+	
+	
+                   <!-- jQuery -->
+    <script src="stylesheets/js/jquery.js"></script>
+	<script src='stylesheets/js/jquery-1.11.1.js'></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="stylesheets/js/bootstrap.min.js"></script>
+             
+   <!-- Ace Editor -->         
+   <script src="stylesheets/js/ace.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+   		 var editor = ace.edit("editor");
+    	 editor.setTheme("ace/theme/eclipse");
+   		 editor.getSession().setMode("ace/mode/javascript");
+	</script>            
+               
+    <!-- Tab -->
+    <script type="text/javascript">
+		initTabs('dhtmlgoodies_tabView1',Array('untitled01.html', 'untitled02.html'),0,500,400,Array(true,true));
+	</script>
+	
+	
+	<!-- page right  -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script src="stylesheets/js/page-js/jquery.mousewheel.js"></script>
+		<script src="stylesheets/js/page-js/jquery.jscrollpane.min.js"></script>
+		<script src="stylesheets/js/page-js/jquerypp.custom.js"></script>
+		<script src="stylesheets/js/page-js/jquery.bookblock.js"></script>
+		<script src="stylesheets/js/page-js/page.js"></script>
+		
+		<script>
+			$(function() {
+				Page.init();
+			});
+		  
+		/*Collaborate-slide*/
+		  $("#Collaborate_btn").click(event, function() {
+		  	 if($('#edit_content').hasClass('smallContent')) {
+			      $('#edit_content').removeClass('smallContent');
+			      $('#sidebar-resizer').removeClass('smallContent');
+				  $('#Collaborate_btn').removeClass('btn_yellow');
+			      
+			    } else {
+			      $('#edit_content').addClass('smallContent');
+			      $('#sidebar-resizer').addClass('smallContent');
+			      $('#Collaborate_btn').addClass('btn_yellow');
+			    }
+			});
+		
+		/*Member_access*/
+			$('.writebutton').click(function(event){
+				 $('.writebutton').addClass('selectButton');
+				 $('.readbutton').removeClass('selectButton');
+			});
+		
+			$('.readbutton').click(function(event){
+				 $('.readbutton').addClass('selectButton');
+				 $('.writebutton').removeClass('selectButton');
+			});
+			
+		/*access-test */	
+			/*종익 */
+				 $('.writebutton1').click(function(event){
+				 $('.writebutton1').addClass('selectButton');
+				 $('.readbutton1').removeClass('selectButton');
+			});
+		
+			     $('.readbutton1').click(function(event){
+				 $('.readbutton1').addClass('selectButton');
+				 $('.writebutton1').removeClass('selectButton');
+			});
+			
+			/*원기  */
+			
+ 		      	 $('.writebutton2').click(function(event){
+				 $('.writebutton2').addClass('selectButton');
+				 $('.readbutton2').removeClass('selectButton');
+			});
+		
+			     $('.readbutton2').click(function(event){
+				 $('.readbutton2').addClass('selectButton');
+				 $('.writebutton2').removeClass('selectButton');
+			});
+			     
+		/*kickout-test */	
+			$('.ktest1').click(function(event){
+				 $('.test1').empty();
+			});
+		
+			$('.ktest2').click(function(event){
+				 $('.test2').empty();
+			});
+		
+		</script>
+		
+	<!-- treeview -->
+		<script>
+	
+		</script>
+		
+		<!--realtime  -->
+		    <script>
+    	var username = "testuser" + Math.ceil(Math.random() * 100);
+    	var filepath = "untitled.txt";
+    	
+    	var dont_update_first = false;
+    	var socket = null;
+    	
+		$(document).ready(function () {
+			socket = io.connect();
+			
+			editor.init();
+			editor.load();
+			
+			collaboration.init();
+			collaboration.join();
+		});
+    </script>
+	
+               
+</body>
+</html>
