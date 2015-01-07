@@ -1,60 +1,40 @@
-var editor = {
-	codemirror: null,
+function getCompletions(token, context) {
+  var found = [], start = token.string;
+  
+  function maybeAdd(str) {
+    if (str.indexOf(start) == 0) found.push(str);
+  }
+  
+
 	
-	init: function () {
-		var self = this;
-		
-		this.codemirror = CodeMirror.fromTextArea(document.getElementById("code"), {
-			lineNumbers: true,
-			lineWrapping: true,
-			extraKeys: {
-				"Ctrl-S": function(cm) {
-					self.save();
-				
-			}
-		});
-		
-		this.codemirror.on('change', function(i, e) {
-			if(collaboration.updating_process_running == false){
-				collaboration.update_change(e);
-			}
-		});
-		
-		this.codemirror.on('cursorActivity', function(i, e) {
-			collaboration.update_cursor({
-				line: self.codemirror.getCursor().line,
-				ch: self.codemirror.getCursor().ch
-			});
-		});
-		
-		$("#input input").keypress(function(evt){
-			if((evt.keyCode || evt.which) == 13){
-				evt.preventDefault();
-				
-				collaboration.message_process($(this).val());
-				$(this).val("");
-			}
-		});
-		
-		
-	},
+  function gatherCompletions(obj) {
 	
-	load: function () {
-		var self = this;
-		
-		$.get('/get_file_contents', function (data) {
-			self.codemirror.setValue(data);
-			self.codemirror.focus();
-		});
-	},
-	
-	save: function () {
-		var postdata = {
-			contents: this.codemirror.getValue()
-		};
-		
-		$.post('/put_file_contents', postdata, function (data) {
-			$("#messages").append("<div class='alarm'>File saved!</div>");
-		});
-	}
-};
+    if (typeof obj == "string") forEach(stringProps, maybeAdd);
+    else if (obj instanceof Array) forEach(arrayProps, maybeAdd);
+    else if (obj instanceof Function) forEach(funcProps, maybeAdd);
+    for (var name in obj) maybeAdd(name);
+  }
+
+  if (context) {
+    // If this is a property, see if it belongs to some object we can
+    // find in the current environment.
+    var obj = context.pop(), base;
+    if (obj.className == "js-variable")
+      base = window[obj.string];
+    else if (obj.className == "js-string")
+      base = "";
+    else if (obj.className == "js-atom")
+      base = 1;
+    while (base != null && context.length)
+      base = base[context.pop().string];
+    if (base != null) gatherCompletions(base);
+  }
+  else {
+    // If not, just look in the window object and any local scope
+    // (reading into JS mode internals to get at the local variables)
+    for (var v = token.state.localVars; v; v = v.next) maybeAdd(v.name);
+    gatherCompletions(window);
+    forEach(keywords, maybeAdd);
+  }
+  return found;
+}

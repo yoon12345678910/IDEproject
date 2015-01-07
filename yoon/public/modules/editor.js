@@ -1,6 +1,5 @@
 var editor = {
 	codemirror: null,
-	
 	//에디터를 초기화할 때 호출되는 메서드입니다.
 	init: function () {
 		var self = this;
@@ -10,10 +9,9 @@ var editor = {
 			lineNumbers: true,
 			lineWrapping: true,
 			extraKeys: {
-				"Ctrl-S": function(cm) {
-					self.save();
-				}
-			}
+				"Ctrl-S": function(cm) {self.save();}, "Ctrl-Space": "autocomplete"
+			},
+			mode: {name: "javascript", globalVars: true}
 		});
 		
 		//코드 미러 에디터의 변경사항이 발생할 때 호출되는 콜백 함수를 지정하는 부분입니다.

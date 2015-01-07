@@ -21,16 +21,47 @@
 	<script src="stylesheets/js/page-js/modernizr.custom.79639.js"></script>
 	
 	<!-- realTime CSS & JS-->
-	 <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
-    <script src="/codemirror/lib/codemirror.js"></script>
-    <script src="/codemirror/mode/css/css.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/modules/editor.js"></script>
     <script src="/modules/collaboration.js"></script>
     <script src="/modules/treeview.js"></script>
-    <link rel="stylesheet" href="codemirror/doc/docs.css">
+   
     <link rel='stylesheet' href="/stylesheets/css/style-editor.css" />
-
+    
+    <!--codemirror -->
+    <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
+    <script src="/codemirror/lib/codemirror.js"></script>
+    <script src="/codemirror/mode/css/css.js"></script>
+    <link rel="stylesheet" href="codemirror/doc/docs.css">
+    
+    
+    	
+    	<!-- mode -->
+    <script src="/stylesheets/js/mode/javascript/javascript.js"></script>
+    
+    	<!-- hint -->
+    <link rel="stylesheet" href="/stylesheets/css/addon/hint/show-hint.css">
+    <script src="/stylesheets/js/addon/hint/show-hint.js"></script>
+	<script src="/stylesheets/js/addon/hint/javascript-hint.js"></script>
+    
+    	<!-- theme -->
+    <link rel="stylesheet" href="/codemirror/theme/ambiance.css">
+    <link rel="stylesheet" href="/codemirror/theme/blackboard.css">
+	<link rel="stylesheet" href="/codemirror/theme/cobalt.css">
+	<link rel="stylesheet" href="/codemirror/theme/eclipse.css">
+	<link rel="stylesheet" href="/codemirror/theme/elegant.css">
+	<link rel="stylesheet" href="/codemirror/theme/eclipse.css">
+	<link rel="stylesheet" href="/codemirror/theme/erlang-dark.css">
+	<link rel="stylesheet" href="/codemirror/theme/lesser-dark.css">
+	<link rel="stylesheet" href="/codemirror/theme/monokai.css">
+	<link rel="stylesheet" href="/codemirror/theme/neat.css">
+	<link rel="stylesheet" href="/codemirror/theme/night.css">
+	<link rel="stylesheet" href="/codemirror/theme/rubyblue.css">
+	<link rel="stylesheet" href="/codemirror/theme/solarized.css">
+	<link rel="stylesheet" href="/codemirror/theme/twilight.css">
+	<link rel="stylesheet" href="/codemirror/theme/xq-dark.css">
+	<link rel="stylesheet" href="/codemirror/theme/vibrant-ink.css">
+	
 	<!-- treeView CSS -->
 	<link rel="stylesheet" href="/stylesheets/css/jqueryFileTree.css">
 	</head>
@@ -116,6 +147,7 @@
  	<div id="right_bar">
 	 	<div id="right_bar_back">
 	 		<button id="Collaborate_btn" class="vertical_btn">Collaborate</button>
+	 		<button id="memo_btn" class="memo_offC ">Memo</button>
 	 	</div>
  	</div>
 
@@ -137,6 +169,37 @@
 					<input class="text-input"/>
 				</div>
 					
+		</div>
+	 </div> 
+	 
+	 
+	 
+	 <div id="memo_container" class="container">	
+		<div class="menu-panel">
+		
+	<!-- codemirror theme -->
+		<p>Select a theme: <select onchange="selectTheme()" id=select>
+			    <option selected>default</option>
+			    
+			    <option>ambiance</option>
+			    <option>blackboard</option>
+			    <option>cobalt</option>
+			    <option>eclipse</option>
+			    <option>elegant</option>
+			    <option>erlang-dark</option>
+			    <option>lesser-dark</option>
+			    <option>monokai</option>
+			    <option>neat</option>
+			    <option>neo</option>
+			    <option>night</option>
+			    <option>rubyblue</option>
+			    <option>solarized</option>
+			    <option>twilight</option>
+			    <option>vibrant-ink</option>
+			    <option>xq-dark</option>
+			</select>
+		</p>
+
 		</div>
 	 </div> 
 
@@ -186,10 +249,11 @@
 		});
 		</script>
 		
-		<!--Collaborate-slide  -->
+		<!--Collaborate-slide && memo -->
 		<script>
 			$(function() {
 				Page.init();
+				MemoPage.init();
 			});
 		
 		  $("#Collaborate_btn").click(event, function() {
@@ -204,6 +268,22 @@
 			      $('#Collaborate_btn').addClass('btn_yellow');
 			    }
 			});
+		
+		  $("#memo_btn").click(event, function() {
+		  	 if($('#edit_content').hasClass('smallContent')) {
+			      $('#edit_content').removeClass('smallContent');
+			      $('#sidebar-resizer').removeClass('smallContent');
+				  $('#memo_btn').removeClass('memo_onC');
+			      
+			    } else {
+			      $('#edit_content').addClass('smallContent');
+			      $('#sidebar-resizer').addClass('smallContent');
+			      $('#memo_btn').addClass('memo_onC');
+			    }
+			});
+	
+		  
+		  
 		</script>
 		
 		<!-- realtime  -->
@@ -225,6 +305,24 @@
 			
 		});
     </script>
+    
+    <!-- codemirror theme -->
+    <script>
+	  
+	  var input = document.getElementById("select");
+	  function selectTheme() {
+	    var theme = input.options[input.selectedIndex].innerHTML;
+	    editor.codemirror.setOption("theme", theme);
+	  }
+	  var choice = document.location.search &&
+	               decodeURIComponent(document.location.search.slice(1));
+	  if (choice) {
+	    input.value = choice;
+	    editor.codemirror.setOption("theme", choice);
+	  }
+	</script>
+	
+	
                
 </body>
 </html>

@@ -121,7 +121,7 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#EFF5FF,endColorstr=#E0ECFF,GradientType=0);
 }
 .panel-body {
-  background-color: #ffffff;
+  background: #fff url(../../images/nav.png) repeat-x center left;
   color: #000000;
   font-size: 12px;
 }
