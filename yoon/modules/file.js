@@ -6,12 +6,16 @@
 
 var fs = require('fs');
 
-
 module.exports = {
 	//파일을 불러오는 부분입니다. 여기에서는 고정된 파일 하나만 사용합니다.
-	load: function () {
-		var data = fs.readFileSync(process.cwd() + "/workspace/untitled.js");
-		
+	load: function (filename) {
+		var ff;
+		if(!filename){
+			ff = "/workspace/untitled.js";
+		}else{
+			ff = "/" + filename;	
+		}
+		var data = fs.readFileSync(process.cwd() + ff);
 		return data;
 	},
 	

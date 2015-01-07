@@ -1,3 +1,5 @@
+document.write("<script src='/modules/editor.js'></script>");
+
 if(jQuery) (function($){
 	
 	$.extend($.fn, {
@@ -29,8 +31,32 @@ if(jQuery) (function($){
 				
 				function bindTree(t) {
 					$(t).find('LI A').bind(o.folderEvent, function() {
+						
+						
+					// set up data object to send back via trigger
+						var data = {};
+						data.li = $(this).closest('li');
+						data.type = ( data.li.hasClass('directory') ? 'directory' : 'file' );
+						data.value	= $(this).text();
+						data.rel	= $(this).prop('rel');
+						var relLength = $(this).prop('rel').length;
+						
+						data.rel = $(this).prop('rel').substring(1,relLength);
+						
+						var postdata = {
+								cf: data.rel
+							};
+						
+						$.post('/post_file_load',  postdata, function (data) {
+							editor.codemirror.setValue(data);
+							editor.codemirror.focus();
+						});
+						
+						
 						if( $(this).parent().hasClass('directory') ) {
 							if( $(this).parent().hasClass('collapsed') ) {
+						
+								
 								// Expand
 								if( !o.multiFolder ) {
 									$(this).parent().parent().find('UL').slideUp({ duration: o.collapseSpeed, easing: o.collapseEasing });
@@ -45,10 +71,18 @@ if(jQuery) (function($){
 								$(this).parent().removeClass('expanded').addClass('collapsed');
 							}
 						} else {
+							
+							
+						// this is a file click, return file information
 							h($(this).attr('rel'));
+							console.log("rel", data.rel);
+							
+							
+							_trigger($(this), 'filetreeclicked', data);
 						}
 						return false;
 					});
+					
 					// Prevent A from triggering the # on non-click events
 					if( o.folderEvent.toLowerCase != 'click' ) $(t).find('LI A').bind('click', function() { return false; });
 				}
@@ -56,8 +90,34 @@ if(jQuery) (function($){
 				$(this).html('<ul class="jqueryFileTree start"><li class="wait">' + o.loadMessage + '<li></ul>');
 				// Get the initial file list
 				showTree( $(this), escape(o.root) );
+				
+			// wrapper to append trigger type to data
+				function _trigger(element, eventType, data) {
+				data.trigger = eventType;
+				element.trigger(eventType, data);
+				}
+				// checkbox event (multiSelect)
+				$(this).on('change', 'input:checkbox' , function(){
+				var data = {};
+				data.li = $(this).closest('li');
+				data.type	= ( data.li.hasClass('directory') ? 'directory' : 'file' );
+				data.value	= data.li.children('a').text();
+				data.rel	= data.li.children('a').prop('rel');
+				// propagate check status to (visible) child checkboxes
+				data.li.find('input:checkbox').prop( 'checked', $(this).prop('checked') );
+				// set triggers
+				if( $(this).prop('checked') ){
+				_trigger($(this), 'filetreechecked', data);
+				}
+				else
+				_trigger($(this), 'filetreeunchecked', data);
+				});
+				
+				
+				
 			});
 		}
 	});
+	
 	
 })(jQuery);

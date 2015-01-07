@@ -24,7 +24,6 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="/modules/editor.js"></script>
     <script src="/modules/collaboration.js"></script>
-    <script src="/modules/treeview.js"></script>
    
     <link rel='stylesheet' href="/stylesheets/css/style-editor.css" />
     
@@ -33,7 +32,6 @@
     <script src="/codemirror/lib/codemirror.js"></script>
     <script src="/codemirror/mode/css/css.js"></script>
     <link rel="stylesheet" href="codemirror/doc/docs.css">
-    
     
     	
     	<!-- mode -->
@@ -71,18 +69,14 @@
 	<link rel="stylesheet" type="text/css" href="stylesheets/css/easyUi/icon.css">
  	<script type="text/javascript" src="stylesheets/js/easyUi/jquery.easyui.min.js"></script>
 
-
-
-
-
 <body>
 
 <!--navBar  -->
    <div class="easyui-panel" style="padding:5px;">
-		<a href="#" class="easyui-linkbutton" data-options="plain:true">IDE</a>
+		<a href="#" class="easyui-linkbutton" data-options="plain:true"><img src="stylesheets/images/logo.png"/></a>
 		<a href="#" class="easyui-menubutton" data-options="menu:'#File',iconCls:'icon-edit'">File</a>
 		<a href="#" class="easyui-menubutton" data-options="menu:'#Edit',iconCls:'icon-help'">Edit</a>
-		<a href="#" class="easyui-menubutton" data-options="menu:'#About'">About</a>
+		<a href="#" class="easyui-menubutton" data-options="menu:'#About',iconCls:'icon-tip'">About</a>
    </div>
    
    <div id="File" style="width:150px;">
@@ -235,7 +229,7 @@
 	<!--treeview-->
 	<script>
 	$(document).ready (function() {
-		$('.filetree').fileTree({root: '../', script: '/jqueryFileTree', folderEvent: 'dblclick'}, function(file) {
+		$('.filetree').fileTree({root: './', script: '/jqueryFileTree', folderEvent: 'dblclick'}, function(file) {
 		});
 		// event listeners
 		$('.filetree')
