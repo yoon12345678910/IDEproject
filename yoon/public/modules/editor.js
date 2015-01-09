@@ -1,11 +1,14 @@
 var editor = {
+		
 	codemirror: null,
+	num : null ,
 	//에디터를 초기화할 때 호출되는 메서드입니다.
 	init: function () {
 		var self = this;
 		
+		console.log("index", this.num);
 		//코드 미러를 이용하여 에디터를 생성하는 부분입니다.
-		this.codemirror = CodeMirror.fromTextArea(document.getElementById("code"), {
+		this.codemirror = CodeMirror.fromTextArea(document.getElementById("code_" + this.num), {
 			lineNumbers: true,
 			lineWrapping: true,
 			extraKeys: {
@@ -31,6 +34,11 @@ var editor = {
 			});
 		});
 		
+	},
+	
+	count: function(){
+		//this.num++;
+		console.log("num", this.num);
 	},
 	
 	//파일을 읽을 때 호출되는 메서드입니다.

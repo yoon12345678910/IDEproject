@@ -121,19 +121,11 @@
  	<div id= "edit_content">
 		<div id="dhtmlgoodies_tabView1">
 			<div class="dhtmlgoodies_aTab">
-				 <textarea id="code" name="code"></textarea>
-			</div>
-			
-			<div class="dhtmlgoodies_aTab">
-				<a href="#" onclick="deleteTab('untitled02.html')">ddd</a>dd<br>
-			</div>
-			
-			<div class="dhtmlgoodies_aTab">
-				<a href="#" onclick="deleteTab('untitled03.html')"></a><br>
+				 <textarea id="code_0" name="code_0"></textarea>
 			</div>
 		</div>
 	
-<!--editor-->	
+<!--terminal-->	
 	 	<div id="content"></div>
  	</div> 
  
@@ -210,7 +202,7 @@
              
     <!-- Tab -->
     <script type="text/javascript">
-		initTabs('dhtmlgoodies_tabView1',Array('untitled01.html', 'untitled02.html'),0,500,400,Array(true,true));
+		
 	</script>
 	
 	<!-- page right  -->
@@ -222,15 +214,71 @@
 	
 	<!-- treeview -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script src="stylesheets/js/jqueryFileTree.js"></script>
+	<script src="modules/jqueryFileTree.js"></script>
 	
 	<!-- ===============================================================================  -->
 	
 	<!--treeview-->
 	<script>
-	$(document).ready (function() {
+	
+	var username = "testuser" + Math.ceil(Math.random() * 100);
+	var filepath = "untitled.js";
+	
+	var dont_update_first = false;
+	var socket = null;
+	
+	
+	$(document).ready(function() {
+		var index = 1;	
+		function clone(obj) {
+	    if (null == obj || "object" != typeof obj) return obj;
+	    var copy = obj.constructor();
+	    for (var attr in obj) {
+	        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+	    }
+	    return copy;
+		}
+		
+		var a = clone(editor);
+		
+		socket = io.connect();
+		
+		editor.num = 0;
+		editor.init();
+		editor.load();
+			
+		collaboration.init();
+		collaboration.join(); 
+		
+		initTabs('dhtmlgoodies_tabView1',Array('app.js'),0,500,400,Array(true));
+		
 		$('.filetree').fileTree({root: './', script: '/jqueryFileTree', folderEvent: 'dblclick'}, function(file) {
+			
+			var relLength = file.length;
+			var data_path = file.substring(1,relLength);
+			var data_name = file.substring(2,relLength);
+			
+			
+			function createTab(){
+				$.get('/get_file_contents',  {path: data_path}, function (data) {
+					var b = clone(editor);
+					
+					$('#tabViewdhtmlgoodies_tabView1_' + index).append(
+							'<textarea id =' + 'code_' + index + ' ' + 'name=' + 'code_' + index + '></textarea>'
+					); 
+					b.num = index;
+					b.init();
+					b.codemirror.setValue(data);
+					b.codemirror.focus();
+					index++;
+					});
+				
+				
+			}
+			createTab();
+			createNewTab('dhtmlgoodies_tabView1', data_name, '', '',true);
 		});
+		
 		// event listeners
 		$('.filetree')
 		.on('filetreeexpand', function (e, data) { console.log(data); })
@@ -282,22 +330,7 @@
 		
 		<!-- realtime  -->
 		<script>
-    	var username = "testuser" + Math.ceil(Math.random() * 100);
-    	var filepath = "untitled.js";
     	
-    	var dont_update_first = false;
-    	var socket = null;
-    	
-		$(document).ready(function () {
-			socket = io.connect();
-			
-			editor.init();
-			editor.load();
-			
-			collaboration.init();
-			collaboration.join();
-			
-		});
     </script>
     
     <!-- codemirror theme -->

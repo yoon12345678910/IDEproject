@@ -1,5 +1,5 @@
 document.write("<script src='/modules/editor.js'></script>");
-
+var self = this;
 if(jQuery) (function($){
 	
 	$.extend($.fn, {
@@ -39,19 +39,19 @@ if(jQuery) (function($){
 						data.type = ( data.li.hasClass('directory') ? 'directory' : 'file' );
 						data.value	= $(this).text();
 						data.rel	= $(this).prop('rel');
-						var relLength = $(this).prop('rel').length;
 						
+	/*					
+						var relLength = $(this).prop('rel').length;
 						data.rel = $(this).prop('rel').substring(1,relLength);
 						
-						var postdata = {
-								cf: data.rel
-							};
-						
-						$.post('/post_file_load',  postdata, function (data) {
-							editor.codemirror.setValue(data);
-							editor.codemirror.focus();
+						//서버로 선택한 파일이름(경로 ex: /workspace/test.html) 전송.
+						$.get('/get_file_contents',  { path: data.rel}, function (data) {
+						//코드미러의 내용을 받아온 파일 내용으로 채웁니다.
+							console.log("self",self);
+							self.editor.codemirror.setValue(data);
+							self.editor.codemirror.focus();
 						});
-						
+						*/
 						
 						if( $(this).parent().hasClass('directory') ) {
 							if( $(this).parent().hasClass('collapsed') ) {

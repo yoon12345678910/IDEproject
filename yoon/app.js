@@ -40,9 +40,6 @@ app.get('/get_file_contents', routes.get_file_contents);
 app.post('/put_file_contents', routes.put_file_contents);
 app.post('/jqueryFileTree', routes.jqFileTree);
 
-
-app.post('/post_file_load', routes.fileLoad);
-
 server = http.createServer(app);
 io = socketio.listen(server);
 

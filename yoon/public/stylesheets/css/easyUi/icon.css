@@ -5,10 +5,7 @@
 	background:url('../../icons/edit_add.png') no-repeat center center;
 }
 .icon-edit{
-	background:url('../../icons/icons.jpg') no-repeat;
-	background-position: -30px -30px;
-	width: 30px;
-	height: 30px;
+	background:url('../../icons/pencil.png') no-repeat center center;
 }
 .icon-clear{
 	background:url('../../icons/clear.png') no-repeat center center;

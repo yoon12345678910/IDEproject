@@ -1,8 +1,3 @@
-/**
- * author: sung-tae ryu
- * email: xenoz0718@gmail.com
- * node.js book example, Freelec
- **/
 
 //Array 객체에 기본 메서드로 removeByValue라는 이름의 메서드를 확장하였습니다. 이 메서드는 전달받은 값을 이용하여 배열 중 해당 원소를 삭제합니다.
 Array.prototype.removeByValue = function(val) {

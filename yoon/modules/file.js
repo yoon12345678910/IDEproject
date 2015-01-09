@@ -1,13 +1,8 @@
-/**
- * author: sung-tae ryu
- * email: xenoz0718@gmail.com
- * node.js book example, Freelec
- **/
 
 var fs = require('fs');
 
 module.exports = {
-	//파일을 불러오는 부분입니다. 여기에서는 고정된 파일 하나만 사용합니다.
+	//파일을 불러오는 부분입니다.
 	load: function (filename) {
 		var ff;
 		if(!filename){

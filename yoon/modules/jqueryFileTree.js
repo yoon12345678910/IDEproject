@@ -1,9 +1,3 @@
-/**
-*	jQuery File Tree Node.js Connector
-*	Version 1.0
-*	wangpeng_hit@live.cn
-*	21 May 2014
-*/
 var fs = require('fs');
 
 var _getDirList = function(request, response) {
