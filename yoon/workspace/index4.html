@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/custom.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+	<!-- Tab CSS && JS -->
+	<link rel="stylesheet" href="css/tab-view.css" type="text/css" media="screen">
+	<script type="text/javascript" src="js/ajax.js"></script>
+	<script type="text/javascript" src="js/tab-view.js"></script>
+	
+	<!-- jQuery -->
+	<script src="js/jquery-2.1.3.js"></script>
+	
+	<!-- page  -->
+	<link rel="stylesheet" type="text/css" href="css/page-css/custom.css" />
+	<script src="js/page-js/modernizr.custom.79639.js"></script>
+
+	<!-- treeview -->
+	 <link rel="stylesheet" type="text/css" href="css/treeview/easyui.css">
+	<link rel="stylesheet" type="text/css" href="css/treeview/icon.css">
+ 	<script type="text/javascript" src="js/treeview/jquery.easyui.min.js"></script>
+
+
+</head>
+
+<body>
+	<!--navbar  -->
+           <div class = "navbar-top">
+              <div class="navbar navbar-inverse">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="#">IDE</a>
+                </div>
+                
+                <div class="navbar-collapse collapse navbar-inverse-collapse">
+                  <ul class="nav navbar-nav">
+                   
+                    
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">File</a>
+                      <ul class="dropdown-menu">
+                        <li><a href="#" 
+                        onclick="createNewTab('dhtmlgoodies_tabView1',
+                        		'Untitled.html',
+                        		'','externalfile.html',true);return false">New File</a>
+                        </li>
+                        <li><a href="#">Open</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Save</a></li>
+                        <li><a href="#">Save As...</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Import</a></li>
+                        <li><a href="#">Export</a></li>
+                      </ul>
+                    </li>
+                    
+                     <li><a href="#">Edit</a></li>
+                     <li><a href="#">Find</a></li>
+                     <li><a href="#">View</a></li>
+                     <li><a href="#">Window</a></li>
+                     <li><a href="#">Help</a></li>
+                    
+                  </ul>
+                   	<ul class="nav navbar-nav navbar-middle">
+                   		<li><a href="#">Preview</a></li>
+                   		 <li>
+                   		 	<a href="#" >
+                    				<i class="btn btn-success btn-xs glyphicon glyphicon-play"></i>
+                   			 Run</a>
+                    		</li>
+                   	</ul>
+                  
+                  
+                  <ul class="nav navbar-nav navbar-right">
+                  
+                   <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Username</a>
+                      <ul class="dropdown-menu">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Logout</a></li>
+                      </ul>
+                    </li>
+                  
+                    <li><a href="#">Share</a></li>
+                  		
+                    <li class="btn">
+                    <a href="#">
+                    	<i class="glyphicon glyphicon-cog"></i>
+                    </a>
+                    </li>
+                    
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+
+<!--workspace  -->
+<div id="workspace">
+		<div id = "workspace-nav">
+		 	<b>Workspace</b>
+		</div>
+		
+		<div id="workspace-list">
+	
+	<div style="margin:20px 0;"></div>
+	<div class="easyui-panel" style="padding:5px">
+		<ul id="tt" class="easyui-tree" data-options="
+				url: 'tree_data1.json',
+				method: 'get',
+				animate: true,
+				dnd:true,
+				onContextMenu: function(e,node){
+					e.preventDefault();
+					$(this).tree('select',node.target);
+					$('#mm').menu('show',{
+						left: e.pageX,
+						top: e.pageY
+					});
+					
+				},
+				onDblClick: function(node){
+					$(this).tree('beginEdit',node.target);
+				}
+				"></ul>
+	</div>
+	<div id="mm" class="easyui-menu" style="width:120px;">
+		<div onclick="append()" data-options="iconCls:'icon-add'">Append</div>
+		<div onclick="removeit()" data-options="iconCls:'icon-remove'">Remove</div>
+		<div class="menu-sep"></div>
+		<div onclick="expand()">Expand</div>
+		<div onclick="collapse()">Collapse</div>
+	</div>
+			
+				
+			
+		</div>
+	</div>
+	
+	
+
+
+
+<!--editor-->
+ <div id= "edit_content">
+	<div id="dhtmlgoodies_tabView1">
+		<div class="dhtmlgoodies_aTab">
+			<pre id="editor">function foo(items) {
+				    var i;
+				    for (i = 0; i &lt; items.length; i++) {
+				        alert("Ace Rocks " + items[i]);
+				    }
+				}
+				</pre>
+		</div>
+		
+		<div class="dhtmlgoodies_aTab">
+			<a href="#" onclick="deleteTab('untitled02.html')">ddd</a>dd<br>
+		</div>
+		<div class="dhtmlgoodies_aTab">
+			<a href="#" onclick="deleteTab('untitled03.html')"></a><br>
+		</div>
+	</div>
+	
+	
+	 <div id="content"></div>
+ </div> 
+ 
+ 
+ <!--Collaborate-->
+ <div id="right_bar">
+ 	<div id="right_bar_back">
+ 		<button id="Collaborate_btn" class="vertical_btn">Collaborate</button>
+ 	</div>
+ </div>
+
+	<!--Chat -->
+	
+	<div id="container" class="container">	
+			<div class="menu-panel">
+
+			<!-- member -->
+					<div id="member_top"><b>Members</b></div>
+					<div class="member_layout">
+					
+						<div class="member_tree_row">
+							<span id="onoff"></span>
+							<span class="member_user">You</span>
+							<div class="access_control">
+								<div class="writebutton selectButton">RW</div>
+								<div class="readbutton">R</div>
+							</div>
+							<div class="kickout">
+								<i class="glyphicon glyphicon-trash"></i>
+							</div>
+						</div>
+						
+						<div class="member_tree_row test1">
+							<div id="onoff1"></div>
+							<span class="member_user ">종익</span>
+							<div class="access_control">
+								<div class="writebutton1">RW</div>
+								<div class="readbutton1 selectButton">R</div>
+							</div>
+							<div class="kickout ktest1">
+								<i class="glyphicon glyphicon-trash"></i>
+							</div>
+						</div>
+						
+						<div class="member_tree_row test2">
+							<div id="onoff2"></div>
+							<span class="member_user">원기</span>
+							<div class="access_control">
+								<div class="writebutton2 selectButton">RW</div>
+								<div class="readbutton2 ">R</div>
+							</div>
+							<div class="kickout ktest2">
+								<i class="glyphicon glyphicon-trash"></i>
+							</div>
+						</div>
+						
+					</div>
+					
+			<!-- ot_chat -->		
+					<div id="chat_top"><b>GropChat</b></div>
+					<div class="chatText">
+					
+					
+						<p id="ot_chat">
+							<span class ="chatBorder"></span>
+							<a href="#" class="authorName">
+								<b>종익</b>
+							</a>
+							<span id="chatmessage">"어허허"<br></span>
+						</p>
+						
+						<p id="ot_chat">
+							<span class ="chatBorder1"></span>
+							<a href="#" class="authorName">
+								<b>원기</b>
+							</a>
+							<span id="chatmessage">"헤헤"<br></span>
+						</p>
+						
+						<p id="ot_chat">
+							<span class ="chatBorder2"></span>
+							<a href="#" class="authorName">
+								<b>You</b>
+							</a>
+							<span id="chatmessage">"김종서ㅎ"<br></span>
+						</p>
+						
+						
+					</div>
+						
+				<!-- chat_input  -->
+					<div class="chatContainer">
+						 		<textarea class="text-input" wrap="soft" spellcheck="false"></textarea>
+					<button class="textSend">send</button>
+					</div>
+					
+			</div>
+	 	</div> 
+	 	
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+             
+   <!-- Ace Editor -->         
+   <script src="js/ace.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+   		 var editor = ace.edit("editor");
+    	 editor.setTheme("ace/theme/eclipse");
+   		 editor.getSession().setMode("ace/mode/javascript");
+	</script>            
+               
+    <!-- Tab -->
+    <script type="text/javascript">
+		initTabs('dhtmlgoodies_tabView1',Array('untitled01.html', 'untitled02.html'),0,500,400,Array(true,true));
+	</script>
+	
+	
+	<!-- page right  -->
+		<script src="js/page-js/jquery.mousewheel.js"></script>
+		<script src="js/page-js/jquery.jscrollpane.min.js"></script>
+		<script src="js/page-js/jquerypp.custom.js"></script>
+		<script src="js/page-js/jquery.bookblock.js"></script>
+		<script src="js/page-js/page.js"></script>
+		
+		
+		<script>
+			$(function() {
+				Page.init();
+			});
+		  
+		/*Collaborate-slide*/
+		  $("#Collaborate_btn").click(event, function() {
+		  	 if($('#edit_content').hasClass('smallContent')) {
+			      $('#edit_content').removeClass('smallContent');
+			      $('#sidebar-resizer').removeClass('smallContent');
+				  $('#Collaborate_btn').removeClass('btn_yellow');
+			      
+			    } else {
+			      $('#edit_content').addClass('smallContent');
+			      $('#sidebar-resizer').addClass('smallContent');
+			      $('#Collaborate_btn').addClass('btn_yellow');
+			    }
+			});
+		
+		/*Member_access*/
+			$('.writebutton').click(function(event){
+				 $('.writebutton').addClass('selectButton');
+				 $('.readbutton').removeClass('selectButton');
+			});
+		
+			$('.readbutton').click(function(event){
+				 $('.readbutton').addClass('selectButton');
+				 $('.writebutton').removeClass('selectButton');
+			});
+			
+		/*access-test */	
+			/*종익 */
+				 $('.writebutton1').click(function(event){
+				 $('.writebutton1').addClass('selectButton');
+				 $('.readbutton1').removeClass('selectButton');
+			});
+		
+			     $('.readbutton1').click(function(event){
+				 $('.readbutton1').addClass('selectButton');
+				 $('.writebutton1').removeClass('selectButton');
+			});
+			
+			/*원기  */
+			
+ 		      	 $('.writebutton2').click(function(event){
+				 $('.writebutton2').addClass('selectButton');
+				 $('.readbutton2').removeClass('selectButton');
+			});
+		
+			     $('.readbutton2').click(function(event){
+				 $('.readbutton2').addClass('selectButton');
+				 $('.writebutton2').removeClass('selectButton');
+			});
+			     
+		/*kickout-test */	
+			$('.ktest1').click(function(event){
+				 $('.test1').empty();
+			});
+		
+			$('.ktest2').click(function(event){
+				 $('.test2').empty();
+			});
+		
+		</script>
+		
+		
+		<!-- treeview -->
+		<script type="text/javascript">
+		function append(){
+			var t = $('#tt');
+			var node = t.tree('getSelected');
+			t.tree('append', {
+				parent: (node?node.target:null),
+				data: [{
+					text: 'new item1'
+				},{
+					text: 'new item2'
+				}]
+			});
+		}
+		function removeit(){
+			var node = $('#tt').tree('getSelected');
+			$('#tt').tree('remove', node.target);
+		}
+		function collapse(){
+			var node = $('#tt').tree('getSelected');
+			$('#tt').tree('collapse',node.target);
+		}
+		function expand(){
+			var node = $('#tt').tree('getSelected');
+			$('#tt').tree('expand',node.target);
+		}
+	</script>
+		
+
+               
+</body>
+</html>
