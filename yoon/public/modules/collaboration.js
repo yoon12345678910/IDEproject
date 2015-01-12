@@ -1,13 +1,6 @@
-/**
- * author: sung-tae ryu
- * email: xenoz0718@gmail.com
- * node.js book example, Freelec
- **/
-
 var collaboration = {
 	//업데이트 내용을 반영하는 중에는 다른 업데이트가 일어나지 않도록 하는 Flag입니다.
 	updating_process_running: false,
-	
 	//여러 업데이트 내용들이 충돌하지 않고 순차적으로 반영될 수 있도록 큐를 사용합니다.
 	task_queue: [],
 	
@@ -36,6 +29,9 @@ var collaboration = {
 			}
 		};
  		
+		
+	
+		
  		//수시로 업데이트를 수행하기 위해 타이머를 설정합니다.
  		this.timer = window.setInterval(check_for_updates, 500);
 
@@ -250,6 +246,7 @@ var collaboration = {
 				self.change(message.next);
 			}
 		}
+		
 		
 		this.updating_process_running = false;
 	},

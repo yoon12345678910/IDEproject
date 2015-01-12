@@ -252,7 +252,7 @@
 	}
 	
 	.textSend{
-		left: 77%;
+		left: 77%; display: none;
 		position: relative;
 		width: 24%;
 		height: 48px;

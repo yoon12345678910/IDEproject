@@ -36,12 +36,17 @@
     	
     	<!-- mode -->
     <script src="/stylesheets/js/mode/javascript/javascript.js"></script>
+    <script src="/stylesheets/js/mode/css/css.js"></script>
+  	<script src="/stylesheets/js/mode/xml/xml.js"></script>
+  	<script src="/stylesheets/js/mode/htmlmixed/htmlmixed.js"></script>
     
     	<!-- hint -->
     <link rel="stylesheet" href="/stylesheets/css/addon/hint/show-hint.css">
     <script src="/stylesheets/js/addon/hint/show-hint.js"></script>
 	<script src="/stylesheets/js/addon/hint/javascript-hint.js"></script>
-    
+	<script src="/stylesheets/js/addon/hint/html-hint.js"></script>
+	<script src="/stylesheets/js/addon/hint/xml-hint.js"></script>
+	
     	<!-- theme -->
     <link rel="stylesheet" href="/codemirror/theme/ambiance.css">
     <link rel="stylesheet" href="/codemirror/theme/blackboard.css">
@@ -69,6 +74,17 @@
 	<link rel="stylesheet" type="text/css" href="stylesheets/css/easyUi/icon.css">
  	<script type="text/javascript" src="stylesheets/js/easyUi/jquery.easyui.min.js"></script>
 
+
+
+
+	<!-- dynamically-->
+	 <script src='http://codemirror.net/mode/xml/xml.js'></script>
+ 	 <script src='http://codemirror.net/mode/css/css.js'></script>
+ 	 <script src='http://codemirror.net/mode/htmlmixed/htmlmixed.js'></script>
+ 	 <script src="http://codemirror.net/addon/edit/closetag.js"></script>
+    <script src="http://codemirror.net/addon/edit/matchbrackets.js"></script>
+    <script src="http://codemirror.net/addon/selection/active-line.js"></script>
+ 	 
 <body>
 
 <!--navBar  -->
@@ -77,6 +93,7 @@
 		<a href="#" class="easyui-menubutton" data-options="menu:'#File',iconCls:'icon-edit'">File</a>
 		<a href="#" class="easyui-menubutton" data-options="menu:'#Edit',iconCls:'icon-help'">Edit</a>
 		<a href="#" class="easyui-menubutton" data-options="menu:'#About',iconCls:'icon-tip'">About</a>
+		<button id="preBtn">preview</button>
    </div>
    
    <div id="File" style="width:150px;">
@@ -123,6 +140,8 @@
 			<div class="dhtmlgoodies_aTab">
 				 <textarea id="code_0" name="code_0"></textarea>
 			</div>
+			
+			<iframe id="preview" style="display: none"></iframe>
 		</div>
 	
 <!--terminal-->	
@@ -162,6 +181,8 @@
 	 
 	 <div id="memo_container" class="container">	
 		<div class="menu-panel">
+		
+		
 		
 	<!-- codemirror theme -->
 		<p>Select a theme: <select onchange="selectTheme()" id=select>
@@ -218,7 +239,7 @@
 	
 	<!-- ===============================================================================  -->
 	
-	<!--treeview-->
+	<!--treeview--> <!-- realtime  -->
 	<script>
 	
 	var username = "testuser" + Math.ceil(Math.random() * 100);
@@ -226,7 +247,6 @@
 	
 	var dont_update_first = false;
 	var socket = null;
-	
 	
 	$(document).ready(function() {
 		var index = 1;	
@@ -238,18 +258,18 @@
 	    }
 	    return copy;
 		}
-		
-		var a = clone(editor);
-		
 		socket = io.connect();
 		
+	/* 	var editorA = clone(editor);
+		var collaborationA = clone(collaboration);*/
 		editor.num = 0;
 		editor.init();
 		editor.load();
-			
+		
+		collaboration.getEditor = editor;
 		collaboration.init();
 		collaboration.join(); 
-		
+		 
 		initTabs('dhtmlgoodies_tabView1',Array('app.js'),0,500,400,Array(true));
 		
 		$('.filetree').fileTree({root: './', script: '/jqueryFileTree', folderEvent: 'dblclick'}, function(file) {
@@ -258,21 +278,20 @@
 			var data_path = file.substring(1,relLength);
 			var data_name = file.substring(2,relLength);
 			
-			
 			function createTab(){
 				$.get('/get_file_contents',  {path: data_path}, function (data) {
-					var b = clone(editor);
+					var editorB = clone(editor);
 					
 					$('#tabViewdhtmlgoodies_tabView1_' + index).append(
 							'<textarea id =' + 'code_' + index + ' ' + 'name=' + 'code_' + index + '></textarea>'
 					); 
-					b.num = index;
-					b.init();
-					b.codemirror.setValue(data);
-					b.codemirror.focus();
+					editorB.num = index;
+					editorB.init();
+					
+					editorB.codemirror.setValue(data);
+					editorB.codemirror.focus();
 					index++;
 					});
-				
 				
 			}
 			createTab();
@@ -323,13 +342,6 @@
 			      $('#memo_btn').addClass('memo_onC');
 			    }
 			});
-	
-		  
-		  
-		</script>
-		
-		<!-- realtime  -->
-		<script>
     	
     </script>
     
@@ -349,7 +361,21 @@
 	  }
 	</script>
 	
+	<!-- preview  -->
+	<script>
+	$("#preBtn").click(event, function() {
+		if($('.dhtmlgoodies_aTab').hasClass('smallPreview')) {
+	      $('.dhtmlgoodies_aTab').removeClass('smallPreview');
+	      $('#preview').css("display", "none");
+	      
+	    } else {
+	      $('.dhtmlgoodies_aTab').addClass('smallPreview');
+	      $('#preview').css("display", "");
+	    }
+			
+	});
 	
+	</script>
                
 </body>
 </html>

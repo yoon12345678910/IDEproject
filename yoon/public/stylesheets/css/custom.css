@@ -120,14 +120,6 @@ body{
 	
 }
 
-
-
-
-
-
-
-
-
 .run{
 	background-position: 100% ;
 	display: block;
@@ -185,5 +177,35 @@ body{
   top: 30px;
   width: 100%;
 }
+
+
+
+/*  ---------------------------test--------------------------   */
+
+
+
+
+
+
+#preview {
+  position: absolute;
+  border-left: 1px solid #a1a1a1;
+  border-right: 1px solid #a1a1a1;
+  border-bottom: 1px solid #a1a1a1;
+  border-top: 1px solid #a1a1a1;
+  
+  background-color: white;
+  top: 1.70em;
+  left: 50.2%;
+  width: 49.8%;
+  height: 70%;
+ 
+}
+
+.dhtmlgoodies_aTab.smallPreview{
+	width: 49.8%;
+}
+
+
     
     

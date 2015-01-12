@@ -6,21 +6,26 @@ var editor = {
 	init: function () {
 		var self = this;
 		
-		console.log("index", this.num);
 		//코드 미러를 이용하여 에디터를 생성하는 부분입니다.
 		this.codemirror = CodeMirror.fromTextArea(document.getElementById("code_" + this.num), {
 			lineNumbers: true,
 			lineWrapping: true,
+			autoCloseTags: true,
+			tabMode: 'indent',
 			extraKeys: {
 				"Ctrl-S": function(cm) {self.save();}, "Ctrl-Space": "autocomplete"
 			},
-			mode: {name: "javascript", globalVars: true}
+			mode: {name: "text/html", globalVars: true},
+			value: document.documentElement.innerHTML
 		});
 		
 		//코드 미러 에디터의 변경사항이 발생할 때 호출되는 콜백 함수를 지정하는 부분입니다.
 		this.codemirror.on('change', function(i, e) {
 			if(collaboration.updating_process_running == false){
 				//에디터의 변경사항을 전달하도록 조치 합니다. collaboration 객체의 update_change()를 이용합니다.
+				
+				self.updatePreview();
+				
 				collaboration.update_change(e);
 			}
 		});
@@ -33,12 +38,14 @@ var editor = {
 				ch: self.codemirror.getCursor().ch
 			});
 		});
-		
 	},
 	
-	count: function(){
-		//this.num++;
-		console.log("num", this.num);
+	updatePreview: function(){
+	  var previewFrame = document.getElementById('preview');
+	  var preview =  previewFrame.contentDocument ||  previewFrame.contentWindow.document;
+	  preview.open();
+	  preview.write(this.codemirror.getValue());
+	  preview.close();
 	},
 	
 	//파일을 읽을 때 호출되는 메서드입니다.
