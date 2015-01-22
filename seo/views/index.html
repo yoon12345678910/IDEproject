@@ -98,7 +98,7 @@
 			<div class="dhtmlgoodies_aTab">
 				 <textarea id="code" name="code"></textarea>
 			</div>
-			
+			 
 			<div class="dhtmlgoodies_aTab">
 				<a href="#" onclick="deleteTab('untitled02.html')">ddd</a>dd<br>
 			</div>
@@ -172,10 +172,10 @@
 	<!--treeview-->
 	<script>
 	$(document).ready (function() {
-		$('.filetree').fileTree({root: './', script: '/jqueryFileTree'}, function(file) {
+		$('.filetree').fileTree({root: '../', script: '/jqueryFileTree', folderEvent: 'dblclick'}, function(file) {
 		});
 		// event listeners
-		$('.filetree')
+		 $('.filetree')
 		.on('filetreeexpand', function (e, data) { console.log(data); })
 		.on('filetreeexpanded', function (e, data) { console.log(data); })
 		.on('filetreecollapsed', function (e, data) { console.log(data); })
@@ -183,7 +183,7 @@
 		.on('filetreechecked', function (e, data) { console.log(data); })
 		.on('filetreeunchecked', function (e, data) { console.log(data); })
 		.on('filetreeclicked', function(e, data) { console.log(data); });
-		});
+		});  
 		</script>
 		
 		<!--Collaborate-slide  -->
