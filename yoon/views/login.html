@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Welcome to Collabo IDE</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0" />
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <style>
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+       box-sizing: border-box;
+}
+
+html {
+  overflow-y: scroll; 
+}
+
+body {
+  background: #c1bdba;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #1ab188;
+  -webkit-transition: .5s ease;
+          transition: .5s ease;
+}
+a:hover {
+  color: #179b77;
+}
+
+.form {
+  background: rgba(19, 35, 47, 0.9);
+  padding: 40px;
+  max-width: 600px;
+  margin: 10px auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+
+.tab-group {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px 0;
+}
+.tab-group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.tab-group li a {
+  display: block;
+  text-decoration: none;
+  padding: 15px;
+  background: rgba(160, 179, 176, 0.25);
+  color: #a0b3b0;
+  font-size: 20px;
+  float: left;
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: .5s ease;
+          transition: .5s ease;
+}
+.tab-group li a:hover {
+  background: #179b77;
+  color: #ffffff;
+}
+.tab-group .active a {
+  background: #1ab188;
+  color: #ffffff;
+}
+
+.tab-content > div:last-child {
+  display: none;
+}
+
+h1 {
+  text-align: center;
+  color: #ffffff;
+  font-weight: 300;
+  margin: 0 0 40px;
+}
+
+label {
+  position: absolute;
+  -webkit-transform: translateY(6px);
+      -ms-transform: translateY(6px);
+          transform: translateY(6px);
+  left: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  -webkit-transition: all 0.25s ease;
+          transition: all 0.25s ease;
+  -webkit-backface-visibility: hidden;
+  pointer-events: none;
+  font-size: 22px;
+}
+label .req {
+  margin: 2px;
+  color: #1ab188;
+}
+
+label.active {
+  -webkit-transform: translateY(50px);
+      -ms-transform: translateY(50px);
+          transform: translateY(50px);
+  left: 2px;
+  top: -7px;
+  font-size: 14px;
+}
+label.active .req {
+  opacity: 0;
+}
+
+label.highlight {
+  color: #ffffff;
+}
+
+input, textarea {
+  font-size: 22px;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 5px 10px;
+  background: none;
+  background-image: none;
+  border: 1px solid #a0b3b0;
+  color: #ffffff;
+  border-radius: 0;
+  -webkit-transition: border-color .25s ease, box-shadow .25s ease;
+          transition: border-color .25s ease, box-shadow .25s ease;
+}
+input:focus, textarea:focus {
+  outline: 0;
+  border-color: #1ab188;
+}
+
+textarea {
+  border: 2px solid #a0b3b0;
+  resize: vertical;
+}
+
+.field-wrap {
+position: relative;
+top: 5px;
+margin-bottom: 35px;
+}
+
+.top-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.top-row > div {
+  top: -30px;
+  width: 100%;
+  margin-right: 4%;
+}
+.top-row > div:last-child {
+  margin: 0;
+}
+
+.button {
+  border: 0;
+  outline: none;
+  border-radius: 0;
+  padding: 15px 0;
+  font-size: 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  background: #1ab188;
+  color: #ffffff;
+  -webkit-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+  -webkit-appearance: none;
+}
+.button:hover, .button:focus {
+  background: #179b77;
+}
+
+.button-block {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  
+}
+
+.forgot {
+  margin-top: -20px;
+  text-align: right;
+}
+    
+    </style>
+    
+    </head>
+    <body>
+	
+		<div class="form">
+      
+      <ul class="tab-group">
+        <li class="tab active"><a href="#login">Log In</a></li>
+        <li class="tab  "><a href="#signup">sign Up</a></li>
+      </ul>
+      
+      <div class="tab-content">
+      
+        
+        
+        <!--***************** Login ***************  -->
+        <div id="login">   
+          <h1>Welcome to Collabo IDE!</h1>
+          
+          <form>
+          
+            <div class="field-wrap">
+            <label id ="label_lid">
+              User Name<span class="req">*</span>
+            </label>
+            <input id="lid" name="lid" type="text"required autocomplete="off"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label id="label_lpwd">
+              Password<span class="req">*</span>
+            </label>
+            <input  id="lpwd" name="lpwd" type="password"required autocomplete="off"/>
+          </div>
+          
+          
+          <p class="forgot"><a href="#"> &nbsp </a></p>
+          
+          <button id= "loginbtn" class="button button-block" type="button">Get Started</button>
+          
+          </form>
+
+        </div>
+        
+        
+        
+        
+        
+        <!--***************** signup ***************  -->
+          <div id="signup">   
+          <h1>Welcome to Collabo IDE!</h1>
+          
+          <form>
+          
+          <div class="top-row">
+            <div class="field-wrap">
+              <label id="label_UserName">
+                User Name<span class="req">*</span>
+              </label>
+              <input id="rid" name="rid" type="text" required autocomplete="off" />
+            </div>
+        
+            
+          </div>
+
+          <div class="field-wrap">
+            <label id="label_Email">
+              Email Address<span class="req">*</span>
+            </label>
+            <input id="email" name="email" type="email"required autocomplete="off"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label id="label_rpwd" >
+              Set A Password<span class="req">*</span>
+            </label>
+            <input id="rpwd" name="rpwd"type="password"required autocomplete="off"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label id="label_pwd_confirm">
+              Set B Password<span class="req">*</span>
+            </label>
+            <input id="pwd_confirm" name="pwd_confirm" type="password"required autocomplete="off"/>
+          </div>
+          
+          <button id="signup" type="button" class="button button-block">Sign Up</button>
+          
+          </form>
+
+        </div>
+        
+      </div><!-- tab-content -->
+      
+</div> <!-- /form -->
+		
+
+       <script src="stylesheets/js/jquery.min.js"></script>  
+       
+    </body>
+    
+    <script>
+    $('.form').find('input, textarea').on('keyup blur focus', function (e) {
+      
+      var $this = $(this),
+          label = $this.prev('label');
+
+    	  if (e.type === 'keyup') {
+    			if ($this.val() === '') {
+              label.removeClass('active highlight');
+            } else {
+              label.addClass('active highlight');
+            }
+        } else if (e.type === 'blur') {
+        	if( $this.val() === '' ) {
+        		label.removeClass('active highlight'); 
+    			} else {
+    		    label.removeClass('highlight');   
+    			}   
+        } else if (e.type === 'focus') {
+          
+          if( $this.val() === '' ) {
+        		label.removeClass('highlight'); 
+    			} 
+          else if( $this.val() !== '' ) {
+    		    label.addClass('highlight');
+    			}
+        }
+
+    });
+
+    $('.tab a').on('click', function (e) {
+      
+      e.preventDefault();
+      
+      $(this).parent().addClass('active');
+      $(this).parent().siblings().removeClass('active');
+      
+      target = $(this).attr('href');
+
+      $('.tab-content > div').not(target).hide();
+      
+      $(target).fadeIn(600);
+      
+    });
+    
+    </script>
+    
+    
+    
+    <script type="text/javascript">
+	var etext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+	var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,16}$/;
+	
+	var rid = 0;
+	var email = 0;
+	var rpwd = 0;
+	var pwdC = 0;
+	
+			$("#rid").keyup(function(data){
+				if($('#rid').val().length > 4 && $('#rid').val().length < 16){
+						$.get("/uid_check",{
+							id : $('#rid').val()
+							},function(data){
+								if(data.result == '무'){
+									$('#rid').css('border', '2px solid green');
+									$('#label_UserName').html("OK!")
+									rid = 1;
+								} else{
+									//$('#rid').focus();
+									$('#rid').css('border', '2px solid red');
+									$('#label_UserName').html("아이디가 중복됩니다. 다른 아이디를 입력하세요.")
+									rid = 0;
+								}
+							})
+				}else{
+					$('#rid').css('border', '2px solid red');
+					rid = 0;
+					$('#label_UserName').html("4보다 크고 12보다 작게 적으세요.");
+				}	
+			});
+	
+			
+			$("#email").keyup(function(data){
+				if(etext.test($('#email').val())==false){
+					$('#email').css('border', '2px solid red');
+					$('#label_Email').html("@를 포함한 이메일 형식으로 입력하세요.!");
+					
+					email = 0;
+			    }else{
+			    	$.get("/email_check", {email : $('#email').val()}, function(data){
+									if(data.result == '무'){
+										$('#email').css('border', '2px solid green');
+										$('#label_Email').html("OK!");
+										email = 1;
+									} else{
+										$('#email').css('border', '2px solid red');
+										$('#label_Email').html("중복된 이메일 입니다. 다시 입력하세요.");
+										email = 0;
+									}
+								});
+			    	}
+			});
+			
+			
+			$("#rpwd").focusout(function(data){
+				
+					 if ($('#rpwd').val().length == 0 || $('#rpwd').val().length < 6 || $('#rpwd').val().length > 16) {
+						 $('#rpwd').css('border', '2px solid red');
+						 $("#label_rpwd").html("비밀번호를 6 ~ 16 자리로 입력해주세요");
+						 
+							 //alert("비밀번호는 6 ~ 16 자리로 입력해주세요.");
+							 //$('#rpwd').focus();
+							 rpwd = 0;
+							  return;
+					}else if(!pwdCheck.test($('#rpwd').val())){
+						 $('#rpwd').css('border', '2px solid red');
+						$("#label_rpwd").html("비밀번호는 문자, 숫자, 특수문자 조합으로 입력해주세요.");
+						//alert("비밀번호는 문자, 숫자, 특수문자의 조합으로 입력해주세요.");
+						//$('#rpwd').focus();
+						rpwd = 0;
+						return;
+					}else{
+						$('#rpwd').css('border', '2px solid green');
+						$("#label_rpwd").html("OK!");
+					}
+					
+					rpwd = 1;
+			});
+			
+			$("#pwd_confirm").focusout(function(data){
+				if($('#rpwd').val() != $('#pwd_confirm').val()){
+					//$('#pwd_confirm').focus();
+					pwdC = 0;
+					$('#rpwd').css('border', '2px solid red');
+					$('#pwd_confirm').css('border', '2px solid red');
+					
+					$("#label_rpwd").html("비밀번호가 동일하지 않습니다.");
+					$("#label_pwd_confirm").html("비밀번호가 동일하지 않습니다.");
+					//alert("비밀번호가 동일하지 않습니다.");
+				}else if($('#rpwd').val().length == 0 || $('#pwd_confirm').val().length == 0){
+					$("#label_rpwd").html("비밀번호를 입력하세요");
+					$("#label_pwd_confirm").html("비밀번호를 입력하세요.");
+				}else if($('#rpwd').val().length == 0 || $('#rpwd').val().length < 6 || $('#rpwd').val().length > 16) {
+					 $('#rpwd').css('border', '2px solid red');
+					 $("#label_rpwd").html("비밀번호를 6 ~ 16 자리로 입력해주세요");
+					 
+						 //alert("비밀번호는 6 ~ 16 자리로 입력해주세요.");
+						 //$('#rpwd').focus();
+						 rpwd = 0;
+						  return;
+				}else if(!pwdCheck.test($('#rpwd').val())){
+					 $('#rpwd').css('border', '2px solid red');
+						$("#label_rpwd").html("비밀번호는 문자, 숫자, 특수문자 조합으로 입력해주세요.");
+						//alert("비밀번호는 문자, 숫자, 특수문자의 조합으로 입력해주세요.");
+						//$('#rpwd').focus();
+						rpwd = 0;
+						return;
+				}else{
+					$('#rpwd').css('border', '2px solid green');
+					$('#pwd_confirm').css('border', '2px solid green');
+					$("#label_rpwd").html("OK!");
+					$("#label_pwd_confirm").html("OK!");
+					
+					pwdC = 1;	
+				}
+			});
+			
+			
+			$("#signup").click(function(){
+				
+				  if($('#rid').val().length == 0){
+				    //alert('아이디를 입력하세요');
+				    //$('#rid').focus();
+				    $('#rid').css('border', '2px solid red');
+				    $('#label_UserName').html("아이디를 입력하세요.");
+				    return;
+				  }
+				  
+				  if($('#email').val().length == 0){
+				    //alert('이메일을 입력하세요');
+				    //$('#email').focus();
+				    $('#email').css('border', '2px solid red');
+				    $('#label_Email').html("이메일을 입력하세요.");
+				    return;
+				  }
+				  
+				  if($('#rpwd').val().length == 0){
+				    //alert('비밀번호를 입력하세요');
+				    //$('#rpwd').focus();
+				   $('#rpwd').css('border', '2px solid red');
+				   $('#label_rpwd').html("비밀번호를 입력하세요");
+				    return;
+				  }
+				  
+				  if($('#pwd_confirm').val().length == 0){
+				    //alert('비밀번호 확인을 입력하세요');
+				    //$('#pwd_confirm').focus();
+				    $('#pwd_confirm').css('border', '2px solid red');
+				    $('#label_pwd_confirm').html("비밀번호를 입력하세요");
+				    return;
+				  }
+				  
+				if(rid + email + rpwd + pwdC == 4){
+					
+					$.post("/signup", 
+						{
+						id : $('#rid').val(),
+						email : $('#email').val(),
+						pwd : $('#rpwd').val()
+						},function(data){
+							location.href = '/login';
+						});
+				}
+			});
+			
+	 	
+			$("#loginbtn").click(function(){
+			   $.post('/login'
+			        , {
+			          uid : $('#lid').val(),
+			          pwd : $('#lpwd').val(),
+			          save : $('#loginkeeping').is(':checked')
+			        }
+			        , function(data){
+			        	
+			        	console.log("data");
+			        	
+			        	if(data.result == "성공"){
+			        		location.href = '/loadPage';
+			        	}else{
+			        		
+			        		$('#lid').css('border', '2px solid red');
+			        		$('#lpwd').css('border', '2px solid red');
+			        		$('#label_lid').html("아이디를 확인해 주세요.");
+			        		$('#label_lpwd').html("비밀번호를 확인해 주세요.");
+			        		//alert("아이디와 비밀번호를 알려주세요");
+			        		$('#lpwd').val('');
+			        		
+			        		
+			        	}
+			        }
+			        , 'json');
+			});
+			 
+	   	 
+			</script>
+    
+    
+    
+</html>

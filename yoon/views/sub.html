@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>안녕하세요 반갑습니다.</title>
+
+	<!-- Bootstrap Core CSS -->
+    <link href="stylesheets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="stylesheets/css/custom.css" rel="stylesheet">
+
+	<!-- tab CSS && JS -->
+	<link rel="stylesheet" href="stylesheets/css/tab-view.css" type="text/css" media="screen">
+	<script type="text/javascript" src="stylesheets/js/ajax.js"></script>
+	<script type="text/javascript" src="stylesheets/js/tab-view.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+	<!-- page  CSS & JS -->
+	<link rel="stylesheet" type="text/css" href="stylesheets/css/page-css/custom.css" />
+	<script src="stylesheets/js/page-js/modernizr.custom.79639.js"></script>
+	
+	<!-- realTime CSS & JS-->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/modules/editor.js"></script>
+    <script src="/modules/collaboration.js"></script>
+   
+    <link rel='stylesheet' href="/stylesheets/css/style-editor.css" />
+    
+    <!--codemirror -->
+    <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
+    <script src="/codemirror/lib/codemirror.js"></script>
+    <script src="/codemirror/mode/css/css.js"></script>
+    <link rel="stylesheet" href="codemirror/doc/docs.css">
+    
+    	
+    	<!-- mode -->
+    <script src="/stylesheets/js/mode/javascript/javascript.js"></script>
+    <script src="/stylesheets/js/mode/css/css.js"></script>
+  	<script src="/stylesheets/js/mode/xml/xml.js"></script>
+  	<script src="/stylesheets/js/mode/htmlmixed/htmlmixed.js"></script>
+    
+    	<!-- hint -->
+    <link rel="stylesheet" href="/stylesheets/css/addon/hint/show-hint.css">
+    <script src="/stylesheets/js/addon/hint/show-hint.js"></script>
+	<script src="/stylesheets/js/addon/hint/javascript-hint.js"></script>
+	<script src="/stylesheets/js/addon/hint/html-hint.js"></script>
+	<script src="/stylesheets/js/addon/hint/xml-hint.js"></script>
+	
+    	<!-- theme -->
+    <link rel="stylesheet" href="/codemirror/theme/ambiance.css">
+    <link rel="stylesheet" href="/codemirror/theme/blackboard.css">
+	<link rel="stylesheet" href="/codemirror/theme/cobalt.css">
+	<link rel="stylesheet" href="/codemirror/theme/eclipse.css">
+	<link rel="stylesheet" href="/codemirror/theme/elegant.css">
+	<link rel="stylesheet" href="/codemirror/theme/eclipse.css">
+	<link rel="stylesheet" href="/codemirror/theme/erlang-dark.css">
+	<link rel="stylesheet" href="/codemirror/theme/lesser-dark.css">
+	<link rel="stylesheet" href="/codemirror/theme/monokai.css">
+	<link rel="stylesheet" href="/codemirror/theme/neat.css">
+	<link rel="stylesheet" href="/codemirror/theme/night.css">
+	<link rel="stylesheet" href="/codemirror/theme/rubyblue.css">
+	<link rel="stylesheet" href="/codemirror/theme/solarized.css">
+	<link rel="stylesheet" href="/codemirror/theme/twilight.css">
+	<link rel="stylesheet" href="/codemirror/theme/xq-dark.css">
+	<link rel="stylesheet" href="/codemirror/theme/vibrant-ink.css">
+	
+	<!-- treeView CSS -->
+	<link rel="stylesheet" href="/stylesheets/css/jqueryFileTree.css">
+	</head>
+
+	<!-- navbaEasyui  CSS & JS-->
+	<link rel="stylesheet" type="text/css" href="stylesheets/css/easyUi/easyui.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/css/easyUi/icon.css">
+ 	<script type="text/javascript" src="stylesheets/js/easyUi/jquery.easyui.min.js"></script>
+
+	<!-- dynamically-->
+	 <script src='http://codemirror.net/mode/xml/xml.js'></script>
+ 	 <script src='http://codemirror.net/mode/css/css.js'></script>
+ 	 <script src='http://codemirror.net/mode/htmlmixed/htmlmixed.js'></script>
+ 	 <script src="http://codemirror.net/addon/edit/closetag.js"></script>
+    <script src="http://codemirror.net/addon/edit/matchbrackets.js"></script>
+    <script src="http://codemirror.net/addon/selection/active-line.js"></script>
+ 	 
+ 	 <!-- tree click -->
+ 	 <link rel='stylesheet' href="/stylesheets/css/jquery.contextMenu.css" /> 
+ 	 
+ 	 
+<body>
+
+<!--navBar  -->
+   <div class="easyui-panel" style="padding:5px;">
+		<a href="#" class="easyui-linkbutton" data-options="plain:true"><img src="stylesheets/images/logo.png"/></a>
+		<a href="#" class="easyui-menubutton" data-options="menu:'#File',iconCls:'icon-edit'">File</a>
+		<a href="#" class="easyui-menubutton" data-options="menu:'#Edit',iconCls:'icon-help'">Edit</a>
+		<a href="#" class="easyui-menubutton" data-options="menu:'#About',iconCls:'icon-tip'">About</a>
+
+		<button id="preBtn">preview</button>
+		<button id="testBtn">test</button>
+   </div>
+   
+  		  
+   
+   <div id="File" style="width:150px;">
+		<div>New File</div>
+		<div>Open</div>
+		<div>
+			<span>Open Recent</span>
+			<div>
+				<div>test01.html</div>
+			</div>
+		</div>
+		
+		<div class="menu-sep"></div>
+		<div>Save</div>
+		<div>Save As...</div>
+		
+		<div class="menu-sep"></div>
+		<div>import</div>
+		<div>export</div>
+	</div>
+	
+	<div id="Edit" style="width:100px;">
+		<div>Setting</div>
+	</div>
+	
+	<div id="About" style="width:100px;">
+		<div>About</div>
+	</div>
+
+<!--workspace  -->
+	<div id="workspace">
+		<div id = "workspace-nav">
+		 	<b>Workspace</b>
+		</div>
+		
+		<div id="workspace-list">
+			<div class="filetree"></div>
+
+		</div>
+	</div>
+
+<!--tab-->
+ 	<div id= "edit_content">
+		<div id="dhtmlgoodies_tabView1">
+			<div class="dhtmlgoodies_aTab">
+				 <textarea id="code_0" name="code_0"></textarea>
+			</div>
+			
+			<iframe id="preview" style="display: none"></iframe>
+		</div>
+	
+<!--terminal-->	
+	 	<div id="content"></div>
+ 	</div> 
+ 
+ <!--collaborate layout-->
+ 	<div id="right_bar">
+	 	<div id="right_bar_back">
+	 		<button id="Collaborate_btn" class="vertical_btn">Collaborate</button>
+	 		<button id="memo_btn" class="memo_offC ">Memo</button>
+	 	</div>
+ 	</div>
+
+<!--chat -->
+	<div id="container" class="container">	
+		<div class="menu-panel">
+			<!-- member -->
+				<div id="member_top"><b>Members</b></div>
+					<div class="member_layout">
+				</div>
+					
+			<!-- ot_chat -->		
+				<div id="chat_top"><b>GropChat</b></div>
+				<div class="chatText"></div>
+						
+			<!-- chat_input  -->
+				<div class="chatContainer">
+					<input class="text-input"/>
+				</div>
+		</div>
+	 </div> 
+	 
+	 <div id="memo_container" class="container">	
+		<div class="menu-panel">
+		
+	<!-- codemirror theme -->
+		<p>Select a theme: <select onchange="selectTheme()" id=select>
+			    <option selected>default</option>
+			    
+			    <option>ambiance</option>
+			    <option>blackboard</option>
+			    <option>cobalt</option>
+			    <option>eclipse</option>
+			    <option>elegant</option>
+			    <option>erlang-dark</option>
+			    <option>lesser-dark</option>
+			    <option>monokai</option>
+			    <option>neat</option>
+			    <option>neo</option>
+			    <option>night</option>
+			    <option>rubyblue</option>
+			    <option>solarized</option>
+			    <option>twilight</option>
+			    <option>vibrant-ink</option>
+			    <option>xq-dark</option>
+			</select>
+		</p>
+		</div>
+	 </div> 
+
+
+<!-- JS -->	
+
+    <!-- jQuery -->
+    <script src="stylesheets/js/jquery.js"></script>
+	<script src='stylesheets/js/jquery-1.11.1.js'></script>
+    
+    <!-- Bootstrap Core JavaScript -->
+    <script src="stylesheets/js/bootstrap.min.js"></script>
+             
+	<!-- page right  -->
+		<script src="stylesheets/js/page-js/jquery.mousewheel.js"></script>
+		<script src="stylesheets/js/page-js/jquery.jscrollpane.min.js"></script>
+		<script src="stylesheets/js/page-js/jquerypp.custom.js"></script>
+		<script src="stylesheets/js/page-js/jquery.bookblock.js"></script>
+		<script src="stylesheets/js/page-js/page.js"></script>
+	
+	<!-- treeview -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="modules/jqueryFileTree.js"></script>
+	
+	 <!-- tree click -->
+ 	 <script src="/modules/jquery.contextMenu.js"></script>
+	 <script src="/modules/jquery.ui.position.js"></script>
+	
+	<!-- ===============================================================================  -->
+	
+	<!--treeview--> <!-- realtime  -->
+	<script>
+	
+	var username = "testuser" + Math.ceil(Math.random() * 100);
+	var filepath = "untitled.js";
+	
+	var dont_update_first = false;
+	var socket = null;
+	
+	$(document).ready(function() {
+		var index = 1;	
+		function clone(obj) {
+	    if (null == obj || "object" != typeof obj) return obj;
+	    var copy = obj.constructor();
+	    for (var attr in obj) {
+	        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+	    }
+	    return copy;
+		}
+		socket = io.connect();
+		
+	/* 	var editorA = clone(editor);
+		var collaborationA = clone(collaboration);*/
+		
+		editor.num = 0;
+		editor.init();
+		editor.load();
+		
+		collaboration.projectEach = "app.js";
+		collaboration.init();
+		collaboration.join(); 
+		 
+		initTabs('dhtmlgoodies_tabView1',Array('app.js'),0,500,400,Array(true));
+		
+		$('.filetree').fileTree({root: './', script: '/jqueryFileTree', folderEvent: 'dblclick'}, function(file) {
+			var relLength = file.length;
+			var data_path = file.substring(1,relLength);
+			var data_name = file.substring(2,relLength);
+			
+		
+				$.get('/get_file_contents',  {path: data_path}, function (data) {
+					var editorB = clone(editor);
+					var collaborationB = clone(collaboration);
+					
+					$('#tabViewdhtmlgoodies_tabView1_' + index).append(
+							'<textarea id =' + 'code_' + index + ' ' + 'name=' + 'code_' + index + '></textarea>'
+					); 
+					editorB.num = index;
+					editorB.init();
+					
+					editorB.codemirror.setValue(data);
+					editorB.codemirror.focus();
+					
+					collaborationB.projectEach = data_name;
+					collaborationB.join();
+					index++;
+					});
+				
+			
+			createNewTab('dhtmlgoodies_tabView1', data_name, '', '',true);
+		});
+		
+		// event listeners
+		$('.filetree')
+		.on('filetreeexpand', function (e, data) { console.log(data); })
+		.on('filetreeexpanded', function (e, data) { console.log(data); })
+		.on('filetreecollapsed', function (e, data) { console.log(data); })
+		.on('filetreecollapse', function (e, data) { console.log(data); })
+		.on('filetreechecked', function (e, data) { console.log(data); })
+		.on('filetreeunchecked', function (e, data) { console.log(data); })
+		.on('filetreeclicked', function(e, data) { console.log(data); });
+		});
+		</script>
+		
+		<!--Collaborate-slide && memo -->
+		<script>
+			$(function() {
+				Page.init();
+				MemoPage.init();
+			});
+		
+		  $("#Collaborate_btn").click(event, function() {
+		  	 if($('#edit_content').hasClass('smallContent')) {
+			      $('#edit_content').removeClass('smallContent');
+			      $('#sidebar-resizer').removeClass('smallContent');
+				  $('#Collaborate_btn').removeClass('btn_yellow');
+			      
+			    } else {
+			      $('#edit_content').addClass('smallContent');
+			      $('#sidebar-resizer').addClass('smallContent');
+			      $('#Collaborate_btn').addClass('btn_yellow');
+			    }
+			});
+		
+		  $("#memo_btn").click(event, function() {
+		  	 if($('#edit_content').hasClass('smallContent')) {
+			      $('#edit_content').removeClass('smallContent');
+			      $('#sidebar-resizer').removeClass('smallContent');
+				  $('#memo_btn').removeClass('memo_onC');
+			      
+			    } else {
+			      $('#edit_content').addClass('smallContent');
+			      $('#sidebar-resizer').addClass('smallContent');
+			      $('#memo_btn').addClass('memo_onC');
+			    }
+			});
+    	
+    </script>
+    
+    <!-- codemirror theme -->
+    <script>
+	  
+	  var input = document.getElementById("select");
+	  function selectTheme() {
+	    var theme = input.options[input.selectedIndex].innerHTML;
+	    editor.codemirror.setOption("theme", theme);
+	  }
+	  var choice = document.location.search &&
+	               decodeURIComponent(document.location.search.slice(1));
+	  if (choice) {
+	    input.value = choice;
+	    editor.codemirror.setOption("theme", choice);
+	  }
+	</script>
+	
+	<!-- preview  -->
+	<script>
+	$("#preBtn").click(event, function() {
+		if($('.dhtmlgoodies_aTab').hasClass('smallPreview')) {
+	      $('.dhtmlgoodies_aTab').removeClass('smallPreview');
+	      $('.dhtmlgoodies_tabPane').removeClass('smallPreview');
+	      
+	      
+	      $('#preview').css("display", "none");
+	      
+	    } else {
+	      $('.dhtmlgoodies_aTab').addClass('smallPreview');
+	      $('.dhtmlgoodies_tabPane').addClass('smallPreview');
+	      $('#preview').css("display", "");
+	    }
+	});
+	</script>
+	
+	<!-- tree click  -->
+	<script type="text/javascript" class="showcase">
+		$(function() {
+			$.contextMenu({
+				selector : 'li',
+				callback : function(key, options) {
+					var m = "clicked: " + key + " on " + $(this).attr('id');
+					//window.console && console.log(m) || alert(m);
+					console.log("경로",m);
+				},
+
+				items : {
+					"create" : {name : "Create"},
+					"sep1" : "---------",
+					"delete" : {name : "Delete"}
+				}
+			});
+			$('.context-menu-one').on('click', function(e) {
+				console.log('clicked', this);
+			})
+		});
+	</script>
+	
+	<script>
+	$('#testBtn').on('click', function(e){
+	/* 	editor.updatePreview();
+		console.log("여기"); */
+		
+		$.post('/test', function(data){
+	  	 
+  		console.log("여기",data);
+	});
+	});
+	</script>
+
+</body>
+</html>

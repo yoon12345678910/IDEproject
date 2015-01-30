@@ -1,0 +1,46 @@
+.container,
+.memo_container,
+.bb-custom-wrapper,
+.bb-bookblock {
+}
+
+/* .js body {
+	overflow: hidden;
+} */
+
+.container {
+  position: absolute;
+  bottom : 0;
+  top: 2.3em;
+  left: 100%;
+  -webkit-transition: all 0.3s ease; 
+  -moz-transition: all 0.3s ease; 
+  -o-transition: all 0.3s ease; 
+  transition: all 0.3s ease;
+}
+
+.slideRight {
+	position:absolute;
+	border-top: 1px solid #4d4d4d;
+	display: block;
+	width:20.3%;
+	left: 77.3%;
+	top: 2.3em;
+  -webkit-transition: all 0.3s ease; 
+  -moz-transition: all 0.3s ease; 
+  -o-transition: all 0.3s ease; 
+  transition: all 0.3s ease;
+}
+
+.menu-panel {
+	background:#2b2b2b;
+	height: 100%;
+	text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.js .menu-panel {
+	position: absolute;
+	width: 100%;
+}
+
+

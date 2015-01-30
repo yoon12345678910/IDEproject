@@ -1,0 +1,627 @@
+body{
+	background-color:#e1e1e1;
+}
+
+#smallLogo{
+	position: absolute;
+	right: 30px;
+	border: 1.5px solid #2B2B2C;
+	border-radius: 4px;
+}
+
+#fontChange{
+	position: relative;
+	top: -95px;
+	left: -122px;
+}
+
+#selectTheme{
+	position: absolute;
+	left: -115px;
+	top: 10px;	
+}
+
+#file_delete{
+	position: absolute;
+	top: 10px;
+	right: 20px;
+}
+
+#file_delete_panel{
+	position: absolute;
+	padding: 3px;
+	border: 1px solid #2b2b2b;
+	border-radius: 5px;
+	top: 9px;
+	width: 400px;
+	height: 20px;
+	font-size: 11px;
+	line-height: 20px;
+}
+
+#notify{
+	position: absolute;
+	left: 41%;
+	top: 3px;
+	height: 22px;
+	width: 24%;
+	line-height: 10px;
+	text-align: center;
+	font-size: 14px;
+	overflow :hidden;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+.runPo{
+	position: absolute;
+	left : 20.5%;
+}
+
+#userMenu{
+	position: absolute;
+	right : 13.8%;
+	z-index: auto;
+}
+
+#userImg{
+	overflow: hidden;
+	width: 80px;
+	height: 80px;
+	cursor: pointer;
+	border-radius: 50%
+}
+
+#template{
+	width: 200px;
+	height: 150px;
+	text-align: center;
+}
+
+#tFooter{
+	text-align: center;
+	
+}
+.projectPath {
+	margin-top: -8px;
+}
+
+#projectInfo {
+	margin-top: 9px;
+}
+
+#edit_content.smallContent{
+  width: 59.6%;
+  position: absolute;
+  bottom: 0;
+  left: 17.5%;
+  overflow: hidden;
+  right: 0;
+  top: 2.4em;
+  
+  -webkit-transition: all 0.3s ease; 
+  -moz-transition: all 0.3s ease; 
+  -o-transition: all 0.3s ease; 
+  transition: all 0.3s ease; 
+}
+
+#edit_content.smallContent.fullSizeEditor{
+	left: 13.8%;
+	width: 63.2%;
+	overflow: initial;
+}
+
+#edit_content
+{
+  position: absolute;
+  width: 79.9%;
+  bottom: 0;
+  left: 17.5%;
+  right: 0;
+  top: 2.4em;
+  
+  -webkit-transition: all 0.3s ease; 
+  -moz-transition: all 0.3s ease; 
+  -o-transition: all 0.3s ease; 
+   transition: all 0.3s ease; 
+}
+
+#right_bar{
+	position: absolute;
+	left :97.6%;
+	width : 2.4%;
+	 top: 2.35em;
+	 bottom : 0;
+}
+
+#right_bar_back{
+	border-left: 1px solid #4d4d4d;
+	position: absolute;
+	height : 100%;
+	width : 100%;
+	background-color: #2b2b2b;
+	z-index: 1000000; 	
+}
+
+
+.vertical_btn{
+	position: absolute;
+	padding : 7px 3px 3px 3px;
+	left:-1.5em;
+	height :1.6em;
+	top : 2.6em;
+	color:#A1A1A1;
+ 	writing-mode:tb-rl;
+ 	white-space:nowrap;
+ 	display:block;
+ 	cursor : pointer;
+ 	font-weight:normal;
+  	-moz-transform:rotate(90deg);
+ 	-o-transform: rotate(90deg);
+	-webkit-transform:rotate(90deg); 
+}
+
+#Collaborate_btn.btn_yellow{
+	position: absolute;
+	padding : 7px 3px 3px 3px;
+	left:-1.5em;
+	height :1.6em;
+	top : 2.6em;
+	color:#fff;
+ 	writing-mode:tb-rl;
+ 	white-space:nowrap;
+ 	display:block;
+ 	font-weight:normal;
+  	-moz-transform:rotate(90deg);
+ 	-o-transform: rotate(90deg);
+	-webkit-transform:rotate(90deg);
+}
+
+.memo_offC{
+	
+	position: absolute;
+	cursor : pointer;
+	padding : 7px 3px 3px 3px;
+	left: -0.4em;
+	height :1.6em;
+	top: 7.4em;
+	color:#A1A1A1;
+ 	writing-mode:tb-rl;
+ 	white-space:nowrap;
+ 	display:block;
+ 	font-weight:normal;
+  	-moz-transform:rotate(90deg);
+ 	-o-transform: rotate(90deg);
+	-webkit-transform:rotate(90deg); 	
+	
+}
+
+
+#memo_btn.memo_onC{
+	position: absolute;
+	padding : 7px 3px 3px 3px;
+	left: -0.4em;
+	height :1.6em;
+	top: 7.4em;
+	color:#fff;
+ 	writing-mode:tb-rl;
+ 	white-space:nowrap;
+ 	display:block;
+ 	font-weight:normal;
+  	-moz-transform:rotate(90deg);
+ 	-o-transform: rotate(90deg);
+	-webkit-transform:rotate(90deg);
+	
+}
+
+.run{
+	background-position: 100% ;
+	display: block;
+	height:100%;
+	top: 12px !important;
+	height: 25px !important;
+	left: 2px;
+	right: 0;
+	top: 4px;
+	bottom: 0;
+	background-image :url(https://ide.c9.io/static/plugins/c9.ide.layout.classic/icons/run.png);
+	background-repeat: no-repeat;
+}
+
+
+#workspace
+{
+  background-color: #2b2b2b;
+  color : #fff;
+  bottom: 0;
+  display : block;
+  overflow : auto;
+  left: 0;
+  overflow: hidden;
+  padding-left: 5px;
+  padding-right: 5px;
+  position: absolute;
+  top: 2.84em;
+  width: 16.5%;
+}
+
+#workspaceRefresh{
+	right: 20px;
+	position: absolute;
+	cursor: pointer;
+}
+
+#workspace-nav
+{
+  background-color: #2b2b2b;
+  font-size: 17px;
+  font-family : Arial,Helvetica,sans-serif;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  padding-left: 5px;
+  padding-right: 5px;
+  position: absolute;
+  top: 0px;
+  width: 15.5em;
+  height: 30px;
+  border-bottom: 1px solid #4d4d4d;
+}
+
+#workspace-proName{
+  line-height : 20px;	
+  left : 12px;
+  position: absolute;
+  width: 100%;
+  top: 30px;
+}
+
+#workspace-list
+{	
+  border-top: 1px solid #4d4d4d;
+  background-color: #2b2b2b;
+  height: 100%;  
+  
+  left: 1px;
+  overflow: auto;
+  padding-left: 5px;
+  padding-right: 5px;
+  position: absolute;
+  top: 50px;
+  width: 100%;
+}
+
+#preview {
+  position: absolute;
+  border : 1px solid #4d4d4d;
+  background-color: rgba(255, 255, 255, 0.882353);
+  top: 1.74em;
+  left: 50.2%;
+  width: 49.6%;
+  height: 70%;
+  
+  -webkit-transition: all 0.3s ease; 
+  -moz-transition: all 0.3s ease; 
+  -o-transition: all 0.3s ease; 
+  transition: all 0.3s ease; 
+ 
+}
+
+#preview.fullSize{
+	left: -21.8%;
+	top: -0.0em;
+	z-index: 10;
+	width: 122%;
+	height: 100%;
+	
+  -webkit-transition: all 0.3s ease; 
+  -moz-transition: all 0.3s ease; 
+  -o-transition: all 0.3s ease; 
+  transition: all 0.3s ease; 
+}
+
+#prePanel{
+	background-image: url('../img/tab_left_active.png');
+	position: absolute;
+	top: 5px;
+	width: 100px;
+	height: 24px;
+	
+}
+
+#prePanel span{
+	color: #fff;
+	font-family: ariel;
+	font-size: 13px;
+	left: 26px;
+	line-height: 19px;
+	position: absolute;
+}
+
+#previewClose_btn{
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	cursor: pointer;
+} 
+
+.dhtmlgoodies_aTab.smallPreview{
+	width: 49.8%;
+	
+}
+
+#userPanel{
+	position: absolute;
+	background-color : #f0f0f0;
+	right: 10%;
+}
+
+#preBtns{
+	position: absolute;
+	left: 50.2%;
+	width: 49.6%;
+	height: 24px;
+}
+
+#reBtn{
+	position: absolute;
+	right: 0px;
+	line-height: 1.38em;
+	z-index :11;
+}
+
+#fullBtn{
+	position: absolute;
+	right: 30px;
+	line-height: 1.38em;
+	z-index :11;
+}
+
+#shareBtn{
+	position: absolute;
+	right: 26.5%;
+}
+
+
+#newFileTitle{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	color: #000;
+	font-size: 17px;
+	font-family: monospace;
+	line-height: 22px;
+	height: 2.2em;
+	right: 0px;
+	padding-left: 5px;
+	background-color: #fff;
+	background-image: url("../images/newFile.jpg");
+	background-size: 170px;
+	background-position-x: 330px;
+	background-repeat: no-repeat;
+}
+
+
+#newFileTitle img{
+	position: absolute;
+	top: 20px;
+	left: 38px;
+}
+
+#fileResult{
+	position: absolute;
+	color: #000;
+	font-size: 12px;
+	left: 56px;
+	top: 17px;
+}
+
+#filePathText{
+	position: absolute;
+	top: 48px;
+	left: 12px;
+}
+
+
+#newFilePath{
+	position: absolute;
+	top: 5.5em;
+	left: 10px;
+	width: 480px;
+	right: 0;
+}
+
+#filePath{
+	width: 455px;
+	position: relative;
+	left: 20px;
+	border-radius: 5px;
+}
+
+#newFileTree{
+	position: absolute;
+	border: 1px solid #2b2b2b;
+	top: 8.2em;
+	left: 10px;
+	right: 10px;
+	height: 188px;
+	overflow: auto;
+	border-radius: 5px;
+	padding: 2px 0 0 5px;
+}
+
+#newFileInput{
+	position: absolute;
+	top: 310px;
+	left: 10px;
+	width: 480px;
+	right: 0;
+	
+}
+#fileName{
+	position: absolute;
+	left: 80px;
+	width: 395px;
+	border-radius: 5px;
+}
+
+#newFileResult{
+	position: absolute;
+	top: 370px;
+	right: 10px;
+}
+
+#줄{
+	position: absolute;
+	backgroud-color: 2b2b2b;
+	/* width: 99%; */
+	top: 350px;
+	left: 0;
+	right: 0;
+	border: 1px solid #2b2b2b;
+}
+
+#fileRoot{
+	position: absolute;
+	cursor: pointer;
+	width: 5px;
+	left: 0px;
+}
+
+
+
+
+
+#newFolderTitle{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	color: #000;
+	font-size: 17px;
+	font-family: monospace;
+	line-height: 22px;
+	height: 2.2em;
+	right: 0px;
+	padding-left: 5px;
+	background-color: #fff;
+	background-image: url("../images/newFolder.png");
+	background-size: 170px;
+	background-position-x: 330px;
+	background-repeat: no-repeat;
+}
+
+
+#newFolderTitle img{
+	position: absolute;
+	top: 20px;
+	left: 38px;
+}
+
+#folderResult{
+	position: absolute;
+	color: #000;
+	font-size: 12px;
+	left: 56px;
+	top: 17px;
+}
+
+#folderPathText{
+	position: absolute;
+	top: 48px;
+	left: 12px;
+}
+
+
+#newFolderPath{
+	position: absolute;
+	top: 5.5em;
+	left: 10px;
+	width: 480px;
+	right: 0;
+}
+
+#folderPath{
+	width: 455px;
+	position: relative;
+	left: 20px;
+	border-radius: 5px;
+}
+
+#newFolderTree{
+	position: absolute;
+	border: 1px solid #2b2b2b;
+	top: 8.2em;
+	left: 10px;
+	right: 10px;
+	height: 188px;
+	overflow: auto;
+	border-radius: 5px;
+	padding: 2px 0 0 5px;
+}
+
+#newFolderInput{
+	position: absolute;
+	top: 310px;
+	left: 10px;
+	width: 480px;
+	right: 0;
+	
+}
+#folderName{
+	position: absolute;
+	left: 80px;
+	width: 395px;
+	border-radius: 5px;
+}
+
+#newFolderResult{
+	position: absolute;
+	top: 370px;
+	right: 10px;
+}
+
+#folderRoot{
+	position: absolute;
+	cursor: pointer;
+	width: 5px;
+	left: 0px;
+}
+
+#import_btn{
+	right: 37px;
+	position: absolute;
+}
+
+#select{
+	border-radius: 10px;
+}
+
+#memo_window{
+   overflow: initial;	
+}
+
+#memo_window ::-webkit-scrollbar {
+    width: 2px;
+	height: 0px;
+}
+ 
+#memo_window ::-webkit-scrollbar-track {
+	background-color: rgba(6, 6, 6, 1);
+	box-shadow: inset 0px 0px 0px 2px #545353;
+	border-radius: 5px;
+}
+ 
+#memo_window ::-webkit-scrollbar-thumb {
+	background-color: #DB5C00;
+	border-radius: 5px;
+}
+
+#memo_window ::-webkit-scrollbar-corner {
+}
+	
+
+
+
+    
+    

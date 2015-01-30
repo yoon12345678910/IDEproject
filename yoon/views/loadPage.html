@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<style>
+	body{
+		margin: 0;
+		overflow: hidden;
+	}
+	#logoDiv{
+		position: absolute;
+		top: 0;
+		padding: 0 auto;
+		width: 100%;
+		bottom: 0;
+		}
+
+	#logoDiv img{
+		width: 100%;
+		height: 100.5%;
+		bottom: 0;
+	}
+	
+	span{
+		color:#DBDBDB;
+		font-size: 32px;
+	}
+	
+	#a1{
+		position: absolute;
+		top: 59.8%;
+		left: 52.2%;
+	}
+	
+	#a2{
+		position: absolute;
+		top: 59.8%;
+		left: 52.7%;
+	}
+	
+	#a3{
+		position: absolute;
+		top: 59.8%;
+		left: 53.2%;
+	}
+	
+	</style>
+
+
+
+</head>
+<body id="logoDiv">
+    	<img src="stylesheets/img/big.loding.jpg"/>
+    	<span id="a1">.</span> <span id="a2">.</span> <span id="a3">.</span>
+</body>
+
+<script src="stylesheets/js/jquery.min.js"></script>  
+<script>
+
+
+
+
+
+	var elem = $('#a1');
+  setInterval(function() {
+	    if (elem.css('visibility') == 'hidden') {
+	        elem.css('visibility', 'visible');
+	    } else {
+	        elem.css('visibility', 'hidden');
+	    }    
+	}, 500); 
+
+	var elem1 = $('#a2');
+  setInterval(function() {
+	    if (elem1.css('visibility') == 'hidden') {
+	        elem1.css('visibility', 'visible');
+	    } else {
+	        elem1.css('visibility', 'hidden');
+	    }    
+	}, 600); 
+  
+	var elem2 = $('#a3');
+  setInterval(function() {
+    if (elem2.css('visibility') == 'hidden') {
+        elem2.css('visibility', 'visible');
+    } else {
+        elem2.css('visibility', 'hidden');
+    }    
+}, 700); 
+  
+
+
+setTimeout(function(){location.href = '/'; }, 2500);
+	
+
+</script>
+
+
+</html>
+
+
+
+

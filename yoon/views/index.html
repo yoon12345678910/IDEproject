@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<!-- kendo CSS & JS-->
+	 <link href="stylesheets/css/kendo/examples-offline.css" rel="stylesheet">
+    <link href="stylesheets/css/kendo/kendo.common.min.css" rel="stylesheet">
+    <link href="stylesheets/css/kendo/kendo.rtl.min.css" rel="stylesheet">
+    <link href="stylesheets/css/kendo/kendo.black.min.css" rel="stylesheet">
+    <link href="stylesheets/css/kendo/kendo.dataviz.min.css" rel="stylesheet">
+    <link href="stylesheets/css/kendo/kendo.dataviz.black.min.css" rel="stylesheet">
+    
+<!-- Custom CSS -->
+    <link href="stylesheets/css/custom.css" rel="stylesheet">
+
+<!-- tab CSS && JS -->
+	<link rel="stylesheet" href="stylesheets/css/tab-view.css" type="text/css" media="screen">
+	<script type="text/javascript" src="stylesheets/js/ajax.js"></script>
+	<script type="text/javascript" src="stylesheets/js/tab-view.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- page  CSS & JS -->
+	<link rel="stylesheet" type="text/css" href="stylesheets/css/page-css/custom.css" />
+	<script src="stylesheets/js/page-js/modernizr.custom.79639.js"></script>
+	
+<!-- realTime CSS & JS-->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/modules/editor.js"></script>
+    <script src="/modules/collaboration.js"></script>
+   
+    <link rel='stylesheet' href="/stylesheets/css/style-editor.css" />
+    
+<!--codemirror -->
+    <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
+    <script src="/codemirror/lib/codemirror.js"></script>
+    <script src="/codemirror/mode/css/css.js"></script>
+    <link rel="stylesheet" href="codemirror/doc/docs.css">
+    
+    	
+<!-- mode -->
+    <script src="/stylesheets/js/mode/javascript/javascript.js"></script>
+    <script src="/stylesheets/js/mode/css/css.js"></script>
+  	<script src="/stylesheets/js/mode/xml/xml.js"></script>
+  	<script src="/stylesheets/js/mode/htmlmixed/htmlmixed.js"></script>
+    
+<!-- hint -->
+    <link rel="stylesheet" href="/stylesheets/css/addon/hint/show-hint.css">
+    <script src="/stylesheets/js/addon/hint/show-hint.js"></script>
+	<script src="/stylesheets/js/addon/hint/javascript-hint.js"></script>
+	<script src="/stylesheets/js/addon/hint/html-hint.js"></script>
+	<script src="/stylesheets/js/addon/hint/xml-hint.js"></script>
+	
+<!-- theme -->
+    <link rel="stylesheet" href="/codemirror/theme/ambiance.css">
+    <link rel="stylesheet" href="/codemirror/theme/blackboard.css">
+	<link rel="stylesheet" href="/codemirror/theme/cobalt.css">
+	<link rel="stylesheet" href="/codemirror/theme/eclipse.css">
+	<link rel="stylesheet" href="/codemirror/theme/elegant.css">
+	<link rel="stylesheet" href="/codemirror/theme/eclipse.css">
+	<link rel="stylesheet" href="/codemirror/theme/erlang-dark.css">
+	<link rel="stylesheet" href="/codemirror/theme/lesser-dark.css">
+	<link rel="stylesheet" href="/codemirror/theme/monokai.css">
+	<link rel="stylesheet" href="/codemirror/theme/neat.css">
+	<link rel="stylesheet" href="/codemirror/theme/night.css">
+	<link rel="stylesheet" href="/codemirror/theme/rubyblue.css">
+	<link rel="stylesheet" href="/codemirror/theme/solarized.css">
+	<link rel="stylesheet" href="/codemirror/theme/twilight.css">
+	<link rel="stylesheet" href="/codemirror/theme/xq-dark.css">
+	<link rel="stylesheet" href="/codemirror/theme/vibrant-ink.css">
+	
+<!-- treeView CSS -->
+	<link rel="stylesheet" href="/stylesheets/css/jqueryFileTree.css">
+	</head>
+
+<!-- navbaEasyui  CSS & JS-->
+	<link rel="stylesheet" type="text/css" href="stylesheets/css/easyUi/easyui.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/css/easyUi/icon.css">
+ 	<script type="text/javascript" src="stylesheets/js/easyUi/jquery.easyui.min.js"></script>
+
+<!-- dynamically-->
+	 <script src='http://codemirror.net/mode/xml/xml.js'></script>
+ 	 <script src='http://codemirror.net/mode/css/css.js'></script>
+ 	 <script src='http://codemirror.net/mode/htmlmixed/htmlmixed.js'></script>
+ 	 <script src="http://codemirror.net/addon/edit/closetag.js"></script>
+    <script src="http://codemirror.net/addon/edit/matchbrackets.js"></script>
+    <script src="http://codemirror.net/addon/selection/active-line.js"></script>
+ 	 
+<!-- tree click -->
+ 	 <link rel='stylesheet' href="/stylesheets/css/jquery.contextMenu.css" /> 
+    
+    
+<title>Insert title here</title>
+</head>
+<body>
+
+<!--navBar  -->
+        <div id="megaStore">
+            <ul id="menu">
+                <li>
+                    File
+                    <ul>
+                        <li>
+                            New
+                            <ul> <!-- moving the UL to the next line will cause an IE7 problem -->
+                                <li id="newFile">File</li>
+                                <li id="newFolder">Folder</li>
+                            </ul>
+                        </li>
+                        <li id="importFile">
+                            Import
+                    
+                        </li>
+                        <li id="exportFile">
+                            Export
+
+                        </li>
+                     
+                    </ul>
+                </li>
+                
+                <li>
+                    Edit
+                    <ul>
+                        <li>
+                            <div id="template" style="padding: 10px;">
+                            
+                              <div id ="fontChange" class="box">
+						                <h4>Font Size</h4>
+						                <div id="climateCtrl">
+						                	<input id="slider" class="temperature" />
+						           	 </div>
+							     </div>
+                            
+                            
+                            <div id="selectTheme" class="box">
+<!-- codemirror theme -->
+										<h4>Select a theme: <select onchange="selectTheme()" id=select>
+											    <option selected>twilight</option>
+											    
+											    <option>ambiance</option>
+											    <option>blackboard</option>
+											    <option>cobalt</option>
+											    <option>eclipse</option>
+											    <option>elegant</option>
+											    <option>erlang-dark</option>
+											    <option>lesser-dark</option>
+											    <option>monokai</option>
+											    <option>neat</option>
+											    <option>neo</option>
+											    <option>night</option>
+											    <option>rubyblue</option>
+											    <option>solarized</option>
+											    <option>vibrant-ink</option>
+											    <option>xq-dark</option>
+											</select>
+										</h4>
+								</div>	
+										 
+									   
+										
+
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li>
+                    About
+                </li>
+                
+                	<run class = "runPo">	
+                	   <button type="button" id="saveBtn" title="Ctrl+S">Save</button>
+                     <button type="button" id="preBtn">Preview</button>
+                     <button type="button" id="runBtn" disabled="disabled" >Run</button>
+                  	
+                  </run> 
+                  
+                  <div id="notify">
+                  		<span id="staticNotification"></span>
+                  </div>
+                  
+                  	<button type="button" id="shareBtn">Share</button>
+                  <li id = "userMenu">
+                  <img src ="stylesheets/icons/test.png" height="20" width= "20"></img>
+                  <span id ="userId">userid</span>
+                    
+                    <ul>
+                        <li>
+                            <div id="template" style="padding: 10px;">
+                                <img id = "userImg" src="stylesheets/images/psy-album.jpg" 
+                                height="100" width= "100"/>
+                               	
+                               	<div>
+                                		<h2 id="userTemplateId">userid</h2><p class = "projectPath">/node02</p>  
+                                </div>
+                                
+                                	<div id="projectInfo">
+                                       <b>Member</b> <small>since Nov. 2012</small>
+                            		</div>
+                            		
+                            </div>
+                            
+                            	<div id="tFooter">
+                                <button type="button" class="k-button">Dashboard</button>
+                                <button id="logout" type="button" class="k-button">Log out</button>
+                        		</div>
+                        </li>
+                    </ul>
+                    
+                    	
+                </li>
+                <img id ="smallLogo" src ="stylesheets/img/small_logo.jpg">
+            </ul>
+            
+        </div>
+                    
+<!--workspace  -->
+	<div id="workspace">
+		<div id = "workspace-nav">
+			<b>Workspace</b>
+		</div>
+		
+		<div id = "workspace-proName">
+			<small>project: </small>
+			<b>myFirstProject</b>
+			<button type="button" id="workspaceRefresh" class="k-icon k-si-refresh"></button>
+		</div>
+												
+		<div id="workspace-list">
+			<div class="filetree"></div>
+		</div>
+	</div>  
+                        
+                            
+<!--tab-->
+	<div id= "edit_content">
+		<div id="dhtmlgoodies_tabView1">
+			<div class="dhtmlgoodies_aTab">
+				<textarea id="code_0" name="code_0"></textarea>
+			</div>
+			<div id="preBtns" style="display: none">
+			<div id="prePanel">
+				<span>Result</span>
+				<img id="previewClose_btn" src ="stylesheets/img/close.gif"></img>
+			</div>
+				
+		  	    <button type="button" id="reBtn"></button>
+		  	    <button type="button" id="fullBtn"></button>
+			</div>											
+			<iframe id="preview" style="display: none"></iframe>
+		</div>
+											
+<!--terminal-->	
+		<div id="content" tabindex="1"></div>
+	</div> 
+        
+ 
+<!--collaborate layout-->
+ 	<div id="right_bar">
+	 	<div id="right_bar_back">
+	 	 	<li id="Collaborate_btn" class="vertical_btn">Collaborate</li>
+	 		<li id="memo_btn" class="memo_offC ">Memo</li>
+	 	</div>
+ 	 </div>
+
+<!--chat -->
+	<div id="container" class="container">	
+		<div class="menu-panel">
+			<!-- member -->
+				<div id="member_top"><b>Members</b></div>
+					<div class="member_layout">
+				</div>
+					
+			<!-- ot_chat -->		
+				<div id="chat_top"><b>GroupChat</b></div>
+				<div class="chatText"></div>
+						
+			<!-- chat_input  -->
+				<div class="chatContainer">
+					<textarea rows="3" class="text-input" placeholder="Enter your message here" ></textarea>
+				</div>
+		</div>
+	 </div> 
+	 
+	 <div id="memo_container" class="container">	
+		<div class="menu-panel">
+
+		</div>
+	 </div>   
+	    
+    <div id="window" style="display: none">
+		<div id="newFileTitle"><b>File</b><img src ="stylesheets/icons/no.png"></img><small id="fileResult">Create a new file resource.</small></div>
+		<b id ="filePathText" >select the parent foler: </b>
+		<div id="newFilePath"><button type="button" id="fileRoot" class="k-icon k-i-folder-up"></button><input id="filePath" disabled="disabled"/></div>
+		<div id="newFileTree"></div>
+		<div id="newFileInput"><b>File name: </b><input id="fileName"/></div>
+		<div id ="줄"></div>
+		<div id="newFileResult">
+			<button type ="button" id ="fileCancle" class="k-button">Cancle</button>
+			<button type ="button" id ="fileFinish" class="k-button" disabled="disabled">Finish</button>
+		</div>
+    </div>
+    
+    <div id="folder_window" style="display: none">
+		<div id="newFolderTitle"><b>Folder</b><img src ="stylesheets/icons/no.png"></img><small id="folderResult">Create a new file resource.</small></div>
+		<b id ="folderPathText" >select the parent foler: </b>
+		<div id="newFolderPath"><button type="button" id="folderRoot" class="k-icon k-i-folder-up"></button><input id="folderPath" disabled="disabled"/></div>
+		<div id="newFolderTree"></div>
+		<div id="newFolderInput"><b>Folder name: </b><input id="folderName"/></div>
+		<div id ="줄"></div>
+		<div id="newFolderResult">
+			<button type ="button" id ="folderCancle" class="k-button">Cancle</button>
+			<button type ="button" id ="folderFinish" class="k-button" disabled="disabled">Finish</button>
+		</div>
+    </div>
+    
+   <div id="file_delete_window" style="display: none">
+		<div id="file_delete_panel">	<span id="file_delete_text"></span></div>   
+			<button type ="button" id ="file_delete" class="k-button">Delete</button>
+   </div>
+    
+   <div id="memo_window" style="display: none">
+            <textarea id="editor" rows="10" cols="30" style="height:420px" >
+            </textarea>
+   </div>
+
+<!-- 파일 임폴트 -->  
+      <form id="importFile_window" enctype="multipart/form-data" style="display: none;" >
+         <div class="demo-section k-header">
+             <input name="files" id="files" type="file" />
+             <p><button id="import_btn" type="button" class="k-button" >Submit</button></p>
+         </div>
+      </form>
+
+
+<!-- ************************************ JS *************************************-->
+<!--web-terminal-->
+	<script src="modules/terminal.init.js"></script>
+
+<!--  scroll bar JS -->
+	<script src="stylesheets/js/color.js"></script>
+
+<!-- kendo -->
+	
+	<script src="stylesheets/js/jquery.min.js"></script>  
+	<script src="stylesheets/js/kendo/angular.min.js"></script>
+    <script src="stylesheets/js/kendo/kendo.all.min.js"></script>
+    <script src="stylesheets/js/kendo/console.js"></script>
+    
+<!-- page right  -->
+		<script src="stylesheets/js/page-js/jquery.mousewheel.js"></script>
+		<script src="stylesheets/js/page-js/jquery.jscrollpane.min.js"></script>
+		<script src="stylesheets/js/page-js/jquerypp.custom.js"></script>
+		<script src="stylesheets/js/page-js/jquery.bookblock.js"></script>
+		<script src="stylesheets/js/page-js/page.js"></script>
+	
+<!-- treeview -->
+	<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+	<script src="modules/jqueryFileTree.js"></script>
+	
+<!-- tree click -->
+ 	 <script src="/modules/jquery.contextMenu.js"></script>
+	 <script src="/modules/jquery.ui.position.js"></script>
+	
+<!--treeview--> <!-- realtime  -->
+	<script>
+	var username;
+	var filepath = "untitled.js";
+	
+	var dont_update_first = false;
+	var socket = null;
+	
+	function treeRefresh(path){
+		$('#newFolderTree').fileTree({root: path, 
+			script: '/jqueryFileTreeDir', folderEvent: 'dblclick'}, function(file) {
+			});
+		
+		$('#newFileTree').fileTree({root: path, 
+			script: '/jqueryFileTreeDir', folderEvent: 'dblclick'}, function(file) {
+			});
+		
+		$('.filetree').fileTree({root: path, 
+			script: '/jqueryFileTree', folderEvent: 'dblclick'}, function(file) {
+			});
+	}
+	
+
+	$(document).ready(function() {
+		
+		var currentEditor_file = "/home/yoon/myFirstProject/NewFile.html";
+		var currentTab;
+		
+		$('#newFileTitle img').css('visibility', 'hidden');
+		$('#newFolderTitle img').css('visibility', 'hidden');
+/*getSession  */
+		
+		$.ajaxSetup({ async:false });
+		$.post('/getSession',  function(data){
+			console.log("getSession", data);
+			
+			$('#userId').html(data.result.user);
+			$('#userTemplateId').html(data.result.user);
+			
+			username = data.result.user;
+		});		
+		
+		$.ajaxSetup({ async:true });
+		
+/*kendo*/
+	   
+	   var staticNotification = $("#staticNotification").kendoNotification({
+                        appendTo: "#notify"
+       }).data("kendoNotification");
+	   $("#saveBtn").click(function(){
+	  	  $(".k-notification").css('font-size', '20px');
+	       var d = new Date();
+	       staticNotification.show("File saved!!!...");
+	       var container = $(staticNotification.options.appendTo);
+	       container.scrollTop(container[0].scrollHeight);
+	       editor.currentFile = currentEditor_file;
+	       console.log('currentTab', currentTab);
+	       //editor.save();
+  		 });
+       
+       
+       
+	 
+       
+	   
+	    function sliderOnSlide(e) {
+	    	console.log("Slide :: new slide value is: ", e.value);
+         }
+
+        function sliderOnChange(e) {
+        	$('.CodeMirror').css('font-size', e.value);
+           console.log("Change :: new value is: ", e.value);
+         }
+	   
+	       $("#slider").kendoSlider({
+                        change: sliderOnChange,
+                        slide: sliderOnSlide,
+                        min: 10,
+                        max: 18,
+                        smallStep: 1,
+                        largeStep: 4,
+                        value: 13
+                    });
+	   
+	   $("#editor").kendoEditor();
+	   $("#files").kendoUpload();
+	   $("#menu").kendoMenu();
+	   $("#saveBtn").kendoButton({icon: "pencil"});
+	   $("#preBtn").kendoButton({spriteCssClass: "k-icon k-i-shape"});
+	   $("#runBtn").kendoButton({icon: "expand"});
+	   $("#reBtn").kendoButton({icon: "refresh"});
+	   $("#fullBtn").kendoButton({icon: "dimension"});
+	   $("#shareBtn").kendoButton({spriteCssClass: ""});
+	  
+	   
+	 var window = $("#window");
+	 $('#newFile').bind("click", function() {
+		window = $("#window").kendoWindow({
+		    width: "500px",
+		    height: "400px",
+		    actions: ["Close"],
+		    title: "New File",
+		    close: function() {
+		     }
+		}).data("kendoWindow").open();
+	 });
+	 
+	 var window = $("#folder_window");
+	 $('#newFolder').bind("click", function() {
+		window = $("#folder_window").kendoWindow({
+		    width: "500px",
+		    height: "400px",
+		    actions: ["Close"],
+		    title: "New Folder",
+		    close: function() {
+		     }
+		}).data("kendoWindow").open();
+	 });
+
+	 var window = $("#importFile_window");
+	 $('#importFile').bind("click", function() {
+			window = $("#importFile_window").kendoWindow({
+			    width: "500px",
+			    height: "0px",
+			    actions: ["Close"],
+			    title: "Import",
+			    close: function() {
+			     }
+			}).data("kendoWindow").open();
+		 });
+	 
+	 var window = $("#file_delete_window");
+	
+	 
+	 var window = $("#memo_window");
+	 $('#memo_btn').bind("click", function() {
+			window = $("#memo_window").kendoWindow({
+			    width: "500px",
+			    height: "440px",
+			    actions: ["Close"],
+			    title: "Memo",
+			    close: function() {
+			     }
+			}).data("kendoWindow").open();
+		 });
+	 
+
+/* treeview   */
+	   var index = 1;	
+		
+		function clone(obj) {
+	    if (null == obj || "object" != typeof obj) return obj;
+	    var copy = obj.constructor();
+	    for (var attr in obj) {
+	        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+	    }
+	    return copy;
+		}
+		socket = io.connect();
+		
+	/* 	var editorA = clone(editor);
+		var collaborationA = clone(collaboration);*/
+		
+		editor.num = 0;
+		editor.currentFile = "/home/yoon/myFirstProject/NewFile.html";
+		editor.init();
+		editor.load();
+		
+		collaboration.projectEach = "NewFile.html";
+		collaboration.username = username;
+		
+		collaboration.init();
+		collaboration.join(); 
+		 
+		initTabs('dhtmlgoodies_tabView1',Array('NewFile.html'),0,500,400,Array(true));
+		
+		$('#filePath').val("/home/yoon/myFirstProject/");
+		$('#folderPath').val("/home/yoon/myFirstProject/");
+		
+		 treeRefresh('/home/yoon/myFirstProject/');
+		
+		// event listeners
+		$('#newFileTree').on('dirtreeclicked', function(e, data) {
+			$("#filePath").val(data.rel);
+		});
+		
+		$('#newFolderTree').on('dirtreeclicked', function(e, data) {
+			$("#folderPath").val(data.rel);
+		});
+		
+		
+		$('.filetree')
+		.on('filetreeexpand', function (e, data) { console.log(data); })
+		.on('filetreeexpanded', function (e, data) { console.log(data); })
+		.on('filetreecollapsed', function (e, data) { console.log(data); })
+		.on('filetreecollapse', function (e, data) { console.log(data); })
+		.on('filetreechecked', function (e, data) { console.log(data); })
+		.on('filetreeunchecked', function (e, data) { console.log(data); })
+		.on('filetreeclicked', function(e, data) {
+			console.log("filetreeclicked", data);
+			
+			
+			
+			$.get('/get_file_contents',  {path: data.rel}, function (result) {
+				
+				var editorB = clone(editor);
+				var collaborationB = clone(collaboration);
+				
+				$('#tabViewdhtmlgoodies_tabView1_' + index).append(
+						'<textarea id =' + 'code_' + index + ' ' + 'name=' + 'code_' + index + '></textarea>'
+				); 
+				editorB.num = index;
+				editorB.init();
+				
+				editorB.codemirror.setValue(result);
+				editorB.codemirror.focus();
+				
+				
+				collaborationB.projectEach = data.value;
+				collaborationB.join();
+				index++;
+				});
+			
+				editor.currentFile = data.rel;
+				currentEditor_file = data.rel;
+			createNewTab('dhtmlgoodies_tabView1', data.value, '', '',true);
+			});
+		});
+		</script>
+		
+<!--Collaborate-slide && memo -->
+		<script>
+			$(function() {
+				Page.init();
+				//MemoPage.init();
+			});
+		
+		  $("#Collaborate_btn").click(event, function() {
+		  	 if($('#edit_content').hasClass('smallContent')) {
+			      $('#edit_content').removeClass('smallContent');
+			      $('#sidebar-resizer').removeClass('smallContent');
+				  $('#Collaborate_btn').removeClass('btn_yellow');
+				  
+				  
+					if($('#preview').hasClass('fullSize')){
+						$('#edit_content').addClass('fullSizeEditor');
+					}else{
+						$('#edit_content').removeClass('fullSizeEditor');
+					}
+			      
+			    } else {
+			    	
+			    	if($('#preview').hasClass('fullSize')){
+							$('#edit_content').addClass('fullSizeEditor');
+						}else{
+							$('#edit_content').removeClass('fullSizeEditor');
+						}
+			    	
+			      $('#edit_content').addClass('smallContent');
+			      $('#sidebar-resizer').addClass('smallContent');
+			      $('#Collaborate_btn').addClass('btn_yellow');
+			    }
+			});
+		
+		 /*   $("#memo_btn").click(event, function() {
+		 	 if($('#memo_btn').hasClass('memo_onC')) {
+				  //$('#memo_btn').removeClass('memo_onC');
+			      
+			    } else {
+			    	window = $("#memo_window").kendoWindow({}).data("kendoWindow").close();
+			    	//$('#memo_btn').removeClass('memo_onC');
+			    } 
+			});
+		    */
+		  $('.writebutton').on('click', function(){
+				 $('.writebutton').addClass('selectButton');
+				 $('.readbutton').removeClass('selectButton');
+			});
+		
+			$('.readbutton').on('click', function(){
+				 $('.readbutton').addClass('selectButton');
+				 $('.writebutton').removeClass('selectButton');
+			});
+    	
+    </script>
+    
+<!-- codemirror theme -->
+    <script>
+	  
+	  var input = document.getElementById("select");
+	  function selectTheme() {
+	    var theme = input.options[input.selectedIndex].innerHTML;
+	    editor.codemirror.setOption("theme", theme);
+	  }
+	  var choice = document.location.search &&
+	               decodeURIComponent(document.location.search.slice(1));
+	  if (choice) {
+	    input.value = choice;
+	    editor.codemirror.setOption("theme", choice);
+	  }
+	</script>
+	
+<!-- preview  -->
+	<script>
+	$("#previewClose_btn").click(event, function(){
+		if($('.dhtmlgoodies_aTab').hasClass('smallPreview')) {
+	      $('.dhtmlgoodies_aTab').removeClass('smallPreview');
+	      $('.dhtmlgoodies_tabPane').removeClass('smallPreview');
+	      $('#edit_content').removeClass('fullSizeEditor');
+	      
+	      $('#preview').css("display", "none");
+	      $('#preBtns').css("display", "none");
+	      
+	    } else {
+	      $('.dhtmlgoodies_aTab').addClass('smallPreview');
+	      $('.dhtmlgoodies_tabPane').addClass('smallPreview');
+	      $('#preview').css("display", "");
+	      $('#preBtns').css("display", "");
+	    }
+	});
+	
+	
+	$("#preBtn").click(event, function() {
+		if($('.dhtmlgoodies_aTab').hasClass('smallPreview')) {
+			
+
+			
+			if($('#preview').hasClass('fullSize')){
+		     $('#preview').removeClass('fullSize');
+		      $('#edit_content').removeClass('fullSizeEditor');
+			};
+			
+	      $('.dhtmlgoodies_aTab').removeClass('smallPreview');
+	      $('.dhtmlgoodies_tabPane').removeClass('smallPreview');
+	      
+	      $('#preview').css("display", "none");
+	      $('#preBtns').css("display", "none");
+	      
+	    } else {
+	
+	      $('.dhtmlgoodies_aTab').addClass('smallPreview');
+	      $('.dhtmlgoodies_tabPane').addClass('smallPreview');
+	      
+	      $('#preview').removeClass('fullSize');
+	      $('#edit_content').removeClass('fullSizeEditor');
+	      
+	      $('#preview').css("display", "");
+	      $('#preBtns').css("display", "");
+	    }
+	});
+	
+	$("#fullBtn").click(event, function() {
+		if($('#preview').hasClass('fullSize')) {
+			$('#preview').removeClass('fullSize');
+			$('#edit_content').removeClass('fullSizeEditor');
+			
+	      
+	    } else {
+	    	if($('#edit_content').hasClass('smallContent')){
+					$('#edit_content').addClass('fullSizeEditor');
+					$('#preview').addClass('fullSize');
+			}else{
+				$('#preview').addClass('fullSize');	
+			}
+	    	
+	      
+	    }
+	});
+	
+	
+	
+	</script>
+	
+<!-- tree click  -->
+	<script type="text/javascript" class="showcase">
+		$(function() {
+			$.contextMenu({
+				selector : 'li',
+				callback : function(key, options) {
+					var m = "clicked: " + key + " on " + $(this).attr('id');
+					
+					console.log("여기", m);
+					//window.console && console.log(m) || alert(m);
+					console.log("aa",$(this).attr('id'));
+					console.log("bb",this[0].getElementsByTagName('A')[0].text);
+					console.log("cc",$(this).attr('id').split(this[0].getElementsByTagName('A')[0].text)[0]);
+					
+					var treeFull = $(this).attr('id');
+					var treeText = this[0].getElementsByTagName('A')[0].text;
+					var treeSplit = treeFull.split(treeText)[0];					
+					var fileType = this[0].classList[0];	
+					
+						if(key == 'delete'){
+							window = $("#file_delete_window").kendoWindow({
+						    width: "500px",
+						    height: "0px",
+						    actions: ["Close"],
+						    title: "Delete",
+						    close: function() {
+						     }
+						}).data("kendoWindow").open();
+	var deleteText = "Are you sure you want to delete "
+						+"'"+treeText + "'" + " from the file system?";
+	
+							$('#file_delete_text').html(deleteText);
+							$('#file_delete').on('click', function(){
+								
+								$.ajaxSetup({ async:false });
+								$.post('/deleteF', {  source : treeFull  }  , function(data){
+									treeRefresh('/home/yoon/myFirstProject/');
+								}); 
+								$.ajaxSetup({ async:true });
+								 window = $("#file_delete_window").kendoWindow({}).data("kendoWindow").close();
+									
+								
+							});
+						
+						}else if(key == 'newfile'){
+							
+							if(fileType == 'file'){
+								$('#filePath').val(treeSplit);
+							}else if(fileType == 'directory'){
+								$('#filePath').val(treeFull);
+							}
+							window = $("#window").kendoWindow({
+						    width: "500px",
+						    height: "400px",
+						    actions: ["Close"],
+						    title: "New File",
+						    close: function() {
+						     }
+							}).data("kendoWindow").open();
+							
+						}else if(key == 'newfolder'){
+							
+							if(fileType == 'file'){
+								$('#folderPath').val(treeSplit);
+							}else{
+								$('#folderPath').val($(this).attr('id'));
+							}
+							window = $("#folder_window").kendoWindow({
+							    width: "500px",
+							    height: "400px",
+							    actions: ["Close"],
+							    title: "New Folder",
+							    close: function() {
+							     }
+							}).data("kendoWindow").open();
+							
+						}
+				},
+
+				items : {
+					"newfile" : {name : "Create File"},
+					"sep1" : "---------",
+					"newfolder" : {name : "Create Folder"},
+					"sep2" : "---------",
+					"delete" : {name : "Delete"}
+				}
+			});
+			$('.context-menu-one').on('click', function(e) {
+				console.log('clicked', this);
+			})
+		});
+
+	</script>
+	
+	<script>
+
+	
+	$('#logout').on('click', function(){
+		$.post('/sessionDestroy', function(data){
+			if(data.result == 'sessionInit'){
+				location.href = '/login';
+			}
+		});
+	});
+	
+	
+	$('#reBtn').on('click', function(){
+		editor.updatePreview();
+	});
+	
+	$('#fileCancle').on('click', function(){
+		window = $("#window").kendoWindow({}).data("kendoWindow").close();
+	});
+	
+	$('#folderCancle').on('click', function(){
+		window = $("#folder_window").kendoWindow({}).data("kendoWindow").close();
+	});
+	
+
+	$('#fileName').keyup(function () {
+		
+		if($('#fileName').val().length ==0){
+			$('#newFileTitle img').css('visibility', 'visible');
+			$('#fileResult').css('color', 'red');
+			$('#fileResult').html(' Name cannot be empty.');
+			$('#fileFinish').attr('disabled','disabled');
+		}else{
+			$.post('/existSource', {source : $('#filePath').val() + $('#fileName').val()} , function(data){
+				if(data == "file"){
+					$('#newFileTitle img').css('visibility', 'visible');
+					$('#fileResult').css('color', 'red');
+					$('#fileResult').html("&nbsp"+ "'" + $('#fileName').val() +"'"  +"&nbsp"+'already exists.');
+					$('#fileFinish').attr('disabled','disabled');
+				}else{
+					$('#newFileTitle img').css('visibility', 'hidden');
+					$('#fileResult').css('color', 'black');
+					$('#fileResult').html('Create a new file resource.');
+					
+					$('#fileFinish').removeAttr('disabled');
+				}
+			});
+		}
+	});
+	
+
+	
+	$('#fileFinish').on('click',  function(){
+		
+		$.ajaxSetup({ async:false });
+		$.post('/createFile', {file : $('#filePath').val() + $('#fileName').val()}, function(data){
+			
+			if(data == false){
+				$('#newFileTitle img').css('visibility', 'visible');
+				$('#fileResult').css('color', 'red');
+				$('#fileResult').html("&nbsp"+ "'"+$('#fileName').val() +"'" +"&nbsp"+'already exists.');
+			}else{
+				$('#fileName').val('');
+				$('#fileFinish').attr('disabled','disabled');
+				window = $("#window").kendoWindow({}).data("kendoWindow").close();
+				
+				treeRefresh('/home/yoon/myFirstProject/');
+			}
+		
+		});
+		$.ajaxSetup({ async:true });
+	});
+	
+	
+	
+	
+$('#folderName').keyup(function () {
+		
+		if($('#folderName').val().length ==0){
+			$('#newFolderTitle img').css('visibility', 'visible');
+			$('#folderResult').css('color', 'red');
+			$('#folderResult').html(' Name cannot be empty.');
+			$('#folderFinish').attr('disabled','disabled');
+		}else{
+			$.post('/existSource', {source : $('#folderPath').val() + $('#folderName').val()} , function(data){
+				if(data == "dir"){
+					$('#newFolderTitle img').css('visibility', 'visible');
+					$('#folderResult').css('color', 'red');
+					$('#folderResult').html("&nbsp"+ "'" + $('#folderName').val() +"'"  +"&nbsp"+'already exists.');
+					$('#folderFinish').attr('disabled','disabled');
+				}else{
+					$('#newFolderTitle img').css('visibility', 'hidden');
+					$('#folderResult').css('color', 'black');
+					$('#folderResult').html('Create a new file resource.');
+					$('#folderFinish').removeAttr('disabled');
+				}
+			});
+		}
+	});
+	
+	$('#folderFinish').on('click',  function(){
+		
+		$.ajaxSetup({ async:false });
+		$.post('/createFolder', {folder : $('#folderPath').val() + $('#folderName').val()}, function(data){
+			
+			if(data == false){
+				$('#newFolderTitle img').css('visibility', 'visible');
+				$('#folderResult').css('color', 'red');
+				$('#folderResult').html("&nbsp"+ "'"+$('#folderName').val() +"'" +"&nbsp"+'already exists.');
+			}else{
+				
+				$('#folderName').val('');
+				$('#folderFinish').attr('disabled','disabled');
+				
+				window = $("#folder_window").kendoWindow({}).data("kendoWindow").close();
+				
+				treeRefresh('/home/yoon/myFirstProject/');
+			}
+		
+		});
+		$.ajaxSetup({ async:true });
+	});
+	
+	
+	$('#workspaceRefresh').on('click',  function(){
+		 treeRefresh('/home/yoon/myFirstProject/');
+	});
+	
+	$('#fileRoot').on('click',  function(){
+		$('#filePath').val("/home/yoon/myFirstProject/");
+	});
+	
+	$('#folderRoot').on('click',  function(){
+		$('#folderPath').val("/home/yoon/myFirstProject/");
+		
+	});
+	
+
+	$('#import_btn').click(function() {
+	
+		var formData = new FormData();
+	     $.each($("input[name=files]")[0].files, function(i, file) {
+	    	 formData.append("files", file);
+	      });  
+	     
+	   	$.ajaxSetup({ async:false });
+	    $.ajax({
+	        url: '/file_import',
+	        type: "post",
+	        dataType: "text",
+	        data: formData,
+	        // cache: false,
+	        processData: false,
+	        contentType: false,
+	        success: function(result, textStatus, jqXHR) {
+	        	 //$( ".k-upload-files" ).remove(); 
+	        /* 	 $( ".k-upload-status" ).remove(); 
+	        	 
+	        	 $( ".k-upload-button" ).removeClass( "k-state-focused" );
+	        	 $(".k-button k-upload-button").find("input").remove();
+	        	 $(".k-button k-upload-button").remove();
+	        	 $(".k-widget k-upload k-header k-upload-sync" ).addClass( "k-upload-empty" ); 
+	        	 $(".k-upload-files.k-reset").find("li").remove();
+	        	 $(".k-upload-files.k-reset").remove(); */
+	        	 
+	          	 treeRefresh('/home/yoon/myFirstProject/');
+	          	 window = $("#importFile_window").kendoWindow({}).data("kendoWindow").close();
+	         }, 
+	        error: function(jqXHR, textStatus, errorThrown) {
+	         }
+	    	});
+	  	$.ajaxSetup({ async:true  });
+	});
+/* 
+  //csIndex ++;
+   setTimeout(function(){ clearInterval(setIntervalNotify); }, 5000);
+  	      
+  	  	 	var notify = $('#notify');
+  	  	    var setIntervalNotify = setInterval(function() {
+           if (notify.css('visibility') == 'hidden') {
+          	 	notify.css('visibility', 'visible');
+           } else {
+          		 notify.css('visibility', 'hidden');
+           }    
+      	 }, 500);
+  	  	 
+  	  	 
+  	  	  */
+  	 
+	
+	</script>	
+	
+	
+</body>
+	
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<title>허허</title>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+<link rel="stylesheet" type="text/css" href="stylesheets/css/login.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/css/loginStyle.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/css/animate-custom.css" />
+</head>
+<body>
+	<div class="container">
+		<!-- Codrops top bar -->
+		<div class="codrops-top">
+
+			<span class="right"> </span>
+			<div class="clr"></div>
+		</div>
+
+		<header> </header>
+
+		<section>
+			<div id="container_demo">
+				<a class="hiddenanchor" id="toregister"></a> <a class="hiddenanchor"
+					id="tologin"></a>
+					
+				<div id="wrapper">
+					<div id="login" class="animate form">
+						<form autocomplete="on">
+							<h1>Log in</h1>
+							<p>
+								<label for="lid" class="uname" data-icon="u"> Your
+									email or username </label> <input id="lid" name="lid"
+									required="required" type="text" />
+							</p>
+							<p>
+								<label for="lpwd" class="youpasswd" data-icon="p"> Your
+									password </label> <input id="lpwd" name="lpwd" required="required"
+									type="password" />
+							</p>
+							<p class="keeplogin">
+								<input type="checkbox" name="loginkeeping" id="loginkeeping"
+									 /> <label for="loginkeeping">Keep
+									me logged in</label>
+							</p>
+							<p class="login button">
+								<button id= "loginbtn" type="button">Login</button>
+								<button id= "test" type="button">test</button>
+							</p>
+							<p class="change_link">
+								Not a member yet ? <a href="#toregister" class="to_register">Join
+									us</a>
+							</p>
+						</form>
+					</div>
+
+					<div id="register" class="animate form">
+						<form autocomplete="on">
+							<h1>Sign up</h1>
+							<p>
+								<label for="rid" class="uname" data-icon="u">Your
+									userid</label> <input id="rid" name="rid" required="required"
+									type="text" placeholder='아이디' />
+							</p>
+							
+								<p id='uid_a'> </p>
+							<p>
+								<label for=email class="youmail" data-icon="e"> Your
+									email</label> <input id="email" name="email" required="required"
+									type="email" placeholder='이메일'/>
+							</p>
+							
+								<p id='email_a'> </p>
+							<p>
+								<label for="rpwd" class="youpasswd" data-icon="p">Your
+									password </label> <input id="rpwd" name="rpwd" required="required"
+									type="password" placeholder='비밀번호'/>
+							</p>
+							<p>
+								<label for="pwd_confirm" class="youpasswd" data-icon="p">Please
+									confirm your password </label> 
+									<input id="pwd_confirm"
+									name="pwd_confirm" required="required" type="password" placeholder='비밀번호 확인'/>
+							</p>
+							<p class="signin button">
+								<button id="signup" type="button">Sign up</button>
+							</p>
+							<p class="change_link">
+								Already a member ? <a href="#tologin" class="to_register">
+									Go and log in </a>
+							</p>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</section>
+	</div>
+
+
+	<script type="text/javascript">
+	var etext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+	var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,16}$/;
+	
+	var rid = 0;
+	var email = 0;
+	var rpwd = 0;
+	var pwdC = 0;
+	
+			$("#rid").keyup(function(data){
+				if($('#rid').val().length > 4 && $('#rid').val().length < 16){
+						$.get("/uid_check",{
+							id : $('#rid').val()
+							},function(data){
+								if(data.result == '무'){
+									$('#rid').css('border', '3px solid green');
+									rid = 1;
+								} else{
+									//$('#rid').focus();
+									$('#rid').css('border', '3px solid red');
+									rid = 0;
+								}
+							})
+				}else{
+					//$('#rid').focus();
+					$('#rid').css('border', '3px solid red');
+					rid = 0;
+					//alert("4보다 크고 12보다 작게 적으시오");
+				}	
+			});
+	
+			
+			$("#email").keyup(function(data){
+				if(etext.test($('#email').val())==false){
+					$('#email').css('border', '3px solid red');
+					email = 0;
+					//$('#email').focus();
+			    }else{
+			    	$.get("/email_check", {email : $('#email').val()}, function(data){
+									if(data.result == '무'){
+										$('#email').css('border', '3px solid green');
+										email = 1;
+									} else{
+										$('#email').css('border', '3px solid red');
+										email = 0;
+										//$('#email').focus();
+									}
+								});
+			    	}
+			});
+			
+			
+			$("#rpwd").focusout(function(data){
+				
+					 if ($('#rpwd').val().length < 6 || $('#rpwd').val().length > 16) {
+							 alert("비밀번호는 6 ~ 16 자리로 입력해주세요.");
+							 //$('#rpwd').focus();
+							 rpwd = 0;
+							  return;
+					}
+				 
+					if(!pwdCheck.test($('#rpwd').val())){
+						alert("비밀번호는 문자, 숫자, 특수문자의 조합으로 입력해주세요.");
+						//$('#rpwd').focus();
+						rpwd = 0;
+						return;
+					};
+					
+					rpwd = 1;
+			});
+			
+			$("#pwd_confirm").focusout(function(data){
+				if($('#rpwd').val() != $('#pwd_confirm').val()){
+					//$('#pwd_confirm').focus();
+					pwdC = 0;
+					$('#rpwd').css('border', '3px solid red');
+					$('#pwd_confirm').css('border', '3px solid red');
+					alert("비밀번호가 동일하지 않습니다.");
+				}else{
+					$('#rpwd').css('border', '3px solid green');
+					$('#pwd_confirm').css('border', '3px solid green');
+					pwdC = 1;	
+				}
+			});
+			
+			
+			
+			
+			$("#signup").click(function(){
+				
+				  if($('#rid').val().length == 0){
+				    alert('아이디를 입력하세요');
+				    $('#rid').focus();
+				    return;
+				  }
+				  
+				  if($('#email').val().length == 0){
+				    alert('이메일을 입력하세요');
+				    $('#email').focus();
+				    return;
+				  }
+				  
+				  if($('#rpwd').val().length == 0){
+				    alert('비밀번호를 입력하세요');
+				    $('#rpwd').focus();
+				    return;
+				  }
+				  
+				  if($('#pwd_confirm').val().length == 0){
+				    alert('비밀번호 확인을 입력하세요');
+				    $('#pwd_confirm').focus();
+				    return;
+				  }
+				if(rid + email + rpwd + pwdC == 4){
+					
+					$.post("/signup", 
+						{
+						id : $('#rid').val(),
+						email : $('#email').val(),
+						pwd : $('#rpwd').val()
+						},function(data){
+							location.href = '/login';
+						});
+				}
+			});
+			
+	 	
+			$("#loginbtn").click(function(){
+			   $.post('/login'
+			        , {
+			          uid : $('#lid').val(),
+			          pwd : $('#lpwd').val(),
+			          save : $('#loginkeeping').is(':checked')
+			        }
+			        , function(data){
+			        	
+			        	console.log("data");
+			        	
+			        	if(data.result == "성공"){
+			        		location.href = '/';
+			        	}else{
+			        		alert("아이디와 비밀번호를 알려주세요");
+			        		$('#lpwd').val('');
+			        	}
+			        }
+			        , 'json');
+			});
+			 
+	   	 
+			/*  
+				$("#loginbtn").click(function(){
+				   $.post('http://192.168.0.160:8080/web03t/json/product/list.do?pageNo=1'
+				        
+				        , function(data){
+					          console.log("dddd", data);
+				        }
+				        , 'json');
+				});
+			 
+			  */
+			  
+			  
+				$("#test").click(function(){
+				   $.post('/test', function(data){
+				  	 
+				  		console.log("여기",data);
+					});
+				});
+		        	  
+			</script>
+
+</body>
+</html>
