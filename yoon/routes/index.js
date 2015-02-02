@@ -18,13 +18,6 @@ exports.dashboard = function(req, res){
 };
 
 
-exports.dash = function(req, res){
-	res.render('product/dash.html');
-};
-
-
-
-
 
 exports.jqFileTree = function(req, res){
 	res.send(jqueryFileTree.getList(req, res));
