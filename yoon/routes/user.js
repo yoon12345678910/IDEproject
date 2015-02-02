@@ -8,9 +8,9 @@ var mysql = require('mysql');
 var client = mysql.createConnection({
 	host : 'localhost',
 	port : 3306,
-	user : 'study',
-	password : 'study',
-	database : 'studydb'
+	user : 'kjs',
+	password : 'kjs',
+	database : 'kjsdb'
 });
 
 exports.list = function(req, res){
@@ -18,7 +18,7 @@ exports.list = function(req, res){
 };
 
 exports.idCheck = function(req, res){
-	client.query('SELECT UID FROM TEST WHERE UID=?', 
+	client.query('SELECT UID FROM USERS WHERE UID=?', 
 			[req.query.id],
 			
 			function(error, result) {
@@ -38,7 +38,7 @@ exports.idCheck = function(req, res){
 };
 
 exports.emailCheck = function(req, res){
-	client.query('SELECT UID FROM TEST WHERE EMAIL=?', 
+	client.query('SELECT UID FROM USERS WHERE EMAIL=?', 
 			[ req.query.email],
 			
 			function(error, result) {
@@ -58,7 +58,7 @@ exports.emailCheck = function(req, res){
 };
 
 exports.signup = function(req, res){
-	client.query('INSERT TEST(UID, PWD, EMAIL) value(?, ?, ?)', 
+	client.query('INSERT USERS(UID, PWD, EMAIL) value(?, ?, ?)', 
 			[req.body.id, req.body.pwd, req.body.email],
 		
 			function(error, result) {
@@ -77,7 +77,7 @@ exports.signup = function(req, res){
 exports.login = function(req, res){
 	 res.setHeader("Access-Control-Allow-Origin", "*");
 	console.log("req.body.uid", req.body.uid);
-	client.query('SELECT UID, PWD FROM TEST WHERE UID=? && PWD =?', 
+	client.query('SELECT UID, PWD FROM USERS WHERE UID=? && PWD =?', 
 			[req.body.uid, req.body.pwd],
 		
 			function(error, result) {
@@ -120,6 +120,30 @@ exports.sessionDestroy = function(req, res){
 	
 };
 
+
+
+exports.existPeople = function(req, res){
+	console.log("req.body.existPeople", req.body.existPeople);
+	
+	
+	client.query('SELECT UID FROM USERS WHERE UID=?', 
+			[req.body.existPeople],
+			function(error, result) {
+		if (result.length) {
+			console.log('아이디 있음ㅠㅠ');
+			res.send({
+				"result" : "유"
+			});
+			
+		} else {
+			console.log('아이디 없음^^');
+			res.send({
+				"result" : "무"
+			});
+		}
+	});
+			
+}
 
 
 

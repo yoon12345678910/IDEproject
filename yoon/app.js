@@ -51,6 +51,8 @@ app.configure('development', function(){
 app.get('/', routes.index);
 app.get('/login', routes.login);
 app.get('/loadPage', routes.loadPage);
+app.get('/dashboard', routes.dashboard);
+app.get('/dash', routes.dash);
 
 app.get('/users', user.list);
 app.get('/uid_check', user.idCheck);
@@ -61,6 +63,7 @@ app.post('/login', user.login);
 
 app.post('/getSession', user.getSession);
 app.post('/sessionDestroy', user.sessionDestroy);
+app.post('/existPeople', user.existPeople);
 
 app.get('/get_file_contents', routes.get_file_contents);
 app.post('/put_file_contents', routes.put_file_contents);
@@ -91,11 +94,10 @@ server.listen(app.get('port'), function(){
 });
 
 
-
 //web-terminal
 io.sockets.on("connection", function (socket) {
 
-  var cwd         = process.cwd(),
+  var cwd         = "/home/yoon/myFirstProject/",
       env         = _.clone(process.env),
       home        = process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE,
       linebreak   = "\n", // check if we need to add \r\n for windows

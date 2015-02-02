@@ -315,6 +315,21 @@
 		</div>
     </div>
     
+    <div id="share_window" style="display: none">
+		<b id ="projectPathText" >project </b>
+		<div id="projectPathRow"><input id="projectPath" disabled="disabled"/></div>
+		<div id="Invite_People">
+			<b id="inviteTop"> Invite User</b><span id="existPeople"></span>
+			<div id="invitePeopleInput"><b>username</b><input id="invitePeople"/></div>
+			
+				<button type ="button" id ="rwBtn" class="k-button" >Rw</button>
+				<button type ="button" id ="rBtn" class="k-button" >R</button>
+			
+			<button type ="button" id ="inviteBtn" class="k-button" disabled="disabled">Invite</button>
+		</div>
+		
+    </div>
+    
    <div id="file_delete_window" style="display: none">
 		<div id="file_delete_panel">	<span id="file_delete_text"></span></div>   
 			<button type ="button" id ="file_delete" class="k-button">Delete</button>
@@ -408,7 +423,7 @@
 		$.ajaxSetup({ async:true });
 		
 /*kendo*/
-	   
+	   $('#projectPath').val("/home/yoon/myFirstProject");
 	   var staticNotification = $("#staticNotification").kendoNotification({
                         appendTo: "#notify"
        }).data("kendoNotification");
@@ -422,10 +437,6 @@
 	       console.log('currentTab', currentTab);
 	       //editor.save();
   		 });
-       
-       
-       
-	 
        
 	   
 	    function sliderOnSlide(e) {
@@ -467,7 +478,7 @@
 		    title: "New File",
 		    close: function() {
 		     }
-		}).data("kendoWindow").open();
+		}).data("kendoWindow").center().open();
 	 });
 	 
 	 var window = $("#folder_window");
@@ -479,7 +490,7 @@
 		    title: "New Folder",
 		    close: function() {
 		     }
-		}).data("kendoWindow").open();
+		}).data("kendoWindow").center().open();
 	 });
 
 	 var window = $("#importFile_window");
@@ -491,7 +502,7 @@
 			    title: "Import",
 			    close: function() {
 			     }
-			}).data("kendoWindow").open();
+			}).data("kendoWindow").center().open();
 		 });
 	 
 	 var window = $("#file_delete_window");
@@ -506,8 +517,68 @@
 			    title: "Memo",
 			    close: function() {
 			     }
-			}).data("kendoWindow").open();
+			}).data("kendoWindow").center().open();
 		 });
+	 
+	 
+	 var window = $("#share_window");
+	 $('#shareBtn').bind("click", function() {
+			window = $("#share_window").kendoWindow({
+			    width: "500px",
+			    height: "220px",
+			    actions: ["Close"],
+			    title: "Share this workspace",
+			    close: function() {
+			     }
+			}).data("kendoWindow").center().open();
+		 });
+	 
+	 
+	 $('#rwBtn').on("click", function(){
+		 $('#rwBtn').css('background-color','#47C83E');
+		 $('#rBtn').css('background-color','#3d3d3d');
+	 });
+	 
+	 $('#rBtn').on("click", function(){
+		 $('#rBtn').css('background-color','#47C83E');
+		 $('#rwBtn').css('background-color','#3d3d3d');
+	 });
+	 
+	 $('#invitePeople').keyup(function(){
+		 
+		 $.post('/existPeople'
+	        , {
+	        	existPeople : $('#invitePeople').val()
+	        }
+	        , function(data){
+
+	        	if(data.result == "유"){
+	        		$('#existPeople').css("color", '#1DDB16');
+	        		$('#existPeople').html("< exist user >");
+	        		$('#inviteBtn').removeAttr('disabled');
+	        		
+	        		
+	        	}else if(data.result == "무"){
+	        		$('#existPeople').css("color", '#FF0000');
+	        		$('#existPeople').html("< no exist user >");	
+	        		$('#inviteBtn').attr('disabled','disabled');
+	        		
+	        	}
+	        	
+	        }
+	        , 'json');
+		 
+		 
+	 });
+	 
+	 
+	 $('#inviteBtn').on('click', function(){
+		 window = $("#share_window").kendoWindow({}).data("kendoWindow").close();
+	 });
+	 
+	 
+	 
+	 
 	 
 
 /* treeview   */
@@ -763,7 +834,7 @@
 						    title: "Delete",
 						    close: function() {
 						     }
-						}).data("kendoWindow").open();
+						}).data("kendoWindow").center().open();
 	var deleteText = "Are you sure you want to delete "
 						+"'"+treeText + "'" + " from the file system?";
 	
@@ -785,7 +856,7 @@
 							if(fileType == 'file'){
 								$('#filePath').val(treeSplit);
 							}else if(fileType == 'directory'){
-								$('#filePath').val(treeFull);
+								$('#filePath').val(treeFull+"/");
 							}
 							window = $("#window").kendoWindow({
 						    width: "500px",
@@ -794,14 +865,14 @@
 						    title: "New File",
 						    close: function() {
 						     }
-							}).data("kendoWindow").open();
+							}).data("kendoWindow").center().open();
 							
 						}else if(key == 'newfolder'){
 							
 							if(fileType == 'file'){
 								$('#folderPath').val(treeSplit);
 							}else{
-								$('#folderPath').val($(this).attr('id'));
+								$('#folderPath').val($(this).attr('id')+"/");
 							}
 							window = $("#folder_window").kendoWindow({
 							    width: "500px",
@@ -810,7 +881,7 @@
 							    title: "New Folder",
 							    close: function() {
 							     }
-							}).data("kendoWindow").open();
+							}).data("kendoWindow").center().open();
 							
 						}
 				},

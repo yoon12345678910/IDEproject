@@ -620,6 +620,86 @@ body{
 #memo_window ::-webkit-scrollbar-corner {
 }
 	
+#projectPathText{
+	position: absolute;
+	font-size: 15px;
+	left: 26px;
+	top: 14px;	
+}
+
+#projectPath{
+	position: absolute;
+	top: 14px;
+	left: 83px;
+	width: 357px;
+	border-radius: 5px;
+}
+
+#Invite_People{
+	position: absolute;
+	top: 47px;
+	left: 26px;
+	width: 400px;
+	height: 100px;
+	padding: 25px;
+	border: 1px solid #2b2b2b;
+	border-radius: 5px;
+}
+
+
+#inviteTop{
+	position: absolute;
+	top: 20px;
+	font-size: 18px;
+}
+
+
+#invitePeopleInput{
+	position: absolute;
+	top: 70px;
+}
+
+#invitePeople{
+	left: 66px;
+	position: absolute;
+	width: 321px;
+	top: -2px;
+	border-radius: 5px;
+}
+
+#rwBtn{
+	position: absolute;
+	top: 110px;
+	left: 237px;
+	
+	background-color:#47C83E;
+	
+	
+}
+
+#rBtn{
+	position: absolute;
+	left: 270px;
+	top: 110px;
+}
+
+#inviteBtn{
+	position: absolute;
+	top: 110px;
+	right: 35px;
+}
+
+#existPeople{
+	position: absolute;
+	left: 194px;
+	top: 21px;
+	font-size: 15px;
+}
+
+
+
+
+
 
 
 

@@ -13,6 +13,16 @@ exports.loadPage = function(req, res){
 	res.render('loadPage.html');
 };
 
+exports.dashboard = function(req, res){
+	res.render('dashboard.html');
+};
+
+
+exports.dash = function(req, res){
+	res.render('product/dash.html');
+};
+
+
 
 
 
