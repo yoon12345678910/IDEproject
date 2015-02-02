@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+<h1>require() - 템플릿 로딩</h1>
+<div id='d1'></div>
+
+<script id="template" type="text/temp"></script>
+
+<script type="text/javascript" src='../js/handlebars-v2.0.0.js'></script>
+<script type="text/javascript" src='../js/jquery-1.11.1.js'></script>
+<script type="text/javascript" src='../js/require.js'></script>
+<script type="text/javascript">
+//require(['라이브러리명', '라이브러리명', 'text!텍스트파일명', ...]
+//        , 함수(라이브러리변수, 라이브러리변수, 텍스트파일변수, ...){
+//  자바 코드...  
+//})
+
+require(['text!templates/address-row.html'], function(p1) {
+  var template = Handlebars.compile(p1);
+  var html = template(
+      {
+        cards: [
+                {name: '홍길동',age: 20,tel: '111-1111'},
+                {name: '임꺽정',age: 30,tel: '111-2222'},
+                {name: '안중근',age: 40,tel: '111-3333'},
+                {name: '윤봉길',age: 50,tel: '111-4444'},
+                {name: '유관순',age: 60,tel: '111-5555'}
+               ]
+      }
+  );
+  $('#d1').html(html);
+});
+
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

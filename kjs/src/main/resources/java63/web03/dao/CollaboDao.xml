@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="java63.web03.dao.CollaboDao">
+	
+	
+  <resultMap type="Collabo" id="collaboMap">
+    <id column="UID" property="uid"/>
+    <id column="PID" property="pid"/>
+    <result column="AUTH" property="auth"/>
+  </resultMap>
+   <resultMap type="CollaboList" id="collaboList">
+    <id column="UID" property="uid"/>
+    <result column="PID" property="pid"/>
+    <result column="PNAME" property="pname"/>
+  </resultMap>
+  
+ <insert id="collaboinsert" parameterType="Map">
+    INSERT INTO COLLABO(UID,PID,AUTH) 
+    VALUES (#{uid},#{pid},'MASTER')
+  </insert>
+  
+  <select id="totalMember" parameterType="String" resultType="int">
+    SELECT count(PID) FROM COLLABO WHERE UID=#{value}
+  </select>
+   <select id="collaboProject" parameterType="String" resultMap="collaboList">
+  	SELECT T1.UID,T1.PID,T2.PNAME FROM COLLABO T1 LEFT OUTER JOIN PROJECTS T2 USING(PID) WHERE UID=#{value}
+  </select>
+  <select id="myAuth" parameterType="Map" resultType="String">
+  	SELECT AUTH FROM COLLABO WHERE UID=#{uid} AND PID=#{pid}
+  </select>
+   <delete id="collabodelete" parameterType="Map">
+    DELETE FROM COLLABO WHERE UID=#{dUid} AND PID=#{dPid}
+  	</delete>
+
+  
+  <!-- <insert id="collaboinsert" parameterType="Collabo"
+    useGeneratedKeys="true" keyColumn="PNO" keyProperty="no" parameterMap="collaboMap">
+    INSERT INTO COLLABO(UID,PID,AUTH) 
+    VALUES (#{uid},#{pid},#{auth})
+  </insert>
+  
+  <update id="collaboupdate" parameterType="Collabo" parameterMap="collaboMap">
+    UPDATE COLLABO SET 
+      UID=#{uid},
+      PID=#{pid},
+      AUTH=#{auth}
+    WHERE UID=#{uid},PID=#{pid}
+  </update>
+  
+   <delete id="collabodelete" parameterType="Collabo" parameterMap="collaboMap">
+    DELETE FROM COLLABO WHERE UID=#{uid} AND PID=#{pid}
+  	</delete>
+  
+
+   
+    <select id="collaboProject" parameterType="String" resultMap="collaboMap">
+    SELECT UID,PID,AUTH
+    FROM COLLABO
+    WHERE UID = #{value}
+    ORDER BY UID ASC
+  </select>
+   -->
+  
+</mapper>

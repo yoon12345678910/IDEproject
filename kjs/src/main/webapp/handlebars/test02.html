@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+<h1>Handlebars JS - 01</h1>
+<div id='d1'></div>
+
+<script id='template' type="text/x-handlebars-template">
+<div style='border:red solid 2px; width: 200px;'>
+이름: {{name}}<br>
+나이: {{age}}<br>
+전화: {{tel}}<br>
+</div>
+</script>
+
+<script type="text/javascript" src='../js/handlebars-v2.0.0.js'></script>
+<script type="text/javascript" src='../js/jquery-1.11.1.js'></script>
+<script type="text/javascript">
+
+var source = $('#template').html();
+var template = Handlebars.compile(source);
+var html = template({
+  name: '홍길동',
+  age: 20,
+  tel: '111-1111'});
+$('#d1').html(html);
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

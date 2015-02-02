@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<display-name>kjs</display-name>
+
+	<!-- 스프링의 ContextLoaderListener가 사용할 설정파일 경로정보 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<!-- <param-value>classpath:java63/servlets/test05/application-context.xml</param-value> -->
+		<param-value>/WEB-INF/application-context.xml</param-value>
+	</context-param>
+
+	<!-- 리스너 등록하기 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- 필터 선언 -->
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>AuthFilter</filter-name>
+		<filter-class>java63.web03.filters.AuthFilter</filter-class>
+	</filter>
+
+
+	<!-- 필터를 실행해야 할 때를 지정 -->
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- <filter-mapping> <filter-name>AuthFilter</filter-name> <url-pattern>*.do</url-pattern> 
+		</filter-mapping> -->
+
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- 스프링 설정 파일을 만들 때 다음의 규칙으로 만들면 굳이 
+		     init-param 태그로 그 위치를 설정할 필요가 없다.
+		     
+		     예) /WEB-INF/서블릿이름-servlet.xml
+		<init-param>
+	    <param-name>contextConfigLocation</param-name>
+	    <param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
+	  </init-param>
+	  -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+</web-app>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

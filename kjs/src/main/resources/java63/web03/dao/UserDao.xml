@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="java63.web03.dao.UserDao">
+
+  <resultMap type="User" id="memberMap">
+    <id column="UID" property="userId"/>
+    <result column="PWD" property="password"/>
+    <result column="EMAIL" property="email"/>
+	<result column="PTNAME" property="ptName"/>   
+	<result column="PURL" property="pUrl"/>
+  </resultMap>
+  
+  <select id="existUser" parameterType="map" resultMap="memberMap">
+    SELECT UID,EMAIL,PTNAME,PURL 
+    FROM USERS
+    WHERE UID=#{userId} AND PWD=#{password}
+  </select>
+  <insert id="insert" parameterType="USER"
+    useGeneratedKeys="true" keyProperty="no">
+    INSERT INTO USERS(UID,PWD,EMAIL,GURL,PTNAME,PURL) 
+    VALUES (#{PNAME},#{PDATE},#{PMEMO},#{gUrl},#{ptName},#{pUrl})
+  </insert>
+  
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
