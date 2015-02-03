@@ -52,7 +52,6 @@ app.get('/', routes.index);
 app.get('/login', routes.login);
 app.get('/loadPage', routes.loadPage);
 app.get('/dashboard', routes.dashboard);
-app.get('/dash', routes.dash);
 
 app.get('/users', user.list);
 app.get('/uid_check', user.idCheck);

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<!-- kendo CSS & JS-->
+	 <link href="stylesheets/css/kendo/examples-offline1.css" rel="stylesheet">
+    <link href="stylesheets/css/kendo/kendo.common.min.css" rel="stylesheet">
+    <link href="stylesheets/css/kendo/kendo.rtl.min.css" rel="stylesheet">
+    <link href="stylesheets/css/kendo/kendo.default.min.css" rel="stylesheet">
+    <link href="stylesheets/css/kendo/kendo.dataviz.min.css" rel="stylesheet">
+    <link href="stylesheets/css/kendo/kendo.dataviz.default.min.css" rel="stylesheet">
+    
+ <style>
+ 
+	 
+	#leftSide{
+		position: absolute;
+		top: 29px;
+		/* height: 100%; */
+		bottom: 0;
+		border-right: 1px solid #b2b2b2;
+		width: 18%;
+	}
+	
+	#userImg{
+		position: absolute;
+		top: 0%;
+		left: 0%;
+		margin: 0%;
+		width: 105%;
+		height: 29%;
+	}
+	
+	
+	#createForm{
+		position: absolute;
+		border-top: 1px solid #b2b2b2;
+		border-bottom: 1px solid #b2b2b2;
+		top: 28%;
+		width: 100%;
+		height: 5%;
+		
+		background: -webkit-gradient(linear, left top, left bottom, from(#eff1f4), color-stop(1, #e6e8eb));
+	
+	}
+
+
+	#createBtn{
+		width: 80%;
+		left: 10%;
+		margin: 2% 0;
+		position: relative;
+		height: 70%;
+		cursor: pointer;
+		font-size: 12px;
+		background-color: #15bd3f;
+		border: 1px solid #1d6e26;
+		border-radius: 8px;
+		font-weight: bolder;
+		color: #fff;
+	}	
+	
+	#projectList{
+		position: absolute;
+		top: 33%;
+		width: 100%;
+		bottom: 0;
+	
+	}
+	
+	#띠{
+		position: absolute;
+		width: 100%;
+		top: 0;
+		height: 4px;
+		background-color: #6ec5ff;
+	}
+	
+ 	
+ 	#띠2{
+		 position: absolute;
+		left: 0;
+		width: 100%;
+		top: 4px;
+		height: 4.5%;
+		background-color: #2b2b2b;
+ 	
+ 	}
+ 	
+ 	#띠2 #rigthImg{
+ 		position: absolute;
+		top: -4px;
+		height: 31px;
+		width: 150px;
+		right: -0.5%;
+		border-radius: 6px;
+
+ 	}
+ 	
+ 	#userImage{
+		position: relative;
+		top: 1px;
+		width: 25px;
+		left: 11px;
+ 	}
+ 	
+ 	#띠2 b{
+ 	position: absolute;
+	left: 43px;
+	top: 8px;
+	font-size: 14px;
+	color: #CAF390;
+ 	
+ 	}
+ 	
+        #music-albums {
+           position: absolute;
+			width: 100%;
+			height: 100%;
+			margin: 0 auto;
+        }
+        #album {
+           position: absolute;
+			/* left: -23px; */
+			top: 0;
+			width: 100%;
+			height: 100%;
+			/* -webkit-transform: scale(0.7); */
+			-moz-transform: scale(0.7);
+			-ms-transform: scale(0.7);
+        }
+        #album-cover {
+           position: absolute;
+			width: 87%;
+			height: 86%;
+			border: 10px solid #626262;
+        }
+        
+        #album-cover img{
+        	width: 100%;
+			height: 100%;
+        }
+        #album-cover:hover {
+            border: 10px solid #ffb100;
+        }
+
+        #album-contents {
+          position: absolute;
+			/* left: 10px; */
+			/* top: 10px; */
+			background: #2e2e2e;
+			color: #ffffff;
+			/* padding: 30px; */
+			width: 95%;
+			height: 100%;
+        }
+
+        #album-contents a {
+            color: #d8a42e;
+        }
+        
+        #imgChange{
+	        top: 80%;
+			position: absolute;
+			left: 5%;
+        }
+ 	
+ 		#imgDelete{
+ 			position: absolute;
+			right: 5%;
+			top: 80%;
+ 		}
+ 		
+ 		.projectRow{
+	 		position: relative;
+			border-bottom: 1px solid #b2b2b2;
+			height: 12.5%;
+			width: 100%;
+			list-style-type: none;
+ 			cursor: pointer;
+ 		}
+ 		
+ 		.projectRow.selected{
+ 			background: -webkit-gradient(linear, left top, left bottom, from(#5b9fdc), color-stop(1, #1f79c2));
+			border-top: 1px solid #0c76d7;
+			border-bottom: 1px solid #1e78c2;
+			color: #fff;
+ 		}
+ 		
+ 		.selected > .arrow{
+ 			width: 10px;
+			height: 16px;
+			position: absolute;
+			right: 6px;
+			top: 18px;
+			z-index: 10000;
+			background: no-repeat -27px 0px url(https://d6ff1xmuve0sx.cloudfront.net/nc-3.0.722-20f677ce/static/oldclient/dashboard/style/images/project-arrow.png);
+		 }
+		 
+		 .projectRow.selected > span{
+		 	color :#fff;
+		 
+		 }
+ 		
+ 		.projectRow b{
+ 			font-size: 14px;
+			padding: 16px;
+			line-height: 37px;
+ 		}
+ 		
+ 		.projectRow span{
+ 			position: absolute;
+			line-height: 66px;
+			left: 16px;
+			color: #a1a1a1;
+			font-size: 9px;
+ 		}
+ 		
+ 		.arrow{
+ 			width: 10px;
+			height: 16px;
+			position: absolute;
+			right: 6px;
+			top: 18px;
+			background: url(https://d6ff1xmuve0sx.cloudfront.net/nc-3.0.765-05a1b675/static/oldclient/dashboard/style/images/project-arrow.png) 0px 0px no-repeat;
+		}
+		
+		.button-signout .icon {
+			width: 13px;
+			height: 20px;
+			position: absolute;
+			right: 18%;
+			top: 5px;
+			background-repeat: no-repeat;
+		}
+		
+		.button-signout .label {
+			color: #e4e4e4;
+			font-size: 12px;
+			top: 3px;
+			font-family: Arial;
+			position: absolute;
+			margin-left: 22px;
+			height: 16px;
+			padding: 3px 0 0 0;
+			right: 14%;
+			cursor: pointer;
+		}
+		
+		#homeBtn{
+			background-position: 0 -25px;
+			position: absolute;
+			width: 25px;
+			height: 25px;
+			background-repeat: no-repeat;
+			background-image: url("https://d6ff1xmuve0sx.cloudfront.net/nc-3.0.765-05a1b675/static/oldclient/dashboard/style/images/c9-topbar-btns.png");
+			top: 1.5px;
+			right: 20%;
+			cursor:pointer;
+		}
+		
+		#center_project_main{
+			position: absolute;
+			top: 5.3%;
+			left: 18.1%;
+			width: 100%;
+			height: 17%;
+			/* border: 1px solid red; */
+			background: url(stylesheets/img/profile_header.png) repeat-x 0 0;
+			z-index: 2000;
+		
+		}
+		
+		#center_project_main h1{
+			font-size: 36px;
+			left: 5%;
+			position: absolute;
+			line-height: 90px;
+		
+		}
+		
+		#center_project_main small{
+			position: absolute;
+			left: 21%;
+			font-size: 14px;
+			line-height: 103px;
+			color: #889696;
+		}
+		
+		
+		#init_main_content{
+			position: absolute;
+			top: 20.3%;
+			left: 18.1%;
+			width: 100%;
+			bottom: 0;
+			background-image: url(stylesheets/img/maincontent.png);
+		
+		}
+		
+		
+		#projectTitle{
+			position: absolute;
+			overflow: hidden;
+			height: 23%;
+			top: 5.2%;
+			left: 18.1%;
+			width: 100%;
+			background: url(stylesheets/img/project_summary_backg1.png) no-repeat right 0,
+			 url(stylesheets/img/project_summary_backg1.png) no-repeat left 0,
+			  url(stylesheets/img/project_summary_backg2.png) repeat-x 0 0;
+		
+		}
+		
+		
+		#projectTitle h1{
+			position: absolute;
+			top: 28%;
+			/* line-height: 74px; */
+			left: 1%;
+			font-size: 34px;
+			color: #889696;
+		}
+		
+		#startBtn{
+			position: absolute;
+			top: 65.5%;
+			width: 9%;
+			padding: 0px;
+			left: 3%;
+			color: #fff;
+			border-radius: 21px;
+			background: -webkit-gradient(linear, left top, left bottom, from(#15bd3f), color-stop(1, #1f8739));
+			font-weight: bolder;
+		}
+		
+		#deleteBtn{
+			position: absolute;
+			top: 65.5%;
+			width: 5%;
+			padding: 0px;
+			right: 21%;
+			color: #fff;
+			border-radius: 21px;
+			font-weight: bolder;
+			background: -webkit-gradient(linear, left top, left bottom, from(rgba(47,47,47,0.2)), color-stop(1, #252525));
+		}
+		
+		
+		
+		#projectInfo{
+			position: absolute;
+			top: 25.5%;
+			left: 18.1%;
+			width: 100%;
+			bottom: 0;
+			background-image: url(stylesheets/img/maincontent.png);
+		}
+		
+		#pInfo{
+			position: absolute;
+			top: 5%;
+			left: 8%;
+			height: 9%;
+		}
+		
+		#masterUser{
+			color:#4083c6;
+		}
+		
+		#teamMember{
+			position: absolute;
+			top: 5%;
+			border-radius: 5px;
+			width: 20%;
+			left: 53%;
+			height: 12%;
+			background-color: rgba(0, 0, 0, 0.03);
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border-radius: 5px;
+			-moz-box-shadow: 0px -1px 0px rgba(255, 255, 255, 1) inset, 0px 1px 1px rgba(205, 207, 208, 1) inset;
+			-webkit-box-shadow: 0px -1px 0px rgba(255, 255, 255, 1) inset, 0px 1px 1px rgba(205, 207, 208, 1) inset;
+			box-shadow: 0px -1px 0px rgba(255, 255, 255, 1) inset, 0px 1px 1px rgba(205, 207, 208, 1) inset;
+					
+		}
+		
+		#memberList{
+			width: 24px;
+			top: 37%;
+			left: 5%;
+			height: 24px;
+			position: absolute;
+		
+		}
+		
+		#editorForm{
+			position: absolute;
+			top: 25%;
+			left: 8%;
+			width: 65%;
+		}
+		
+		.user_span{
+			top: 30%;
+			font-size: 27px;
+			left: 1%;
+			color: #889696;
+		
+		}
+		
+		#titleRow{
+			font-size: 30px;
+			position: absolute;
+			top: 27%;
+			left: 1%;
+		}
+    </style>    
+    
+    
+<title>Insert title here</title>
+</head>
+<body>
+<div id="띠"></div>
+<div id="띠2">
+	<img id="userImage" src="/stylesheets/img/userImage.png">
+	<img id="rigthImg" src="/stylesheets/img/small_logo.jpg">
+	<b id="username">username</b>
+	<div class="button-signout button-signoutIcon  button-signoutDefault " style="box-sizing: border-box; min-width: 1px; min-height: 1px; max-width: 10000px; max-height: 10000px; margin: 0px;">
+                    <div class="icon" style="background-image: url(https://d6ff1xmuve0sx.cloudfront.net/nc-3.0.765-05a1b675/static/oldclient/dashboard/style/icons/dashboard_signout.png);"></div>
+                    <div id="logout" class="label">Log out</div>
+                </div>
+	<div id="homeBtn"></div>
+</div>
+
+<div id ="leftSide">
+
+	<div id="userImg">
+		<div id="music-albums">
+			 <div id="album">
+	            <div id="album-contents">
+	            	<button id ="imgChange" type="button" class="k-button">CHANGE</button>
+	            	<button id ="imgDelete" type="button" class="k-button">DELETE</button>
+	            </div>
+	            <div id="album-cover">
+	                <img src="/stylesheets/images/psy-album.jpg">
+	            </div>
+	        </div>
+        </div>
+	</div>
+
+
+	<div id="createForm">
+		<button type="button" id="createBtn">CREATE NEW WORKSPACE</button>
+	</div>
+
+	<div id="projectList">
+		
+	</div>
+
+</div>
+
+<div id="center_project_main">
+	<h1>Dashboard</h1>
+	<small>Control panel</small>
+</div>
+   
+<div id="init_main_content" >
+	<h1> Welcome to Collabo IDE!</h1>
+</div>
+
+
+<div id="projectTitle" style="display: none">
+<div id="innerTitle" ></div>
+<button id ="startBtn" type="button" class="k-button">START EDITING</button>
+<button id ="deleteBtn" type="button" class="k-button">Delete</button>
+</div>
+
+<div id="projectInfo" style="display: none">
+	<div id="pInfo">
+		<div id="mUser"><mUser>Workspace administrator</mUser>&nbsp;&nbsp;<b id="masterUser">masterUser</b></div>
+		<div id="cDay"><cDay>Created</cDay>&nbsp;&nbsp;<b id="createDay">createDay</b></div>
+	</div>
+	
+	<div id="teamMember">
+		<span id= "memberS">Team member()</span>
+		<div id = "memberList" style="background-image:url(https://secure.gravatar.com/avatar/3f94d531760003ae4d5b99d8329024fe?s=24)"></div>
+	</div>
+	
+	<div id="editorForm">
+		        <textarea id="editor" rows="10" cols="30" style="height:300px">
+		        		&nbsp;
+                    &lt;p&gt;&lt;img src=&quot;stylesheets/img/small_logo.jpg&quot; alt=&quot;Editor for ASP.NET MVC logo&quot; style=&quot;display:block;margin-left:auto;margin-right:auto;&quot; /&gt;&lt;/p&gt;
+                    &lt;p&gt;
+                        Kendo UI Editor allows your users to edit HTML in a familiar, user-friendly way.&lt;br /&gt;
+                        In this version, the Editor provides the core HTML editing engine, which includes basic text formatting, hyperlinks, lists,
+                        and image handling. The widget &lt;strong&gt;outputs identical HTML&lt;/strong&gt; across all major browsers, follows
+                        accessibility standards and provides API for content manipulation.
+                    &lt;/p&gt;
+                    &lt;p&gt;Features include:&lt;/p&gt;
+                    &lt;ul&gt;
+                        &lt;li&gt;Text formatting &amp; alignment&lt;/li&gt;
+                        &lt;li&gt;Bulleted and numbered lists&lt;/li&gt;
+                        &lt;li&gt;Hyperlink and image dialogs&lt;/li&gt;
+                        &lt;li&gt;Cross-browser support&lt;/li&gt;
+                        &lt;li&gt;Identical HTML output across browsers&lt;/li&gt;
+                        &lt;li&gt;Gracefully degrades to a &lt;code&gt;textarea&lt;/code&gt; when JavaScript is turned off&lt;/li&gt;
+                    &lt;/ul&gt;
+                    &lt;p&gt;
+                        Read &lt;a href=&quot;http://docs.telerik.com/kendo-ui&quot;&gt;more details&lt;/a&gt; or send us your
+                        &lt;a href=&quot;http://www.telerik.com/forums/&quot;&gt;feedback&lt;/a&gt;!
+                    &lt;/p&gt;
+                </textarea>
+	</div>
+	
+	
+</div>
+
+ <div id="create_project" style="display: none">
+		<div id="file_delete_panel">	<span id="file_delete_text"></span></div>   
+			<button type ="button" id ="file_delete" class="k-button">Delete</button>
+ </div>
+
+
+
+
+   
+
+
+
+
+
+
+</body>
+<!-- kendo -->
+	
+	<script src="stylesheets/js/jquery.min.js"></script>  
+	<script src="stylesheets/js/kendo/angular.min.js"></script>
+    <script src="stylesheets/js/kendo/kendo.all.min.js"></script>
+    <script src="stylesheets/js/kendo/console.js"></script>
+    <script src="/stylesheets/js/index.js" type="text/javascript"></script>
+    <script src='/stylesheets/js/handlebars-v2.0.0.js'></script>
+    <script src='/stylesheets/js/require.js'></script>
+
+        <script>
+        $(document).ready(function() {
+        	$("#editor").kendoEditor();
+        	
+            var el = kendo.fx($("#album")),
+                flip = el.flip("horizontal", $("#album-cover"), $("#album-contents")),
+                zoom = el.zoomIn().startValue(1).endValue(0.7);
+
+            flip.add(zoom).duration(200);
+			
+            $("#album-cover").click(function() {
+                flip.stop().play();
+            });
+
+            $("#album-contents").click(function() {
+                flip.stop().reverse();
+            });
+            
+            
+        });
+    </script>
+    
+</html>
