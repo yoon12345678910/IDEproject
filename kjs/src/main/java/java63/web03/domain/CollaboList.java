@@ -1,16 +1,20 @@
 package java63.web03.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class CollaboList implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String    uid;
 	  protected int    pid;
 	  protected String       pname;
+	  protected String       auth;
+	  protected Date       pdate;
+	  
 	@Override
 	public String toString() {
 		return "CollaboList [uid=" + uid + ", pid=" + pid + ", pname=" + pname
-				+ "]";
+				+ ", auth=" + auth + ", pdate=" + pdate + "]";
 	}
 	public String getUid() {
 		return uid;
@@ -30,4 +34,18 @@ public class CollaboList implements Serializable {
 	public void setPname(String pname) {
 		this.pname = pname;
 	}
+	public String getAuth() {
+		return auth;
+	}
+	public void setAuth(String auth) {
+		this.auth = auth;
+	}
+	public Date getPdate() {
+		return pdate;
+	}
+	public void setPdate(Date pdate) {
+		this.pdate = pdate;
+	}
+	
+	
 }

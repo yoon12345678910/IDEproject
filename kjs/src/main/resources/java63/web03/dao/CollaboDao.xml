@@ -15,6 +15,9 @@
     <id column="UID" property="uid"/>
     <result column="PID" property="pid"/>
     <result column="PNAME" property="pname"/>
+    <result column="AUTH" property="auth"/>
+    <result column="PDATE" property="pdate"/>
+    
   </resultMap>
   
  <insert id="collaboinsert" parameterType="Map">
@@ -26,7 +29,7 @@
     SELECT count(PID) FROM COLLABO WHERE UID=#{value}
   </select>
    <select id="collaboProject" parameterType="String" resultMap="collaboList">
-  	SELECT T1.UID,T1.PID,T2.PNAME FROM COLLABO T1 LEFT OUTER JOIN PROJECTS T2 USING(PID) WHERE UID=#{value}
+  	SELECT T1.UID,T1.PID,T1.AUTH,T2.PNAME,T2.PDATE FROM COLLABO T1 LEFT OUTER JOIN PROJECTS T2 USING(PID) WHERE UID=#{value}
   </select>
   <select id="myAuth" parameterType="Map" resultType="String">
   	SELECT AUTH FROM COLLABO WHERE UID=#{uid} AND PID=#{pid}
