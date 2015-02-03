@@ -1,5 +1,5 @@
 package java63.web03.domain;
-
+   
 import java.io.Serializable;
 import java.util.Date;
 
