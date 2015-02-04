@@ -1,0 +1,439 @@
+#leftSide{
+		position: absolute;
+		top: 4.7%;
+		/* height: 100%; */
+		bottom: 0;
+		border-right: 1px solid #b2b2b2;
+		width: 18%;
+	}
+	
+	#userImg{
+		position: absolute;
+		top: 0%;
+		left: 0%;
+		margin: 0%;
+		width: 105%;
+		height: 29%;
+	}
+	
+	
+	#createForm{
+		position: absolute;
+		border-top: 1px solid #b2b2b2;
+		border-bottom: 1px solid #b2b2b2;
+		top: 28%;
+		width: 100%;
+		height: 5%;
+		
+		background: -webkit-gradient(linear, left top, left bottom, from(#eff1f4), color-stop(1, #e6e8eb));
+	
+	}
+
+
+	#createBtn{
+		width: 80%;
+		left: 10%;
+		margin: 2% 0;
+		position: relative;
+		height: 70%;
+		cursor: pointer;
+		font-size: 12px;
+		background-color: #15bd3f;
+		border: 1px solid #1d6e26;
+		border-radius: 8px;
+		font-weight: bolder;
+		color: #fff;
+	}	
+	
+	#projectList{
+		position: absolute;
+		top: 33%;
+		width: 100%;
+		bottom: 0;
+	
+	}
+	
+	#띠{
+		position: absolute;
+		width: 100%;
+		top: 0;
+		height: 4px;
+		background-color: #6ec5ff;
+	}
+	
+ 	
+ 	#띠2{
+		position: absolute;
+		left: 0;
+		width: 100%;
+		top: 0.2%;
+		height: 4.5%;
+		background-color: #2b2b2b;
+ 	
+ 	}
+ 	
+ 	#띠2 #rigthImg{
+ 		position: absolute;
+		top: -4px;
+		height: 31px;
+		width: 150px;
+		right: -0.5%;
+		border-radius: 6px;
+
+ 	}
+ 	
+ 	#userImage{
+		position: relative;
+		top: 1px;
+		width: 25px;
+		left: 11px;
+ 	}
+ 	
+ 	#띠2 b{
+ 	position: absolute;
+	left: 43px;
+	top: 8px;
+	font-size: 14px;
+	color: #CAF390;
+ 	
+ 	}
+ 	
+        #music-albums {
+           position: absolute;
+			width: 100%;
+			height: 100%;
+			margin: 0 auto;
+        }
+        #album {
+           position: absolute;
+			/* left: -23px; */
+			top: 0;
+			width: 100%;
+			height: 100%;
+			/* -webkit-transform: scale(0.7); */
+			-moz-transform: scale(0.7);
+			-ms-transform: scale(0.7);
+        }
+        #album-cover {
+           position: absolute;
+			width: 87%;
+			height: 86%;
+			border: 10px solid #626262;
+        }
+        
+        #album-cover img{
+        	width: 100%;
+			height: 100%;
+        }
+        #album-cover:hover {
+            border: 10px solid #ffb100;
+        }
+
+        #album-contents {
+          position: absolute;
+			/* left: 10px; */
+			/* top: 10px; */
+			background: #2e2e2e;
+			color: #ffffff;
+			/* padding: 30px; */
+			width: 95%;
+			height: 100%;
+        }
+
+        #album-contents a {
+            color: #d8a42e;
+        }
+        
+        #imgChange{
+	        top: 80%;
+			position: absolute;
+			left: 5%;
+        }
+ 	
+ 		#imgDelete{
+ 			position: absolute;
+			right: 5%;
+			top: 80%;
+ 		}
+ 		
+ 		.projectRow{
+	 		position: relative;
+			border-bottom: 1px solid #b2b2b2;
+			height: 12.5%;
+			width: 100%;
+			list-style-type: none;
+ 			cursor: pointer;
+ 		}
+ 		
+ 		.projectRow.selected{
+ 			background: -webkit-gradient(linear, left top, left bottom, from(#5b9fdc), color-stop(1, #1f79c2));
+			border-top: 1px solid #0c76d7;
+			border-bottom: 1px solid #1e78c2;
+			color: #fff;
+ 		}
+ 		
+ 		.selected > .arrow{
+ 			width: 10px;
+			height: 16px;
+			position: absolute;
+			right: 6px;
+			top: 18px;
+			z-index: 10000;
+			background: no-repeat -27px 0px url(https://d6ff1xmuve0sx.cloudfront.net/nc-3.0.722-20f677ce/static/oldclient/dashboard/style/images/project-arrow.png);
+		 }
+		 
+		 .projectRow.selected > span{
+		 	color :#fff;
+		 
+		 }
+ 		
+ 		.projectRow b{
+ 			font-size: 14px;
+			padding: 16px;
+			line-height: 37px;
+ 		}
+ 		
+ 		.projectRow span{
+ 			position: absolute;
+			line-height: 66px;
+			left: 16px;
+			color: #a1a1a1;
+			font-size: 9px;
+ 		}
+ 		
+ 		.arrow{
+ 			width: 10px;
+			height: 16px;
+			position: absolute;
+			right: 6px;
+			top: 18px;
+			background: url(https://d6ff1xmuve0sx.cloudfront.net/nc-3.0.765-05a1b675/static/oldclient/dashboard/style/images/project-arrow.png) 0px 0px no-repeat;
+		}
+		
+		.button-signout .icon {
+			width: 13px;
+			height: 20px;
+			position: absolute;
+			right: 18%;
+			top: 5px;
+			background-repeat: no-repeat;
+		}
+		
+		.button-signout .label {
+			color: #e4e4e4;
+			font-size: 12px;
+			top: 3px;
+			font-family: Arial;
+			position: absolute;
+			margin-left: 22px;
+			height: 16px;
+			padding: 3px 0 0 0;
+			right: 14%;
+			cursor: pointer;
+		}
+		
+		#homeBtn{
+			background-position: 0 -25px;
+			position: absolute;
+			width: 25px;
+			height: 25px;
+			background-repeat: no-repeat;
+			background-image: url("https://d6ff1xmuve0sx.cloudfront.net/nc-3.0.765-05a1b675/static/oldclient/dashboard/style/images/c9-topbar-btns.png");
+			top: 1.5px;
+			right: 20%;
+			cursor:pointer;
+		}
+		
+		#center_project_main{
+			position: absolute;
+			top: 4.7%;
+			left: 18.1%;
+			width: 100%;
+			height: 17%;
+			/* border: 1px solid red; */
+			background: url(../img/profile_header.png) repeat-x 0 0;
+			z-index: 2000;
+		
+		}
+		
+		#center_project_main h1{
+			font-size: 36px;
+			left: 5%;
+			position: absolute;
+			line-height: 90px;
+		
+		}
+		
+		#center_project_main small{
+			position: absolute;
+			left: 21%;
+			font-size: 14px;
+			line-height: 103px;
+			color: #889696;
+		}
+		
+		
+		#init_main_content{
+			position: absolute;
+			top: 19.4%;
+			left: 18.1%;
+			width: 100%;
+			bottom: 0;
+			background-image: url(../img/maincontent.png);
+		
+		}
+		
+		
+		#projectTitle{
+			position: absolute;
+			overflow: hidden;
+			height: 21%;
+			z-index: 10000;
+			top: 4.7%;
+			left: 18.1%;
+			width: 100%;
+			background: url(../img/project_summary_backg1.png) no-repeat right 0,
+			 url(../img/project_summary_backg1.png) no-repeat left 0,
+			  url(../img/project_summary_backg2.png) repeat-x 0 0;
+		
+		}
+		
+		
+		#projectTitle h1{
+			position: absolute;
+			top: 28%;
+			/* line-height: 74px; */
+			left: 1%;
+			font-size: 34px;
+			color: #889696;
+		}
+		
+		#startBtn{
+			position: absolute;
+			top: 63.5%;
+			width: 9%;
+			padding: 0px;
+			left: 3%;
+			color: #fff;
+			border-radius: 21px;
+			background: -webkit-gradient(linear, left top, left bottom, from(#15bd3f), color-stop(1, #1f8739));
+			font-weight: bolder;
+		}
+		
+		#deleteBtn{
+			position: absolute;
+			top: 63.5%;
+			width: 5%;
+			padding: 0px;
+			right: 21%;
+			color: #fff;
+			border-radius: 21px;
+			font-weight: bolder;
+			background: -webkit-gradient(linear, left top, left bottom, from(rgba(47,47,47,0.2)), color-stop(1, #252525));
+		}
+		
+		
+		
+		#projectInfo{
+			position: absolute;
+			top: 22.8%;
+			left: 18.1%;
+			width: 100%;
+			bottom: 0;
+			background-image: url(../img/maincontent.png);
+		}
+		
+		#pInfo{
+			position: absolute;
+			top: 5%;
+			left: 8%;
+			height: 9%;
+		}
+		
+		#masterUser{
+			color:#4083c6;
+		}
+		
+		#teamMember{
+			position: absolute;
+			top: 5%;
+			border-radius: 5px;
+			width: 20%;
+			left: 53%;
+			height: 12%;
+			background-color: rgba(0, 0, 0, 0.03);
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border-radius: 5px;
+			-moz-box-shadow: 0px -1px 0px rgba(255, 255, 255, 1) inset, 0px 1px 1px rgba(205, 207, 208, 1) inset;
+			-webkit-box-shadow: 0px -1px 0px rgba(255, 255, 255, 1) inset, 0px 1px 1px rgba(205, 207, 208, 1) inset;
+			box-shadow: 0px -1px 0px rgba(255, 255, 255, 1) inset, 0px 1px 1px rgba(205, 207, 208, 1) inset;
+					
+		}
+		
+		#memberList{
+			width: 24px;
+			top: 37%;
+			left: 5%;
+			height: 24px;
+			position: absolute;
+		
+		}
+		
+		#editorForm{
+			position: absolute;
+			top: 25%;
+			left: 8%;
+			width: 65%;
+		}
+		
+		.user_span{
+			top: 30%;
+			font-size: 27px;
+			left: 1%;
+			color: #889696;
+		
+		}
+		
+		#titleRow{
+			font-size: 30px;
+			position: absolute;
+			top: 27%;
+			left: 1%;
+		}
+		
+		#create_project_btn{
+			position: absolute;
+			top: 20px;
+			right: 2%;
+		}
+		
+		#delete_project_btn{
+			position: absolute;
+			right: 10px;
+			top: 13px;
+		}
+		
+		#delete_text{
+			position: absolute;
+			top: 17px;
+			left: 15px;
+		}
+		
+		#create_input{
+			position: absolute;
+			border-radius: 5px;
+			top: 13px;
+			left: 21px;
+			width: 270px;
+		}
+		
+		#create_text{
+			font-size: 10px;
+			position: absolute;
+			top: 20px;
+			height: 10px;
+			width: 108px;
+			left: 305px;
+		
+		}

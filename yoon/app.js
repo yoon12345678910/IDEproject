@@ -56,17 +56,23 @@ app.get('/dashboard', routes.dashboard);
 app.get('/users', user.list);
 app.get('/uid_check', user.idCheck);
 app.get('/email_check', user.emailCheck);
+app.post('/project_check', user.project_check);
 
 app.post('/signup', user.signup);
 app.post('/login', user.login);
 
 app.post('/getSession', user.getSession);
+app.post('/setSession', user.setSession);
 app.post('/sessionDestroy', user.sessionDestroy);
 app.post('/existPeople', user.existPeople);
+app.post('/invite', user.invite);
+
+
 
 app.get('/get_file_contents', routes.get_file_contents);
 app.post('/put_file_contents', routes.put_file_contents);
 app.post('/file_import', routes.file_import);
+
 
 app.post('/createFile', routes.createFile);
 app.post('/createFolder', routes.createFolder);
@@ -96,7 +102,7 @@ server.listen(app.get('port'), function(){
 //web-terminal
 io.sockets.on("connection", function (socket) {
 
-  var cwd         = "/home/yoon/myFirstProject/",
+  var cwd         = "/home/yoon/kjs/",
       env         = _.clone(process.env),
       home        = process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE,
       linebreak   = "\n", // check if we need to add \r\n for windows

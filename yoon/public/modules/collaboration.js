@@ -119,15 +119,20 @@ var collaboration = {
  				
  				var color=["#FF5E00", "#4374D9", "#2F9D27", "#F361DC", "#FFE400", "#FF007F"];
  				var xx;
+ 				var userimg;
  				
  				if(username == 'fkawk38'){
  					xx = color[0];
+ 					userimg = 'fkawk38.jpg';
  				}else if(username == 'yoon12345678910'){
  					xx = color[1];
+ 					userimg = 'yoon12345678910.png';
  				}else if(username == 'wonbakery'){
  					xx = color[2];
+ 					userimg = 'wonbarkery.jpg';
  				}else{
  					xx = color[3];
+ 					userimg = 'default.png';
  				}
  				
  				
@@ -136,7 +141,7 @@ var collaboration = {
  				$(".member_layout").append(
  						'<div class="member_tree_row">' + 
  						'<span id="onoff"  style= "background-color:' + xx +'"></span>' +
- 						'<img id="userPhSm" src="stylesheets/images/psy-album.jpg"></img>' +
+ 						'<img id="userPhSm" src="stylesheets/images/'+ userimg+'"></img>' +
  						'<span class="member_user">' + username +'</span>' +
  						'<div class="access_control">' +
  						'<div class="writebutton selectButton">RW</div>' +

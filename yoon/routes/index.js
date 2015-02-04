@@ -42,14 +42,16 @@ exports.put_file_contents = function(req, res){
 
 exports.file_import = function(req, res){
 	
-	console.log("aaa", req.files);
+	console.log("aaa", req.session);
+	console.log("bbb", req.files.files);
+	
 	var fileA = new Array();
 
 	if(req.files.files.originalFilename != null){
 		var fileInfo = new Object();
 		fileInfo.name = req.files.files.originalFilename;
 		fileInfo.type = req.files.files.ws.type;
-		fileInfo.target_path =  '/home/yoon/myFirstProject/'+ req.files.files.originalFilename;
+		fileInfo.target_path =  '/home/yoon/kjs/'+ req.session.pname+"/"+req.files.files.originalFilename;
 		fileInfo.tmp_path = req.files.files.path;
 		fileA.push(fileInfo);
 	}else{
@@ -57,7 +59,7 @@ exports.file_import = function(req, res){
 			var fileInfo = new Object();
 			fileInfo.name = req.files.files[i].originalFilename;
 			fileInfo.type = req.files.files[i].ws.type;
-			fileInfo.target_path =  '/home/yoon/myFirstProject/'+ req.files.files[i].originalFilename;
+			fileInfo.target_path =  '/home/yoon/kjs/'+req.session.pname+"/"+req.files.files[i].originalFilename;
 			fileInfo.tmp_path = req.files.files[i].path;
 			fileA.push(fileInfo);
 		}

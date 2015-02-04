@@ -9,7 +9,7 @@ public class CollaboList implements Serializable {
 	  protected int    pid;
 	  protected String       pname;
 	  protected String       auth;
-	  protected Date       pdate;
+	  protected String       pdate;
 	  
 	@Override
 	public String toString() {
@@ -40,10 +40,10 @@ public class CollaboList implements Serializable {
 	public void setAuth(String auth) {
 		this.auth = auth;
 	}
-	public Date getPdate() {
+	public String getPdate() {
 		return pdate;
 	}
-	public void setPdate(Date pdate) {
+	public void setPdate(String pdate) {
 		this.pdate = pdate;
 	}
 	

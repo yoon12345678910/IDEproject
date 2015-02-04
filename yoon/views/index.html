@@ -188,7 +188,7 @@
                     <ul>
                         <li>
                             <div id="template" style="padding: 10px;">
-                                <img id = "userImg" src="stylesheets/images/psy-album.jpg" 
+                                <img id = "userImg" src="" 
                                 height="100" width= "100"/>
                                	
                                	<div>
@@ -196,13 +196,13 @@
                                 </div>
                                 
                                 	<div id="projectInfo">
-                                       <b>Member</b> <small>since Nov. 2012</small>
+                                       <b id="projectAuth">Member</b> <small id="projectDate">since Nov. 2012</small>
                             		</div>
                             		
                             </div>
                             
                             	<div id="tFooter">
-                                <button type="button" class="k-button">Dashboard</button>
+                                <button id="dashboardBtn" type="button" class="k-button">Dashboard</button>
                                 <button id="logout" type="button" class="k-button">Log out</button>
                         		</div>
                         </li>
@@ -223,7 +223,7 @@
 		
 		<div id = "workspace-proName">
 			<small>project: </small>
-			<b>myFirstProject</b>
+			<b id = "workspace_name">myFirstProject</b>
 			<button type="button" id="workspaceRefresh" class="k-icon k-si-refresh"></button>
 		</div>
 												
@@ -381,6 +381,12 @@
 <!--treeview--> <!-- realtime  -->
 	<script>
 	var username;
+	var auth;
+	var pname;
+	var pdate;
+	var pid;
+	
+	
 	var filepath = "untitled.js";
 	
 	var dont_update_first = false;
@@ -403,7 +409,7 @@
 
 	$(document).ready(function() {
 		
-		var currentEditor_file = "/home/yoon/myFirstProject/NewFile.html";
+		var currentEditor_file = '/home/yoon/kjs/' + pname + '/' +'NewFile.html';
 		var currentTab;
 		
 		$('#newFileTitle img').css('visibility', 'hidden');
@@ -414,16 +420,38 @@
 		$.post('/getSession',  function(data){
 			console.log("getSession", data);
 			
-			$('#userId').html(data.result.user);
-			$('#userTemplateId').html(data.result.user);
-			
+		
 			username = data.result.user;
+			auth = data.result.auth;
+			pname = data.result.pname;
+			pdate = data.result.pdate;
+			pid = data.result.pid;
+			$('#userId').html(username);
+			$('#userTemplateId').html(username);
+			
+			$('.projectPath').html("/" + pname);
+			$('#projectAuth').html(auth);
+			$('#projectDate').html("since&nbsp;" + pdate);
+			
+			$('#workspace_name').html(pname);
+			
+			if(username == "yoon12345678910"){
+				$('#userImg').attr("src", "/stylesheets/images/yoon12345678910.png");
+			}else if(username == "wonbakery"){
+				$('#userImg').attr("src", "/stylesheets/images/wonbakery.jpg");
+			}else if(username == "fkawk38"){
+				$('#userImg').attr("src", "/stylesheets/images/fkawk38.jpg");
+			}else{
+				$('#userImg').attr("src", "/stylesheets/images/default.png");
+			}
+			
+			
 		});		
 		
 		$.ajaxSetup({ async:true });
 		
 /*kendo*/
-	   $('#projectPath').val("/home/yoon/myFirstProject");
+	   $('#projectPath').val('/home/yoon/kjs/' + pname);
 	   var staticNotification = $("#staticNotification").kendoNotification({
                         appendTo: "#notify"
        }).data("kendoNotification");
@@ -468,6 +496,9 @@
 	   $("#fullBtn").kendoButton({icon: "dimension"});
 	   $("#shareBtn").kendoButton({spriteCssClass: ""});
 	  
+	   
+
+	   
 	   
 	 var window = $("#window");
 	 $('#newFile').bind("click", function() {
@@ -571,9 +602,34 @@
 		 
 	 });
 	 
+	 var accessAuth = 'rw';
+	 
+	 $('#rwBtn').on('click', function(){
+		 accessAuth ='rw';
+		 console.log('test1', accessAuth);
+	 });
+	 
+	 $('#rBtn').on('click', function(){
+		 
+		 accessAuth ='r';
+		 console.log('test2', accessAuth);
+	 });
+	 
 	 
 	 $('#inviteBtn').on('click', function(){
+		 console.log('test3', pid);
 		 window = $("#share_window").kendoWindow({}).data("kendoWindow").close();
+		 $.post('/invite'
+	        , {
+	        	uid : $('#invitePeople').val(),
+	        	pid : pid,
+	        	auth : accessAuth
+	        	
+	        }, function(data){
+	        	console.log("data", data.result);
+	        	
+	        });
+		 
 	 });
 	 
 	 
@@ -598,7 +654,7 @@
 		var collaborationA = clone(collaboration);*/
 		
 		editor.num = 0;
-		editor.currentFile = "/home/yoon/myFirstProject/NewFile.html";
+		editor.currentFile = '/home/yoon/kjs/' + pname + '/' + "NewFile.html";
 		editor.init();
 		editor.load();
 		
@@ -610,10 +666,10 @@
 		 
 		initTabs('dhtmlgoodies_tabView1',Array('NewFile.html'),0,500,400,Array(true));
 		
-		$('#filePath').val("/home/yoon/myFirstProject/");
-		$('#folderPath').val("/home/yoon/myFirstProject/");
+		$('#filePath').val('/home/yoon/kjs/' + pname + "/");
+		$('#folderPath').val('/home/yoon/kjs/' + pname + "/");
 		
-		 treeRefresh('/home/yoon/myFirstProject/');
+		 treeRefresh('/home/yoon/kjs/' + pname + "/");
 		
 		// event listeners
 		$('#newFileTree').on('dirtreeclicked', function(e, data) {
@@ -843,7 +899,7 @@
 								
 								$.ajaxSetup({ async:false });
 								$.post('/deleteF', {  source : treeFull  }  , function(data){
-									treeRefresh('/home/yoon/myFirstProject/');
+									treeRefresh('/home/yoon/kjs/' + pname + '/');
 								}); 
 								$.ajaxSetup({ async:true });
 								 window = $("#file_delete_window").kendoWindow({}).data("kendoWindow").close();
@@ -967,7 +1023,7 @@
 				$('#fileFinish').attr('disabled','disabled');
 				window = $("#window").kendoWindow({}).data("kendoWindow").close();
 				
-				treeRefresh('/home/yoon/myFirstProject/');
+				treeRefresh('/home/yoon/kjs/' + pname + '/');
 			}
 		
 		});
@@ -1017,7 +1073,7 @@ $('#folderName').keyup(function () {
 				
 				window = $("#folder_window").kendoWindow({}).data("kendoWindow").close();
 				
-				treeRefresh('/home/yoon/myFirstProject/');
+				treeRefresh('/home/yoon/kjs/' + pname + '/');
 			}
 		
 		});
@@ -1026,15 +1082,15 @@ $('#folderName').keyup(function () {
 	
 	
 	$('#workspaceRefresh').on('click',  function(){
-		 treeRefresh('/home/yoon/myFirstProject/');
+		 treeRefresh('/home/yoon/kjs/' + pname + '/');
 	});
 	
 	$('#fileRoot').on('click',  function(){
-		$('#filePath').val("/home/yoon/myFirstProject/");
+		$('#filePath').val('/home/yoon/kjs/' + pname + '/');
 	});
 	
 	$('#folderRoot').on('click',  function(){
-		$('#folderPath').val("/home/yoon/myFirstProject/");
+		$('#folderPath').val('/home/yoon/kjs/' + pname + '/');
 		
 	});
 	
@@ -1066,7 +1122,7 @@ $('#folderName').keyup(function () {
 	        	 $(".k-upload-files.k-reset").find("li").remove();
 	        	 $(".k-upload-files.k-reset").remove(); */
 	        	 
-	          	 treeRefresh('/home/yoon/myFirstProject/');
+	          	 treeRefresh('/home/yoon/kjs/' + pname + '/');
 	          	 window = $("#importFile_window").kendoWindow({}).data("kendoWindow").close();
 	         }, 
 	        error: function(jqXHR, textStatus, errorThrown) {
@@ -1074,6 +1130,13 @@ $('#folderName').keyup(function () {
 	    	});
 	  	$.ajaxSetup({ async:true  });
 	});
+	
+	
+	
+	$('#dashboardBtn').on('click', function(){
+		location.href = "/dashboard";
+	});
+	
 /* 
   //csIndex ++;
    setTimeout(function(){ clearInterval(setIntervalNotify); }, 5000);

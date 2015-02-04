@@ -145,6 +145,61 @@ exports.existPeople = function(req, res){
 			
 }
 
+exports.project_check = function(req, res){
+	client.query('SELECT PNAME FROM PROJECTS WHERE PNAME=?', 
+			[req.body.pname],
+			function(error, result) {
+				if (result.length) {
+					console.log('프로젝트 있음ㅠㅠ');
+					res.send({
+						"result" : "유"
+					});
+					
+				} else {
+					console.log('프로젝트 없음^^');
+					res.send({
+						"result" : "무"
+					});
+				}
+	});
+	
+	
+}
+
+exports.setSession = function(req, res){
+	req.session.pname = req.body.pname;
+	req.session.pid = req.body.pid;
+	req.session.auth = req.body.auth;
+	req.session.pdate = req.body.date;
+	
+	res.send({
+		"result" : "성공"
+	});
+	
+}
+
+
+exports.invite = function(req, res){
+	console.log("aa",  req.body.uid);
+	console.log("bb",  req.body.pid);
+	console.log("cc",  req.body.auth);
+	
+	
+	client.query('INSERT COLLABO(UID, PID, AUTH) value(?, ?, ?)', 
+			[req.body.uid, req.body.pid, req.body.auth],
+		
+			function(error, result) {
+					if (result) {
+						res.send({
+							"result" : "성공"
+						});
+						
+					}else{
+						console.log("err", error);
+					}
+			});
+}
+
 
 
 
