@@ -88,8 +88,10 @@
 	
 	<div id="editorForm">
 	<button id='memoSave' class="k-button">save</button>
-		        <textarea id="editor" rows="10" cols="30" style="height:300px">
-                </textarea>
+	<b id ='memoSaved'>memo saved...</b>
+		        <textarea id="editor" rows="10" cols="30" style="height:300px" >
+          
+               </textarea>
 	</div>
 	
 	
@@ -141,8 +143,7 @@
 
         <script>
         $(document).ready(function() {
-        	$("#editor").kendoEditor();
-        	
+        
             var el = kendo.fx($("#album")),
                 flip = el.flip("horizontal", $("#album-cover"), $("#album-contents")),
                 zoom = el.zoomIn().startValue(1).endValue(0.7);

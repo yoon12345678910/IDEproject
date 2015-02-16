@@ -200,7 +200,7 @@ exports.invite = function(req, res){
 			});
 }
 
-exports.loadMemo =function(req, res){
+exports.loadMemo = function(req, res){
 	client.query('SELECT PMEMO FROM PROJECTS WHERE PID=?', 
 			[req.body.pid],
 		
@@ -214,9 +214,25 @@ exports.loadMemo =function(req, res){
 						console.log("err", error);
 					}
 			});
-	
 }
 
+
+exports.saveMemo = function(req, res){
+	client.query('UPDATE PROJECTS SET PMEMO = ? WHERE PID =?', 
+			[req.body.memo, req.body.pid],
+		
+			function(error, result) {
+					if (result) {
+						res.send({
+							"result" : "성공"
+						});
+						
+					}else{
+						console.log("err", error);
+					}
+			});
+	
+};
 
 
 

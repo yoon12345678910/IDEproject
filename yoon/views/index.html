@@ -336,7 +336,9 @@
    </div>
     
    <div id="memo_window" style="display: none">
-            <textarea id="editor" rows="10" cols="30" style="height:420px" >
+   	<button id='memoSave' class="k-button">save</button>
+	<b id ='memoSaved'>memo saved...</b>
+            <textarea id="memoEditor" rows="6" cols="20" style="height:300px" >
             </textarea>
    </div>
 
@@ -418,8 +420,6 @@
 		
 		$.ajaxSetup({ async:false });
 		$.post('/getSession',  function(data){
-			console.log("getSession", data);
-			
 		
 			username = data.result.user;
 			auth = data.result.auth;
@@ -496,7 +496,11 @@
                         value: 13
                     });
 	   
-	   $("#editor").kendoEditor();
+	   $("#memoEditor").kendoEditor({
+	  	 encoded: false
+	  	 });
+	   
+	   var memoEditor = $("#memoEditor").data("kendoEditor");
 	   $("#files").kendoUpload();
 	   $("#menu").kendoMenu();
 	   $("#saveBtn").kendoButton({icon: "pencil"});
@@ -548,18 +552,68 @@
 	 
 	 var window = $("#file_delete_window");
 	
-	 
+	 /* 메모 띄우기 & 로드 */
+	
 	 var window = $("#memo_window");
 	 $('#memo_btn').bind("click", function() {
-			window = $("#memo_window").kendoWindow({
-			    width: "500px",
-			    height: "440px",
+		 
+			$.ajaxSetup({ async:false });
+			 $.post('/loadMemo'  
+			      ,{  
+			      	pid : pid
+			      } 
+			      , function(result){  
+			      	memoEditor.value(result.result[0].PMEMO);
+			      } 
+			      , 'json');
+	       $.ajaxSetup({ async:true });
+			
+	       window = $("#memo_window").kendoWindow({
+			    width: "530px",
+			    height: "320px",
 			    actions: ["Close"],
 			    title: "Memo",
 			    close: function() {
 			     }
 			}).data("kendoWindow").center().open();
 		 });
+	 
+	 /* 메모 저장  */
+	 $('#memoSave').click(function(){
+		 console.log("av",pid);
+		 console.log("av", $("#memoEditor")[0].value);
+			$.post('/saveMemo'  
+		      , {  
+		      	pid : pid,
+		      	memo : $("#memoEditor")[0].value
+		      	
+		      } 
+		      , function(data){  
+		      		if(data.result == "성공"){
+		      			var elem = $('#memoSaved');
+		      			var count = 0;	
+			      				var mRun = setInterval(function() {
+			      				
+				      			    if (elem.css('visibility') == 'hidden') {
+				      			        elem.css('visibility', 'visible');
+				      			    } else {
+				      			        elem.css('visibility', 'hidden');
+				      			    }    
+				      	  		  count ++;
+				      	  		  
+				      	  			if(count >5){
+						      				clearInterval(mRun);
+						      			}		  
+				      			}, 500); 
+			      				
+				      		
+		      		}
+		      } 
+		      , 'json');
+		});
+	 
+	 
+	 
 	 
 	 
 	 var window = $("#share_window");

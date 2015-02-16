@@ -8,12 +8,14 @@ var pid;
 var date;
 var auth;
 $(function(){
+	$("#editor").kendoEditor({
+	  encoded: false
+	});
 	
 	
 	$.ajaxSetup({ async:false });
 	$.post('/getSession', 
 			function(data){
-		console.log("넘어온 데이터 "+ data.result);
 		
 		uid = data.result.user;
 		$.ajaxSetup({ async:true });
@@ -101,26 +103,46 @@ $(function(){
 		$('#projectTitle').css("display", "");
 		$('#projectInfo').css("display", "");
 		
-		
-		console.log("aaaa", $('#editor'));
-		//$('#editor')[0].value('dddd&lt;strong&gt;aaaa&lt;/strong&gt;');
-		//$('#editor').val("AA");
-/*		 $.post('/loadMemo'  
+		var editor = $("#editor").data("kendoEditor");
+		 $.post('/loadMemo'  
 		      , {  
-		      	pid : $(this).attr('pid')
+		      	pid : pid
 		      } 
 		      , function(result){  
-		      	$('#editor').html("AA");
-		        		console.log("test", result.result[0].PMEMO);
+		      	editor.value(result.result[0].PMEMO);
 		      } 
-		      , 'json');*/
-		
-
+		      , 'json');
 	});
 	
 	$('#memoSave').click(function(){
-		console.log("aaaa", $('#editor'));
-		console.log("bbb", $('#editor')[0].value);
+		$.post('/saveMemo'  
+	      , {  
+	      	pid : pid,
+	      	memo : editor.value
+	      	
+	      } 
+	      , function(data){  
+	      		if(data.result == "성공"){
+	      			var elem = $('#memoSaved');
+	      			var count = 0;	
+		      				var mRun = setInterval(function() {
+		      				
+			      			    if (elem.css('visibility') == 'hidden') {
+			      			        elem.css('visibility', 'visible');
+			      			    } else {
+			      			        elem.css('visibility', 'hidden');
+			      			    }    
+			      	  		  count ++;
+			      	  		  
+			      	  			if(count >3){
+					      				clearInterval(mRun);
+					      			}		  
+			      			}, 500); 
+		      				
+			      		
+	      		}
+	      } 
+	      , 'json');
 	});
 	
 	

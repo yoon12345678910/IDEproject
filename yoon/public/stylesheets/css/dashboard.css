@@ -460,6 +460,14 @@
 			right: 5%;
 		}
 		
+		#memoSaved{
+		
+			position: absolute;
+			top: 4%;
+			right: 10%;
+			visibility:hidden;
+}
+		
 		
 		
 		

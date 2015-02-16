@@ -698,6 +698,20 @@ right: 1%;
 	font-size: 15px;
 }
 
+#memoSave{
+	position: absolute;
+	top: 4%;
+	right: 3%;
+}
+
+#memoSaved{
+	position: absolute;
+	bottom: 0%;
+	right: 2%;
+	color: #f1f1f1;
+	visibility:hidden;
+	
+}
 
 
 

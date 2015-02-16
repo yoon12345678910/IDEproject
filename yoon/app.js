@@ -67,6 +67,7 @@ app.post('/sessionDestroy', user.sessionDestroy);
 app.post('/existPeople', user.existPeople);
 app.post('/invite', user.invite);
 
+app.post('/saveMemo', user.saveMemo);
 app.post('/loadMemo', user.loadMemo);
 
 app.get('/get_file_contents', routes.get_file_contents);
