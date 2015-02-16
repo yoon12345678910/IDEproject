@@ -20,21 +20,60 @@ $(function(){
 		
 		$('#username').html(uid);
 		
-		if(uid == "yoon12345678910"){
-			$('#uuu').attr("src", "/stylesheets/images/yoon12345678910.png");
-		}else if(uid == "wonbakery"){
-			$('#uuu').attr("src", "/stylesheets/images/wonbakery.jpg");
-		}else if(uid == "fkawk38"){
-			$('#uuu').attr("src", "/stylesheets/images/fkawk38.jpg");
-		}else{
-			$('#uuu').attr("src", "/stylesheets/images/default.png");
-		}
+		$.post('/existUserImg', {userimg : '/home/yoon/kjs/userimg/' + uid} , function(data){
+			
+			if(data == false){
+				$('#uuu').attr("src", "/home/" + "default.png");
+				$('#imgDelete').attr('disabled','disabled');
+			}else{
+				$('#uuu').attr("src", "/home/" + data.split("/")[5]);
+				$('#imgDelete').removeAttr('disabled');
+			}
+		});
 		
 		loadProjectList(uid);
 		
 	});
 });
 	
+	$('#imgChange').on('click', function(){
+			window = $("#img_change_window").kendoWindow({
+			    width: "500px",
+			    height: "0px",
+			    actions: ["Close"],
+			    title: "image change",
+			    close: function() {
+			     }
+			}).data("kendoWindow").center().open();
+	});
+
+	$('#imgDelete').on('click', function(){
+			window = $("#img_delete_window").kendoWindow({
+			    width: "500px",
+			    height: "0px",
+			    actions: ["Close"],
+			    title: "image delete",
+			    close: function() {
+			     }
+			}).data("kendoWindow").center().open();
+	});	
+	
+	$('#img_delete_btn').on('click', function(){
+		var img_delete_file;
+		 $.ajaxSetup({ async:false });
+		 $.post('/existUserImg', {userimg : '/home/yoon/kjs/userimg/' + uid} , function(data){
+					img_delete_file = data.split("/")[5];
+		 });
+		 $.ajaxSetup({ async:true });
+		 
+		 $.post('/deleteF', {  source : '/home/yoon/kjs/userimg/' + img_delete_file}  , function(data){
+			 $('#uuu').attr("src", "/home/" + "default.png");
+			 $('#imgDelete').attr('disabled','disabled');
+			 window = $("#img_delete_window").kendoWindow({}).data("kendoWindow").close();
+		 }); 
+		 
+	});
+
 	$(document).on('click', '.projectRow', function() {
 		
  		$('#masterUser').html($(this).attr('uid'));
@@ -61,6 +100,27 @@ $(function(){
 	
 		$('#projectTitle').css("display", "");
 		$('#projectInfo').css("display", "");
+		
+		
+		console.log("aaaa", $('#editor'));
+		//$('#editor')[0].value('dddd&lt;strong&gt;aaaa&lt;/strong&gt;');
+		//$('#editor').val("AA");
+/*		 $.post('/loadMemo'  
+		      , {  
+		      	pid : $(this).attr('pid')
+		      } 
+		      , function(result){  
+		      	$('#editor').html("AA");
+		        		console.log("test", result.result[0].PMEMO);
+		      } 
+		      , 'json');*/
+		
+
+	});
+	
+	$('#memoSave').click(function(){
+		console.log("aaaa", $('#editor'));
+		console.log("bbb", $('#editor')[0].value);
 	});
 	
 	
@@ -83,7 +143,8 @@ $(function(){
 });
 	
 	$('#delete_project_btn').click(function() {
-		
+		 $.post('/deleteF', {  source : '/home/yoon/kjs/' + projectName}  , function(data){
+			}); 
 		 $.post(ip+':8080/kjs/json/collabo/deleteCollabo.do' 
 		      , {  
 		        dPid : pid,       
@@ -91,11 +152,12 @@ $(function(){
 		      } 
 		      , function(result){  
 		        if (result.status == "success") {
-		        	loadProjectList(uid);
+		        	 location.href = '/dashboard';
 		        } else {
 		        }
 		      } 
 		      , 'json'  );
+		 
 		 window = $("#delete_project_window").kendoWindow({}).data("kendoWindow").close();
 		 
 	});
@@ -156,34 +218,7 @@ $('#createBtn').click(
 				    close: function() {
 				     }
 				}).data("kendoWindow").center().open();
-			
-		
-		
-			    
-			//prom = prompt('프로젝트명 입력.');
-			    
-/*			if(prom==''){
-				alert('프로젝트명을 입력해주세요');
-			}else{
-			  $.post(ip+':8080/kjs/json/project/addProject.do'  
-				      , {  
-				        pname : prom,       
-				        pdate : str,
-				        uid : uid
-				      } 
-				      , function(result){  
-				        if (result.status == "success") {
-				        	alert("등록 성공");
-				        	loadProjectList(uid);
-				        	var pid = result.pid;
-				        } else {
-				          alert("등록 실패!");
-				        }
-				      } 
-				      , 'json'  );
-			}*/
-				      
-			
+				
 		});
 
 
@@ -217,7 +252,7 @@ $('#createBtn').click(
   function loadProjectList(uid) {
   	$.getJSON(ip+':8080/kjs/json/collabo/listCollabo.do?uid=' + uid, 
   	    function(data){
-  		
+  		console.log("ddd", data);
   			console.log('data = ' + data.memberNo);
   	      var collabos = data.collabos;
   	      require(['stylesheets/js/text!stylesheets/js/templates/product-table.html'], function(html){
@@ -250,10 +285,40 @@ $('#createBtn').click(
   		},function(data){
   			
   			if(data.result == '성공'){
-  				location.href = '/';
+  				location.href = '/loadPage';
   			}
   		});
   	});
+  	
+  	
+  	$('#img_change_btn').click(function() {
+  		
+  		var formData = new FormData();
+  	     $.each($("input[name=files]")[0].files, function(i, file) {
+  	    	 formData.append("files", file);
+  	      });  
+  	     
+  	   	$.ajaxSetup({ async:false });
+  	    $.ajax({
+  	        url: '/img_import',
+  	        type: "post",
+  	        dataType: "text",
+  	        data: formData,
+  	        processData: false,
+  	        contentType: false,
+  	        success: function(result, textStatus, jqXHR) {
+  	        		$('#uuu').attr("src", "/home/" + result.split("/")[5]);
+  	        		$('#imgDelete').removeAttr('disabled');
+  	          	 window = $("#img_change_window").kendoWindow({}).data("kendoWindow").close();
+  	         }, 
+  	        error: function(jqXHR, textStatus, errorThrown) {
+  	         }
+  	    	});
+  	  	$.ajaxSetup({ async:true  });
+  	});
+  	
+  	
+  	
   	
   	
   	

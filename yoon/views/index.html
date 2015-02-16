@@ -165,14 +165,14 @@
                     </ul>
                 </li>
                 
-                <li>
+         <!--        <li>
                     About
-                </li>
+                </li> -->
                 
                 	<run class = "runPo">	
                 	   <button type="button" id="saveBtn" title="Ctrl+S">Save</button>
                      <button type="button" id="preBtn">Preview</button>
-                     <button type="button" id="runBtn" disabled="disabled" >Run</button>
+                    <!--  <button type="button" id="runBtn" disabled="disabled" >Run</button> -->
                   	
                   </run> 
                   
@@ -409,7 +409,7 @@
 
 	$(document).ready(function() {
 		
-		var currentEditor_file = '/home/yoon/kjs/' + pname + '/' +'NewFile.html';
+		var currentEditor_file = '/home/yoon/kjs/' + pname + '/' +'newFile.html';
 		var currentTab;
 		
 		$('#newFileTitle img').css('visibility', 'hidden');
@@ -435,17 +435,27 @@
 			
 			$('#workspace_name').html(pname);
 			
-			if(username == "yoon12345678910"){
+		/* 	if(username == "yoon12345678910"){
 				$('#userImg').attr("src", "/stylesheets/images/yoon12345678910.png");
 			}else if(username == "wonbakery"){
-				$('#userImg').attr("src", "/stylesheets/images/wonbakery.jpg");
+				$('#userImg').attr("src", "/stylesheets/images/default.png");
 			}else if(username == "fkawk38"){
 				$('#userImg').attr("src", "/stylesheets/images/fkawk38.jpg");
 			}else{
 				$('#userImg').attr("src", "/stylesheets/images/default.png");
 			}
-			
-			
+			 */
+			 
+			$.post('/existUserImg', {userimg : '/home/yoon/kjs/userimg/' + username} , function(data){
+				
+				if(data == false){
+					$('#userImg').attr("src", "/home/" + "default.png");
+					
+				}else{
+					$('#userImg').attr("src", "/home/" + data.split("/")[5]);
+				}
+			});
+			 
 		});		
 		
 		$.ajaxSetup({ async:true });
@@ -654,17 +664,17 @@
 		var collaborationA = clone(collaboration);*/
 		
 		editor.num = 0;
-		editor.currentFile = '/home/yoon/kjs/' + pname + '/' + "NewFile.html";
+		editor.currentFile = '/home/yoon/kjs/' + pname + '/' + "newFile.html";
 		editor.init();
 		editor.load();
 		
-		collaboration.projectEach = "NewFile.html";
+		collaboration.projectEach = "newFile.html";
 		collaboration.username = username;
 		
 		collaboration.init();
 		collaboration.join(); 
 		 
-		initTabs('dhtmlgoodies_tabView1',Array('NewFile.html'),0,500,400,Array(true));
+		initTabs('dhtmlgoodies_tabView1',Array('newFile.html'),0,500,400,Array(true));
 		
 		$('#filePath').val('/home/yoon/kjs/' + pname + "/");
 		$('#folderPath').val('/home/yoon/kjs/' + pname + "/");
@@ -970,7 +980,7 @@
 	
 	
 	$('#reBtn').on('click', function(){
-		editor.updatePreview();
+		//editor.updatePreview();
 	});
 	
 	$('#fileCancle').on('click', function(){
@@ -986,7 +996,7 @@
 		
 		if($('#fileName').val().length ==0){
 			$('#newFileTitle img').css('visibility', 'visible');
-			$('#fileResult').css('color', 'red');
+			$('#filuserImgeResult').css('color', 'red');
 			$('#fileResult').html(' Name cannot be empty.');
 			$('#fileFinish').attr('disabled','disabled');
 		}else{

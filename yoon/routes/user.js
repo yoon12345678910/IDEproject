@@ -200,7 +200,22 @@ exports.invite = function(req, res){
 			});
 }
 
-
+exports.loadMemo =function(req, res){
+	client.query('SELECT PMEMO FROM PROJECTS WHERE PID=?', 
+			[req.body.pid],
+		
+			function(error, result) {
+					if (result) {
+						res.send({
+							"result" : result
+						});
+						
+					}else{
+						console.log("err", error);
+					}
+			});
+	
+}
 
 
 

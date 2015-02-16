@@ -121,18 +121,32 @@ var collaboration = {
  				var xx;
  				var userimg;
  				
+ 				$.ajaxSetup({ async:false });
+ 				$.post('/existUserImg', {userimg : '/home/yoon/kjs/userimg/' + username} , function(data){
+ 					
+ 					if(data == false){
+ 						userimg = 'default.png';
+ 						
+ 					}else{
+ 						$('#userImg').attr("src", "/home/" + data.split("/")[5]);
+ 						
+ 						userimg = data.split("/")[5];
+ 					}
+ 				});
+ 				$.ajaxSetup({ async:true });
+ 				
  				if(username == 'fkawk38'){
  					xx = color[0];
- 					userimg = 'fkawk38.jpg';
+ 					//userimg = 'fkawk38.jpg';
  				}else if(username == 'yoon12345678910'){
  					xx = color[1];
- 					userimg = 'yoon12345678910.png';
+ 					//userimg = 'yoon12345678910.png';
  				}else if(username == 'wonbakery'){
  					xx = color[2];
- 					userimg = 'wonbarkery.jpg';
+ 					//userimg = 'default.png';
  				}else{
  					xx = color[3];
- 					userimg = 'default.png';
+ 					//userimg = 'default.png';
  				}
  				
  				
@@ -141,15 +155,19 @@ var collaboration = {
  				$(".member_layout").append(
  						'<div class="member_tree_row">' + 
  						'<span id="onoff"  style= "background-color:' + xx +'"></span>' +
- 						'<img id="userPhSm" src="stylesheets/images/'+ userimg+'"></img>' +
+ 						'<img id="userPhSm" src="/home/'+ userimg+'"></img>' +
  						'<span class="member_user">' + username +'</span>' +
- 						'<div class="access_control">' +
+ 						
+ 						
+/* 						'<div class="access_control">' +
  						'<div class="writebutton selectButton">RW</div>' +
  						'<div class="readbutton">R</div>' +
  						'</div>'+
  						'<div class="kickout">' +
  						'<span class="k-icon k-i-close"></span>' +
- 						'</div>' +
+ 						'</div>' +*/
+ 						
+ 						
  						'</div>');
  				
  				
@@ -197,13 +215,18 @@ var collaboration = {
  						'<span id="onoff"></span>' +
  						'<img id="userPhSm" src="stylesheets/images/psy-album.jpg"></img>' +
  						'<span class="member_user">' + username +'</span>' +
- 						'<div class="access_control">' +
+ 						
+ 	/*					'<div class="access_control">' +
  						'<div class="writebutton selectButton">RW</div>' +
  						'<div class="readbutton">R</div>' +
  						'</div>'+
+ 						
+ 						
  						'<div class="kickout">' +
  						'<span class="k-icon k-i-close"></span>' +
- 						'</div>' +
+ 						'</div>' +*/
+ 						
+ 						
  						'</div>');
  			}
  		});
@@ -346,10 +369,32 @@ var collaboration = {
 				var color = '#' + red.toString(16) + green.toString(16) + blue.toString(16);
 				var light_color = '#' + light_red.toString(16) + light_green.toString(16) + light_blue.toString(16);
 				
-				$(".CodeMirror-scroll").find(".username_" + username).css("background-color", light_color);
-				$(".CodeMirror-scroll").find(".username_" + username).css("border-color", color);
-				$(".CodeMirror-scroll").find(".username_" + username).css("color", color);
-				$(".CodeMirror-scroll").find(".cursor_" + username).css("border-color", color);
+				var color1=["#FF5E00", "#4374D9", "#2F9D27", "#F361DC", "#FFE400", "#FF007F"];
+ 				var xx;
+				
+				
+				if(username == 'fkawk38'){
+ 					xx = color1[0];
+ 					userimg = 'fkawk38.jpg';
+ 				}else if(username == 'yoon12345678910'){
+ 					xx = color1[1];
+ 					userimg = 'yoon12345678910.png';
+ 				}else if(username == 'wonbakery'){
+ 					xx = color1[2];
+ 					userimg = 'wonbarkery.jpg';
+ 				}else{
+ 					xx = color1[3];
+ 					userimg = 'default.png';
+ 				}
+				
+				
+				$(".CodeMirror-scroll").find(".username_" + username).css("background-color", xx);
+				$(".CodeMirror-scroll").find(".username_" + username).css("border-color", xx);
+				$(".CodeMirror-scroll").find(".username_" + username).css("color", '#fff');
+				$(".CodeMirror-scroll").find(".cursor_" + username).css("border-color", xx);
+				
+				
+				
 			}
 		}
 

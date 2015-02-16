@@ -39,7 +39,7 @@ app.configure(function(){
   //이것을 사용하지 않으면 첫 번째 app.get()과 app.post() 등의 호출 경로를 마운트
   app.use(app.router);  
   app.use(express.static(path.join(__dirname, 'public')));
-
+  app.use('/home', express.static(path.join('/home/yoon/kjs/userimg/')));
 });
 
 
@@ -48,7 +48,7 @@ app.configure('development', function(){
 	app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
-app.get('/', routes.index);
+app.get('/editor', routes.index);
 app.get('/login', routes.login);
 app.get('/loadPage', routes.loadPage);
 app.get('/dashboard', routes.dashboard);
@@ -67,11 +67,14 @@ app.post('/sessionDestroy', user.sessionDestroy);
 app.post('/existPeople', user.existPeople);
 app.post('/invite', user.invite);
 
-
+app.post('/loadMemo', user.loadMemo);
 
 app.get('/get_file_contents', routes.get_file_contents);
 app.post('/put_file_contents', routes.put_file_contents);
 app.post('/file_import', routes.file_import);
+app.post('/img_import', routes.img_import);
+app.post('/existUserImg', routes.existUserImg);
+
 
 
 app.post('/createFile', routes.createFile);

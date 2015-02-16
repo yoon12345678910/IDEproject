@@ -17,8 +17,6 @@ exports.dashboard = function(req, res){
 	res.render('dashboard.html');
 };
 
-
-
 exports.jqFileTree = function(req, res){
 	res.send(jqueryFileTree.getList(req, res));
 };
@@ -26,8 +24,6 @@ exports.jqFileTree = function(req, res){
 exports.jqFileTreeDir = function(req, res){
 	res.send(jqueryFileTree.getDirList(req, res));
 };
-
-
 
 exports.get_file_contents = function(req, res){
 	var path = req.query.path;
@@ -41,9 +37,6 @@ exports.put_file_contents = function(req, res){
 };
 
 exports.file_import = function(req, res){
-	
-	console.log("aaa", req.session);
-	console.log("bbb", req.files.files);
 	
 	var fileA = new Array();
 
@@ -67,7 +60,6 @@ exports.file_import = function(req, res){
 	res.send(file.fileImport(fileA));
 };
 
-
 exports.createFile = function(req, res){
 		res.send(file.createFile(req.body.file));
 };
@@ -86,6 +78,23 @@ exports.deleteF = function(req, res){
 
 
 
+exports.img_import = function(req, res){
+	var imgA = new Array();
+	var imgInfo = new Object();
+	
+	imgInfo.target_path = '/home/yoon/kjs/userimg/' 
+														+ req.session.user + "." 
+														+ req.files.files.originalFilename.split(".")[1];
+	imgInfo.temp_path = req.files.files.path;
+	imgA.push(imgInfo);
+	
+	res.send(file.imgImport(imgA));
+};
+
+
+exports.existUserImg = function(req, res){
+	res.send(file.existImg(req.body.userimg));
+};
 
 
 

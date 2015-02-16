@@ -20,8 +20,8 @@ module.exports = {
 	
 	//파일을 저장하는 부분입니다.
 	save: function (contents, currentFile) {
-		console.log("contents", contents);
-		console.log("currentFile", currentFile);
+		//console.log("contents", contents);
+		//console.log("currentFile", currentFile);
 		fs.writeFile(currentFile, contents, function (err) {
 			if (err) {
 				throw err;
@@ -111,6 +111,41 @@ module.exports = {
 					stream.pipe(ws);
 		}
 		return true;
+	},
+	
+	imgImport: function(imgInfo){
+					var ws =  fs.createWriteStream(imgInfo[0].target_path);
+					var stream = fs.createReadStream(imgInfo[0].temp_path);
+		
+					stream.on('error', function(err) {
+						console.log("error", err);
+					});
+					
+					stream.on('close', function() {
+					});
+					
+					stream.pipe(ws);
+		return imgInfo[0].target_path;
+	},
+	
+	
+	existImg:function(img){
+		
+		
+		//console.log("aa", img + ".png");
+		var data = fs.existsSync(img  + ".png");
+		if (data == true){
+			return img  + ".png";
+		}
+		
+		var data = fs.existsSync(img  + ".jpg");
+		if (data == true){
+			return img  + ".jpg";
+		}
+		
+		return false;
+		
+		
 	}
 	
 	

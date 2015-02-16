@@ -459,7 +459,9 @@ body{
 	right: 0;
 	
 }
-#fileName{
+#fileName{position: absolute;
+top: 2%;
+right: 1%;
 	position: absolute;
 	left: 80px;
 	width: 395px;
@@ -695,6 +697,7 @@ body{
 	top: 21px;
 	font-size: 15px;
 }
+
 
 
 

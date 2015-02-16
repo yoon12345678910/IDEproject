@@ -179,7 +179,7 @@
 			right: 6px;
 			top: 18px;
 			z-index: 10000;
-			background: no-repeat -27px 0px url(https://d6ff1xmuve0sx.cloudfront.net/nc-3.0.722-20f677ce/static/oldclient/dashboard/style/images/project-arrow.png);
+			background: no-repeat -27px 0px url(https://d6ff1xmuve0sx.cloudfront.net/nc-3.0.868-a42b657f/static/oldclient/dashboard/style/images/project-arrow.png);
 		 }
 		 
 		 .projectRow.selected > span{
@@ -207,7 +207,7 @@
 			position: absolute;
 			right: 6px;
 			top: 18px;
-			background: url(https://d6ff1xmuve0sx.cloudfront.net/nc-3.0.765-05a1b675/static/oldclient/dashboard/style/images/project-arrow.png) 0px 0px no-repeat;
+			background: url(https://d6ff1xmuve0sx.cloudfront.net/nc-3.0.868-a42b657f/static/oldclient/dashboard/style/images/project-arrow.png) 0px 0px no-repeat;
 		}
 		
 		.button-signout .icon {
@@ -238,7 +238,7 @@
 			width: 25px;
 			height: 25px;
 			background-repeat: no-repeat;
-			background-image: url("https://d6ff1xmuve0sx.cloudfront.net/nc-3.0.765-05a1b675/static/oldclient/dashboard/style/images/c9-topbar-btns.png");
+			background-image: url("https://d6ff1xmuve0sx.cloudfront.net/nc-3.0.868-a42b657f/static/oldclient/dashboard/style/images/c9-topbar-btns.png");
 			top: 1.5px;
 			right: 20%;
 			cursor:pointer;
@@ -437,3 +437,32 @@
 			left: 305px;
 		
 		}
+		
+		#memoSave{
+			position: absolute;
+			top: 2%;
+			right: 1%;
+		}
+		
+		#img_change_btn{
+			position: absolute;
+			right: 5%;		
+		}
+		
+		#img_delete_window{
+			padding: 13px;
+			line-height: 25px;
+		}
+
+		
+		#img_delete_btn{
+			position: absolute;
+			right: 5%;
+		}
+		
+		
+		
+		
+		
+		
+		
