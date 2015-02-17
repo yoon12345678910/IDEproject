@@ -66,7 +66,7 @@
 		position: absolute;
 		left: 0;
 		width: 100%;
-		top: 0.2%;
+		top: 0.4%;
 		height: 4.5%;
 		background-color: #2b2b2b;
  	
@@ -281,6 +281,12 @@
 			bottom: 0;
 			background-image: url(../img/maincontent.png);
 		
+		}
+		#init_main_content h1{
+			position: absolute;
+			left: 5%;
+			top: 4%;
+			font-size: 35px;
 		}
 		
 		

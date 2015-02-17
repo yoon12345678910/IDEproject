@@ -12,6 +12,8 @@
     <link href="stylesheets/css/kendo/kendo.dataviz.default.min.css" rel="stylesheet">
 	<link href="stylesheets/css/dashboard.css" rel="stylesheet">
 	
+
+	<link href="stylesheets/css/slidorion.css" rel="stylesheet">
     
 <title>Insert title here</title>
 </head>
@@ -66,6 +68,29 @@
    
 <div id="init_main_content" >
 	<h1> Welcome to Collabo IDE!</h1>
+	<div id="slidorion" style="margin-top:6%;">
+			<div id="slider">
+				<div class="slide"><img src="stylesheets/images/screenshotsmall4.0.png"></></div>
+				<div class="slide"><img src="stylesheets/images/cloud-logo.png"></div>
+				<div class="slide"><img src="stylesheets/images/collabo.png"></div>
+			</div>
+		
+			<div id="accordion">
+				<div class="link-header">Tools for the web, on the web</div>
+				<div class="link-content">
+					All you need is a modern web browser. From there, you can write code using a great editor, link to a repository and create a site.
+				</div>
+				<div class="link-header">Code Everywhere</div>
+				<div class="link-content">
+					Develop your software where ever you go. It'll be there, in the cloud, right where you left it. Just login from a web browser on desktop, laptop, tablet, at an airport, on a bus or even in your office.
+				</div>
+				<div class="link-header">Real-Time Collabo</div>
+				<div class="link-content">
+					Your users can send a invitation to a friend. When the friend opens the dashboard, each user sees the same page and can interact with it together in real time.
+				</div>
+			</div>
+		</div>
+	
 </div>
 
 
@@ -140,7 +165,8 @@
     <script src="/stylesheets/js/index.js" type="text/javascript"></script>
     <script src='/stylesheets/js/handlebars-v2.0.0.js'></script>
     <script src='/stylesheets/js/require.js'></script>
-
+	<script src="stylesheets/js/jquery.easing.js"></script>
+	<script src="stylesheets/js/jquery.slidorion.min.js"></script>
         <script>
         $(document).ready(function() {
         
@@ -163,5 +189,32 @@
         
         $("#files").kendoUpload();
     </script>
+    
+    
+    	<script type="text/javascript">
+	
+		$(document).ready(function(){
+			$('#slidorion').slidorion({
+				speed: 500,
+				interval: 10000,
+				effect: 'slideDown'
+			});
+		});
+	
+		$(function(){
+		
+			$('#about').click(function(){
+  			$('html, body').animate({ scrollTop: $('#aboutlink').offset().top }, 1000);
+   			return false;});
+
+  			$('#start').click(function(){
+  			$('html, body').animate({ scrollTop: $('#startlink').offset().top }, 1000);
+   			return false;});
+   			
+   			$('#contact').click(function(){
+  			$('html, body').animate({ scrollTop: $('#contactlink').offset().top }, 1000);
+   			return false;});
+		});
+	</script>
     
 </html>
