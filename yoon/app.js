@@ -40,15 +40,15 @@ app.configure(function(){
   app.use(app.router);  
   app.use(express.static(path.join(__dirname, 'public')));
   app.use('/home', express.static(path.join('/home/yoon/kjs/userimg/')));
+  app.use('/', express.static(path.join('/home/yoon/kjs/')));
 });
 
 
 //오류 발생시의 스택을 추적하기 위한 설정으로 dumpExceptions옵션을 활성화
-app.configure('development', function(){
-	app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
+
 
 app.get('/editor', routes.index);
+app.get('/plist', user.plist);
 app.get('/login', routes.login);
 app.get('/loadPage', routes.loadPage);
 app.get('/dashboard', routes.dashboard);
@@ -60,7 +60,8 @@ app.post('/project_check', user.project_check);
 
 app.post('/signup', user.signup);
 app.post('/login', user.login);
-
+app.get('/pUserlist', user.pUserlist);
+app.get('/checkPro', user.checkPro);
 app.post('/getSession', user.getSession);
 app.post('/setSession', user.setSession);
 app.post('/sessionDestroy', user.sessionDestroy);
@@ -70,6 +71,8 @@ app.post('/invite', user.invite);
 app.post('/saveMemo', user.saveMemo);
 app.post('/loadMemo', user.loadMemo);
 
+
+app.get('/get_first_file_contents', routes.get_first_file_contents);
 app.get('/get_file_contents', routes.get_file_contents);
 app.post('/put_file_contents', routes.put_file_contents);
 app.post('/file_import', routes.file_import);
@@ -106,7 +109,7 @@ server.listen(app.get('port'), function(){
 //web-terminal
 io.sockets.on("connection", function (socket) {
 
-  var cwd         = "/home/yoon/kjs/",
+  var cwd         = "/home/yoon/kjs/won",
       env         = _.clone(process.env),
       home        = process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE,
       linebreak   = "\n", // check if we need to add \r\n for windows

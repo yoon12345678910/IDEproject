@@ -18,7 +18,6 @@ if(jQuery) (function($){
 			if( o.loadMessage == undefined ) o.loadMessage = 'Loading...';
 			
 			$(this).each( function() {
-				
 				function showTree(c, t) {
 					$(c).addClass('wait');
 					$(".jqueryFileTree.start").remove();
@@ -68,7 +67,6 @@ if(jQuery) (function($){
 						// this is a file click, return file information
 							h($(this).attr('rel'));
 							
-							console.log("rel", data.rel);
 							
 							
 							_trigger($(this), 'filetreeclicked', data);

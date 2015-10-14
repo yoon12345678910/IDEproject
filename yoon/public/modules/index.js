@@ -78,18 +78,20 @@ $(function(){
 
 	$(document).on('click', '.projectRow', function() {
 		
- 		$('#masterUser').html($(this).attr('uid'));
+ 		$('#masterUser').html($(this).attr('master'));
  		$('#createDay').html($(this).attr('pdate'));
 		
 	
 		prom = $(this).text();
-		projectName= $(this)[0].innerText.split(" ")[0];
+		projectName= $(this).attr('pname');
 		pid = $(this).attr('pid');
 		auth = $(this).attr('auth');
 		date = $(this).attr('pdate');
+		var membername = "";
+		var master = $(this).attr('master');
 		
 		$('#innerTitle').html('<div id="titleRow"><span class="user_span" pid="'+pid+'" uid="'+uid+'" >'
-				+uid+ "/"+ '</span>' + projectName +'</div>');
+				+master+ "/"+ '</span>' + projectName +'</div>');
 		
 		if($(this).hasClass('selected')){
 		}else {
@@ -102,6 +104,20 @@ $(function(){
 	
 		$('#projectTitle').css("display", "");
 		$('#projectInfo').css("display", "");
+		
+		
+ 	 
+ 	 $.getJSON('/pUserlist', {pid : pid},
+   			function(data){
+   				for(var i = 0; i < data.length; i++){
+   				  membername += data[i].UID; 
+   				
+   				  if(i != data.length-1)membername += ", "; 
+   				}
+   				$('#mem').text(membername);
+   	      });
+		
+		
 		
 		var editor = $("#editor").data("kendoEditor");
 		 $.post('/loadMemo'  
@@ -272,16 +288,20 @@ $('#createBtn').click(
 
 
   function loadProjectList(uid) {
-  	$.getJSON(ip+':8080/kjs/json/collabo/listCollabo.do?uid=' + uid, 
-  	    function(data){
-  		console.log("ddd", data);
-  			console.log('data = ' + data.memberNo);
+  	$.ajaxSetup({ async:false });
+  	//$.getJSON(ip+':8080/kjs/json/collabo/listCollabo.do?uid=' + uid, 
+  	 $.getJSON('/plist', {id : uid},
+  			function(data){
+  		console.log("dd1dㅁㅁ", data);
   	      var collabos = data.collabos;
   	      require(['stylesheets/js/text!stylesheets/js/templates/product-table.html'], function(html){
   	        var template = Handlebars.compile(html);
   	        $('#projectList').html(template(data));
   	      });
   	    });
+  		$.ajaxSetup({ async:true });
+  	 
+  	 
   };
   	$('#logout').on('click', function(){
   		$.post('/sessionDestroy', function(data){

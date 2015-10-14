@@ -30,6 +30,14 @@ exports.get_file_contents = function(req, res){
 	res.send(file.load(path));
 };
 
+
+exports.get_first_file_contents = function(req, res){
+	var prname = req.query.pname;
+	var pname = req.query.fname;
+	res.send(file.firstload(prname, pname));
+};
+
+
 exports.put_file_contents = function(req, res){
 	var contents = req.body.contents;
 	var currentFile = req.body.currentFile;
@@ -37,6 +45,7 @@ exports.put_file_contents = function(req, res){
 };
 
 exports.file_import = function(req, res){
+	
 	
 	var fileA = new Array();
 

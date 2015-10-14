@@ -8,8 +8,6 @@ var _getDirList = function(request, response) {
        	r = '<ul class="jqueryFileTree" style="display: none;">';
 		var files = fs.readdirSync(dir);
 		
-		//console.log("files",files); 
-		
 		  files.forEach(function(f){
 			//console.log("f", f);
 			var ff = dir + f;

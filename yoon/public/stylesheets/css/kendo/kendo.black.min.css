@@ -814,9 +814,9 @@ input.k-textbox,textarea.k-textbox,input.k-textbox:hover,textarea.k-textbox:hove
 }
 
 .k-notification.k-notification-info {
-	background-color: #0c779b;
+	background-color: #47C83E;
 	color: #fff;
-	border-color: #0c779b;
+	border-color: #47C83E;
 }
 
 .k-notification.k-notification-success {

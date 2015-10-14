@@ -5,7 +5,10 @@ var collaboration = {
 	task_queue: [],
 	username: null,
 	projectEach: null,
-	
+	CollaboFileName : null,
+	filePath : null,
+	u_color : null,
+	u_name : null,
 	init: function() {
 		var self = this;
 		
@@ -13,10 +16,16 @@ var collaboration = {
 		//socket.io 연결을 통해 객체를 만듭니다.
 		socket = io.connect();
 		
+		
+
+
+		
+		
   		this.task_queue = [];
   		this.removed_lines_uuids = [];
  		//사용자 이름을 생성합니다.
- 		this.username = username;
+
+ 		
  		
  		//작업 큐를 만들고 여기에 업데이트 내용이 쌓이게 하여 충돌 없이 하나씩 차례대로 적용되도록 합니다.
 		var check_for_updates = function() {
@@ -37,11 +46,10 @@ var collaboration = {
 
  		//채팅 메시지가 왔을 때 처리하는 부분입니다.
  		socket.on("communication_message", function (data) {
- 			console.log("aa", data);
- 			
- 			
+ 			var data = JSON.parse(data);
+ 			var usercolor = data.color;
+			data = data.chatting_message;
  			data = decodeURIComponent(data);
- 			
 			data = ((data.replace(/&/g, '&amp;')).replace(/\"/g, '&quot;')).replace(/\'/g, '&#39;'); 
 			data = data.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 			
@@ -49,7 +57,6 @@ var collaboration = {
 			var color=["#FF5E00", "#4374D9", "#2F9D27", "#F361DC", "#FFE400", "#FF007F"];
 			var xx;
 			
-			console.log("id", udata[0]);
 			if(udata[0] == 'fkawk38 '){
 				console.log("fkawk38");
 				xx = color[0];
@@ -64,7 +71,6 @@ var collaboration = {
 				xx = color[3];
 			}
 			
-			console.log("xx", xx);
  			$(".chatText").append("<p id='ot_chat'>" + 
 			"<span class ='chatBorder' style='border-left: 5px solid " + xx +"' ></span>" + 
 			"<a href='#' class='authorName'>" +
@@ -73,11 +79,13 @@ var collaboration = {
  			);
  			
  			
+ 			
  			$(".chatText").scrollTop($(".chatText").height());
  			
  		});
  		//에디터 내용 수정과 관련된 메시지를 처리하는 부분입니다.
 		socket.on("editing_message", function (data) {
+			
  			if(!data) {
  				return false;
  			}
@@ -85,7 +93,6 @@ var collaboration = {
  			//전달받은 데이터를 JSON 객체로 만듭니다.
 			var received_msg = JSON.parse(data);
 			
-			console.log("received_msg", received_msg);
 			
 			//전달 받은 메시지가 편집에 관한 메시지인지, 자신의 이름과 같지 않은 지, 그리고 자신이 편집중인 파일이 맞는 지 확인합니다.
 			if(received_msg.channel == "editing" && 
@@ -108,21 +115,26 @@ var collaboration = {
 		
 		//새로운 사용자가 접속할 때의 상황을 처리합니다.
 		socket.on("someone_joined", function (data) {
-			console.log("data??",data);
- 			data = JSON.parse(data);
+			
+			data = JSON.parse(data);
  			$(".member_layout").empty();
- 			
- 			
- 			
- 			for(var i=0; i<data.length; i++){
- 				var username = data[i];
- 				
+ 			var un = data.username;
+			var indexuser = un.split(",");
+			
+			var uc = data.color;
+			var indexcolor = uc.split(",");
+			u_name = indexuser;
+			u_color = indexcolor;
+ 			for(var i=0; i<indexuser.length; i++){
+ 				 
+ 				//if(indexuser[i] == username)u_color = indexcolor[i];
  				var color=["#FF5E00", "#4374D9", "#2F9D27", "#F361DC", "#FFE400", "#FF007F"];
  				var xx;
- 				var userimg;
+ 				
+ 				
  				
  				$.ajaxSetup({ async:false });
- 				$.post('/existUserImg', {userimg : '/home/yoon/kjs/userimg/' + username} , function(data){
+ 				$.post('/existUserImg', {userimg : '/home/yoon/kjs/userimg/' + indexuser[i]} , function(data){
  					
  					if(data == false){
  						userimg = 'default.png';
@@ -135,13 +147,14 @@ var collaboration = {
  				});
  				$.ajaxSetup({ async:true });
  				
- 				if(username == 'fkawk38'){
+
+ 				if(indexuser[i] == 'fkawk38'){
  					xx = color[0];
  					//userimg = 'fkawk38.jpg';
- 				}else if(username == 'yoon12345678910'){
+ 				}else if(indexuser[i] == 'yoon12345678910'){
  					xx = color[1];
  					//userimg = 'yoon12345678910.png';
- 				}else if(username == 'wonbakery'){
+ 				}else if(indexuser[i] == 'wonbakery'){
  					xx = color[2];
  					//userimg = 'default.png';
  				}else{
@@ -151,34 +164,30 @@ var collaboration = {
  				
  				
  				
+ 				
 //수정				
  				$(".member_layout").append(
  						'<div class="member_tree_row">' + 
  						'<span id="onoff"  style= "background-color:' + xx +'"></span>' +
  						'<img id="userPhSm" src="/home/'+ userimg+'"></img>' +
- 						'<span class="member_user">' + username +'</span>' +
+ 						'<span class="member_user">' + indexuser[i] +'</span>' +
  						
- 						
-/* 						'<div class="access_control">' +
- 						'<div class="writebutton selectButton">RW</div>' +
- 						'<div class="readbutton">R</div>' +
- 						'</div>'+
- 						'<div class="kickout">' +
- 						'<span class="k-icon k-i-close"></span>' +
- 						'</div>' +*/
- 						
+ 		
  						
  						'</div>');
  				
- 				
- 			}
-				var staticNotification = $("#staticNotification").kendoNotification({
+ 				if(username != indexuser[i]){
+ 				var staticNotification = $("#staticNotification").kendoNotification({
 	 	      appendTo: "#notify"
 	 			}).data("kendoNotification");
 				
-				textA = username + "&nbsp"+"joined this project!";
+				textA = indexuser[i] + "&nbsp"+"joined this project!";
 	 			staticNotification.show(textA);
- 			
+ 				}
+ 				
+ 				
+ 			}
+				
  			
  			
  			
@@ -206,26 +215,35 @@ var collaboration = {
 		socket.on("refresh_userlist", function (data) {
  			data = JSON.parse(data);
  			$(".member_layout").empty();
+ 			var un = data.username;
+			var indexuser = un.split(",");
+			
+			var uc = data.color;
+			var indexcolor = uc.split(",");
  			
- 			for(var i=0; i<data.length; i++){
- 				var username = data[i];
-
-				$(".member_layout").append(
+ 			for(var i=0; i<indexuser.length; i++){
+ 				
+ 				$.ajaxSetup({ async:false });
+ 				$.post('/existUserImg', {userimg : '/home/yoon/kjs/userimg/' + indexuser[i]} , function(data){
+ 					
+ 					if(data == false){
+ 						userimg = 'default.png';
+ 						
+ 					}else{
+ 						$('#userImg').attr("src", "/home/" + data.split("/")[5]);
+ 						
+ 						userimg = data.split("/")[5];
+ 					}
+ 				});
+ 				$.ajaxSetup({ async:true });
+ 				
+ 				$(".member_layout").append(
  						'<div class="member_tree_row">' + 
- 						'<span id="onoff"></span>' +
- 						'<img id="userPhSm" src="stylesheets/images/psy-album.jpg"></img>' +
- 						'<span class="member_user">' + username +'</span>' +
+ 						'<span id="onoff"  style= "background-color:' + indexcolor[i] +'"></span>' +
+ 						'<img id="userPhSm" src="/home/'+ userimg+'"></img>' +
+ 						'<span class="member_user">' + indexuser[i] +'</span>' +
  						
- 	/*					'<div class="access_control">' +
- 						'<div class="writebutton selectButton">RW</div>' +
- 						'<div class="readbutton">R</div>' +
- 						'</div>'+
- 						
- 						
- 						'<div class="kickout">' +
- 						'<span class="k-icon k-i-close"></span>' +
- 						'</div>' +*/
- 						
+ 		
  						
  						'</div>');
  			}
@@ -256,20 +274,22 @@ var collaboration = {
 		$(window).unload(function() {
  			self.leave();
  		});
-	},
+	}, 
 
 	//변경 사항이 발생하면 이를 전달해주기 위한 메서드입니다.
 	update_change: function(data){
 		var self = this;
-		
 		if(socket != null){
 			if (socket.socket.connected) {
 				//수정한 내용을 서버에 전달합니다.
-				socket.emit("message", '{"channel": "editing", "action":"change", "username":"' + username + '", "filepath":"' + filepath + '", "message":' + JSON.stringify(data) + '}');
+				socket.emit("message", '{"channel": "editing", "action":"change", "CollaboFileName":"' 
+						+ this.CollaboFileName + '", "projectEach":"' + this.projectEach + '", "username":"' + username + '", "filepath":"' 
+						+ filepath + '", "message":' + JSON.stringify(data) + '}');
 				
 				clearTimeout(this.auto_save_timer);
 				var action = function(){
-					self.save();
+					editor.save();
+					//console.log("auto-save");
 				}
 				this.auto_save_timer = setTimeout(action, 5000);
 			}
@@ -282,9 +302,19 @@ var collaboration = {
 		if(socket != null){
 			if (socket.socket.connected) {
 				data.username = self.username;
+				data.CollaboFileName = self.CollaboFileName;
 				
 				//커서 위치 정보를 서버에 전달합니다.
-				socket.emit("message", '{"channel": "editing", "action":"cursor", "username":"' + username + '", "filepath":"' + filepath + '", "message":' + JSON.stringify(data) + '}');
+				socket.emit("message", '{"channel": "editing", "action":"cursor", "CollaboFileName":"' 
+						+ this.CollaboFileName + '", "projectEach":"' + this.projectEach + '", "username":"' + username + '", "filepath":"' 
+						+ filepath + '", "message":' + JSON.stringify(data) + '}');
+			}
+		}
+	},
+	update_room: function(data){
+		if(socket != null){
+			if (socket.socket.connected) {
+				socket.emit("roomjoin", '{"projectEach":"' + this.projectEach + '", "username":"' + username + '","message":' + JSON.stringify(data) + '}');
 			}
 		}
 	},
@@ -332,7 +362,6 @@ var collaboration = {
 	
 	//커서의 위치를 할당하는 부분입니다.
 	set_cursor: function(message) {
-		console.log("커서위치 할당", message);
 		
 		if(message.username != username){
 			//charCoords와 getScrollInfo는 코드 미러의 API입니다.
@@ -344,7 +373,7 @@ var collaboration = {
 			var left = parseInt(coords.left) - parseInt($(".CodeMirror-scroll").offset().left)  + scroll.left;
 			
 			var username = message.username;
-			
+			var ccolor = u_color[u_name.indexOf(username)];
 			//이미 해당 사용자의 이름으로 된 커서가 존재하는 경우에는 위치만 갱신시켜 줍니다.
 			if ($(".CodeMirror-scroll").find(".username_" + username).length > 0) {
 				$(".CodeMirror-scroll").find(".username_" + username).css("top", top - 8);
@@ -357,18 +386,6 @@ var collaboration = {
 			else {
 				$(".CodeMirror-scroll").prepend("<span class='username_" + username + " username' style='top:" + (top - 8) + "px; left:" + (left + 5) + "px;'>" + username + "</span>");
 				$(".CodeMirror-scroll").prepend("<span class='cursor_" + username + " cursor' style='top:" + top + "px; left:" + left + "px;'></span>");
-				
-				var red = Math.floor(Math.random()*206) - Math.floor(Math.random()*30);
-				var green = Math.floor(Math.random()*206) - Math.floor(Math.random()*30);
-				var blue = Math.floor(Math.random()*206) - Math.floor(Math.random()*30);
-				
-				var light_red = (red + 90 >= 255)? 255 : red + 90;
-				var light_green = (red + 90 >= 255)? 255 : green + 90;
-				var light_blue = (red + 90 >= 255)? 255 : blue + 90;
-				
-				var color = '#' + red.toString(16) + green.toString(16) + blue.toString(16);
-				var light_color = '#' + light_red.toString(16) + light_green.toString(16) + light_blue.toString(16);
-				
 				var color1=["#FF5E00", "#4374D9", "#2F9D27", "#F361DC", "#FFE400", "#FF007F"];
  				var xx;
 				
@@ -393,8 +410,6 @@ var collaboration = {
 				$(".CodeMirror-scroll").find(".username_" + username).css("color", '#fff');
 				$(".CodeMirror-scroll").find(".cursor_" + username).css("border-color", xx);
 				
-				
-				
 			}
 		}
 
@@ -417,7 +432,8 @@ var collaboration = {
 	//새로 접속할 때 호출되는 메서드입니다.
 	join: function () {
 		socket.emit("join", '{"channel": "workspace", "workspace": ' 
-				+ '"'	+ this.projectEach + '",' + '"action":"join", "username":"' + username + '", "message":"hello"}');
+				+ '"'	+ this.projectEach + '",' + '"action":"join", "CollaboFileName":"' 
+				+ this.CollaboFileName + '", "username":"' + username + '", "message":"hello"}');
 	},
 	
 	//에디터를 떠날 때 호출되는 메서드입니다.
@@ -430,12 +446,10 @@ var collaboration = {
 	message_process : function(message){
 		var self = this;
 		
-		if (socket.socket.connected) {
 		
-			//console.log(message);
+		if (socket.socket.connected) {
 			
 			var encodedMsg = encodeURIComponent(message);
-			
 			socket.emit("message", '{"channel": "chat", "action":"send_message", "username":"' + username + '", "message":"' + encodedMsg + '"}');
 		}
 	}

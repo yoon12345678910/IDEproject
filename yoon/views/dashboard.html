@@ -24,7 +24,7 @@
 	<img id="rigthImg" src="/stylesheets/img/small_logo.jpg">
 	<b id="username">username</b>
 	<div class="button-signout button-signoutIcon  button-signoutDefault " style="box-sizing: border-box; min-width: 1px; min-height: 1px; max-width: 10000px; max-height: 10000px; margin: 0px;">
-                    <div class="icon" style="background-image: url(https://d6ff1xmuve0sx.cloudfront.net/nc-3.0.868-a42b657f/static/oldclient/dashboard/style/icons/dashboard_signout.png);"></div>
+                    <div class="icon" style="background-image: url(https://d6ff1xmuve0sx.cloudfront.net/nc-3.0.2738-39bf7959/static/oldclient/dashboard/style/icons/dashboard_signout.png);"></div>
                     <div id="logout" class="label">Log out</div>
                 </div>
 	<div id="homeBtn"></div>
@@ -108,7 +108,9 @@
 	
 	<div id="teamMember">
 		<span id= "memberS">Team member()</span>
-		<div id = "memberList" style="background-image:url(https://secure.gravatar.com/avatar/3f94d531760003ae4d5b99d8329024fe?s=24)"></div>
+		<div id = "memberList" style="background-image:url(https://secure.gravatar.com/avatar/3f94d531760003ae4d5b99d8329024fe?s=24)">
+			<div id ="mem"></div>
+		</div>
 	</div>
 	
 	<div id="editorForm">
@@ -157,12 +159,12 @@
 	
 </body>
 <!-- kendo -->
-	
-	<script src="stylesheets/js/jquery.min.js"></script>  
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- 	<script src="stylesheets/js/jquery.min.js"></script>   -->
 	<script src="stylesheets/js/kendo/angular.min.js"></script>
     <script src="stylesheets/js/kendo/kendo.all.min.js"></script>
     <script src="stylesheets/js/kendo/console.js"></script>
-    <script src="/stylesheets/js/index.js" type="text/javascript"></script>
+    <script src="/modules/index.js" type="text/javascript"></script>
     <script src='/stylesheets/js/handlebars-v2.0.0.js'></script>
     <script src='/stylesheets/js/require.js'></script>
 	<script src="stylesheets/js/jquery.easing.js"></script>
@@ -173,13 +175,11 @@
             var el = kendo.fx($("#album")),
                 flip = el.flip("horizontal", $("#album-cover"), $("#album-contents")),
                 zoom = el.zoomIn().startValue(1).endValue(0.7);
-
             flip.add(zoom).duration(200);
 			
             $("#album-cover").click(function() {
                 flip.stop().play();
             });
-
             $("#album-contents").click(function() {
                 flip.stop().reverse();
             });
@@ -196,7 +196,7 @@
 		$(document).ready(function(){
 			$('#slidorion').slidorion({
 				speed: 500,
-				interval: 10000,
+				interval: 5000,
 				effect: 'slideDown'
 			});
 		});
@@ -204,15 +204,14 @@
 		$(function(){
 		
 			$('#about').click(function(){
-  			$('html, body').animate({ scrollTop: $('#aboutlink').offset().top }, 1000);
+  			$('html, body').animate({ scrollTop: $('#aboutlink').offset().top }, 500);
    			return false;});
-
   			$('#start').click(function(){
-  			$('html, body').animate({ scrollTop: $('#startlink').offset().top }, 1000);
+  			$('html, body').animate({ scrollTop: $('#startlink').offset().top }, 500);
    			return false;});
    			
    			$('#contact').click(function(){
-  			$('html, body').animate({ scrollTop: $('#contactlink').offset().top }, 1000);
+  			$('html, body').animate({ scrollTop: $('#contactlink').offset().top }, 500);
    			return false;});
 		});
 	</script>

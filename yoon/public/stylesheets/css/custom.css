@@ -61,7 +61,7 @@ body{
 
 #userMenu{
 	position: absolute;
-	right : 13.8%;
+	right : 16.8%;
 	z-index: auto;
 }
 
@@ -148,8 +148,8 @@ body{
 .vertical_btn{
 	position: absolute;
 	padding : 7px 3px 3px 3px;
-	left:-1.5em;
-	height :1.6em;
+	left:-1.8em;
+	height :0.6em;
 	top : 2.6em;
 	color:#A1A1A1;
  	writing-mode:tb-rl;
@@ -165,8 +165,8 @@ body{
 #Collaborate_btn.btn_yellow{
 	position: absolute;
 	padding : 7px 3px 3px 3px;
-	left:-1.5em;
-	height :1.6em;
+	left:-1.8em;
+	height :0.6em;
 	top : 2.6em;
 	color:#fff;
  	writing-mode:tb-rl;
@@ -183,8 +183,8 @@ body{
 	position: absolute;
 	cursor : pointer;
 	padding : 7px 3px 3px 3px;
-	left: -0.4em;
-	height :1.6em;
+	left: -0.6em;
+	height :.6em;
 	top: 7.4em;
 	color:#A1A1A1;
  	writing-mode:tb-rl;
@@ -243,7 +243,7 @@ body{
   padding-right: 5px;
   position: absolute;
   top: 2.84em;
-  width: 16.5%;
+  width: 15.8%;
 }
 
 #workspaceRefresh{
@@ -271,7 +271,7 @@ body{
 
 #workspace-proName{
   line-height : 20px;	
-  left : 12px;
+/*   left : 12px; */
   position: absolute;
   width: 100%;
   top: 30px;
@@ -283,7 +283,7 @@ body{
   background-color: #2b2b2b;
   height: 100%;  
   
-  left: 1px;
+  left: -7px;
   overflow: auto;
   padding-left: 5px;
   padding-right: 5px;
@@ -380,7 +380,7 @@ body{
 
 #shareBtn{
 	position: absolute;
-	right: 26.5%;
+	right: 37.5%;
 }
 
 

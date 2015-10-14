@@ -352,7 +352,7 @@ margin-bottom: 35px;
 	var rpwd = 0;
 	var pwdC = 0;
 	
-			$("#rid").keyup(function(data){
+			$("#rid").focusout(function(data){
 				if($('#rid').val().length > 4 && $('#rid').val().length < 16){
 						$.get("/uid_check",{
 							id : $('#rid').val()
@@ -376,7 +376,7 @@ margin-bottom: 35px;
 			});
 	
 			
-			$("#email").keyup(function(data){
+			$("#email").focusout(function(data){
 				if(etext.test($('#email').val())==false){
 					$('#email').css('border', '2px solid red');
 					$('#label_Email').html("@를 포함한 이메일 형식으로 입력하세요.!");
@@ -430,7 +430,7 @@ margin-bottom: 35px;
 					$('#rpwd').css('border', '2px solid red');
 					$('#pwd_confirm').css('border', '2px solid red');
 					
-					$("#label_rpwd").html("비밀번호가 동일하지 않습니다.");
+					//$("#label_rpwd").html("비밀번호가 동일하지 않습니다.");
 					$("#label_pwd_confirm").html("비밀번호가 동일하지 않습니다.");
 					//alert("비밀번호가 동일하지 않습니다.");
 				}else if($('#rpwd').val().length == 0 || $('#pwd_confirm').val().length == 0){

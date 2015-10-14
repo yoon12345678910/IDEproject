@@ -17,6 +17,58 @@ exports.list = function(req, res){
   res.send("respond with a resource");
 };
 
+exports.plist = function(req, res){
+	client.query('SELECT T1.UID,T1.PID,T1.AUTH,T2.PNAME,T2.PDATE, (select UID FROM COLLABO WHERE AUTH ="MASTER" AND PID = T1.PID) AS MASTER FROM COLLABO T1 LEFT OUTER JOIN PROJECTS T2 USING(PID) WHERE UID=?', 
+			[req.query.id],
+			
+			function(error, result) {
+				if (result.length) {
+					res.send({"collabos" : result});
+					
+				} else {
+					console.log('실패');
+					res.send({
+						"result" : "무"
+					});
+				}
+			});
+};
+
+
+exports.pUserlist = function(req, res){
+	client.query('select UID FROM COLLABO WHERE PID=?', 
+			[req.query.pid],
+			
+			function(error, result) {
+				if (result.length) {
+					res.send(result);
+					
+				} else {
+					console.log('실패');
+					res.send({
+						"result" : "무"
+					});
+				}
+			});
+};
+
+exports.checkPro = function(req, res){
+	client.query('select UID FROM COLLABO  WHERE PID=? AND AUTH="MASTER"', 
+			[req.query.pid],
+			
+			function(error, result) {
+				if (result.length) {
+					res.send(result);
+					
+				} else {
+					console.log('실패');
+					res.send({
+						"result" : "무"
+					});
+				}
+			});
+};
+
 exports.idCheck = function(req, res){
 	client.query('SELECT UID FROM USERS WHERE UID=?', 
 			[req.query.id],

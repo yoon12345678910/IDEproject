@@ -17,6 +17,18 @@ module.exports = {
 		
 		return data;
 	},
+
+	
+	firstload: function (pname, fname) {
+		if(!fname){
+			ff = "/home/yoon/myFirstProject/NewFile.html";
+			data = fs.readFileSync(ff);
+		}else{
+			ff = "/home/yoon/kjs/" + pname+ "/" + fname.substring(fname.lastIndexOf("/")+1, fname.length);
+			data = fs.readFileSync(ff);
+		}
+		return data;
+	},
 	
 	//파일을 저장하는 부분입니다.
 	save: function (contents, currentFile) {
@@ -95,9 +107,10 @@ module.exports = {
 	},
 	
 	fileImport: function(file){
-	
+console.log("aa",file);
 		for(var i = 0; i < file.length; i++){
-			
+	/*		console.log("file[i].target_path", file[i].target_path);
+			console.log("file[i].tmp_path", file[i].tmp_path);*/
 					var ws =  fs.createWriteStream(file[i].target_path);
 					var stream = fs.createReadStream(file[i].tmp_path);
 		
@@ -130,7 +143,6 @@ module.exports = {
 	
 	
 	existImg:function(img){
-		
 		
 		//console.log("aa", img + ".png");
 		var data = fs.existsSync(img  + ".png");

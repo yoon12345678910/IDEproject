@@ -33,14 +33,15 @@ Owner of DHTMLgoodies.com
 	var activeTabIndex = new Array();
 	var MSIE = navigator.userAgent.indexOf('MSIE')>=0?true:false;
 
+	
+	var filePath = "/home/yoon/kjs/bit63/";
 	var regExp = new RegExp(".*MSIE ([0-9]\.[0-9]).*","g");
 	var navigatorVersion = navigator.userAgent.replace(regExp,'$1');
-
 	var ajaxObjects = new Array();
 	var tabView_countTabs = new Array();
 	var tabViewHeight = new Array();
 	var tabDivCounter = 0;
-	var closeImageHeight = 8;	// Pixel height of close buttons
+	var closeImageHeight	 = 8;	// Pixel height of close buttons
 	var closeImageWidth = 8;	// Pixel height of close buttons
 	
 	function setPadding(obj,padding){
@@ -111,10 +112,16 @@ Owner of DHTMLgoodies.com
 	function tabClick()
 	{
 		var idArray = this.id.split('_');
+		//console.log("parentNode", this.parentNode.parentNode.id,idArray[idArray.length-1].replace(/[^0-9]/gi,''));
 		showTab(this.parentNode.parentNode.id,idArray[idArray.length-1].replace(/[^0-9]/gi,''));
 		var currentTabName = this.childNodes[0].childNodes[0].data;	
-		console.log("currentTabName", currentTabName);
-		editor.currentFile = currentTabName;
+		//console.log("click", filePath + ""+ currentTabName);	
+		editor.currentFile = filePath + ""+ currentTabName.trim();
+		$.get('/get_file_contents',  {path: filePath + ""+ currentTabName.trim()}, function (result) {
+			editor.codemirror.setValue("");
+			editor.codemirror.setValue(result);
+			editor.codemirror.focus();
+		});
 		//currentTab = currentTabName;
 	}
 
@@ -197,8 +204,9 @@ Owner of DHTMLgoodies.com
 			var span = document.createElement('SPAN');
 			span.innerHTML = tabTitles[no];
 			span.style.position = 'relative';
-			aTab.appendChild(span);
 
+			aTab.appendChild(span);
+			
 			if(closeButtonArray[no]){
 				var closeButton = document.createElement('IMG');
 				closeButton.src = 'stylesheets/img/close.gif';
@@ -211,15 +219,14 @@ Owner of DHTMLgoodies.com
 				closeButton.style.right = '0px';
 				closeButton.onmouseover = hoverTabViewCloseButton;
 				closeButton.onmouseout = stopHoverTabViewCloseButton;
-
+				
 				span.innerHTML = span.innerHTML + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-
 				var deleteTxt = span.innerHTML+'';
 
 				closeButton.onclick = function(){ deleteTab(this.parentNode.innerHTML) };
 				span.appendChild(closeButton);
 			}
-
+			
 			var img = document.createElement('IMG');
 			img.valign = 'bottom';
 			img.src = 'stylesheets/img/tab_right_inactive.png';
@@ -232,6 +239,7 @@ Owner of DHTMLgoodies.com
 				aTab.style.cursor = 'hand';
 			}	// End IE5.x FIX
 			aTab.appendChild(img);
+			//span.id = filePath;
 		}
 
 		var tabs = dhtmlgoodies_tabObj[mainContainerID].getElementsByTagName('DIV');
@@ -282,15 +290,20 @@ Owner of DHTMLgoodies.com
 	}
 
 
-	function createNewTab(parentId,tabTitle,tabContent,tabContentUrl,closeButton)
+	function createNewTab(parentId,tabTitle,tabPath,tabContentUrl,closeButton)
 	{
+		
+		//console.log("CnewTaab", tabPath);
+		
+		
 		if(tabView_countTabs[parentId]>=tabView_maxNumberOfTabs)return;	// Maximum number of tabs reached - return
 		var div = document.createElement('DIV');
 		div.className = 'dhtmlgoodies_aTab';
 		dhtmlgoodies_tabObj[parentId].appendChild(div);
 
 		var tabId = initTabs(parentId,Array(tabTitle),0,'','',Array(closeButton),true);
-		if(tabContent)div.innerHTML = tabContent;
+		//if(tabPath)filePath = tabPath;
+		//console.log("fileA",filePath);
 		if(tabContentUrl){
 			var ajaxIndex = ajaxObjects.length;
 			ajaxObjects[ajaxIndex] = new sack();

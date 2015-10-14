@@ -188,7 +188,7 @@
                     <ul>
                         <li>
                             <div id="template" style="padding: 10px;">
-                                <img id = "userImg" src="" 
+                                <img id = "userImg" src=" " 
                                 height="100" width= "100"/>
                                	
                                	<div>
@@ -239,6 +239,7 @@
 			<div class="dhtmlgoodies_aTab">
 				<textarea id="code_0" name="code_0"></textarea>
 			</div>
+  
 			<div id="preBtns" style="display: none">
 			<div id="prePanel">
 				<span>Result</span>
@@ -322,9 +323,9 @@
 			<b id="inviteTop"> Invite User</b><span id="existPeople"></span>
 			<div id="invitePeopleInput"><b>username</b><input id="invitePeople"/></div>
 			
-				<button type ="button" id ="rwBtn" class="k-button" >Rw</button>
+		<!-- 		<button type ="button" id ="rwBtn" class="k-button" >Rw</button>
 				<button type ="button" id ="rBtn" class="k-button" >R</button>
-			
+			 -->
 			<button type ="button" id ="inviteBtn" class="k-button" disabled="disabled">Invite</button>
 		</div>
 		
@@ -388,7 +389,6 @@
 	var pdate;
 	var pid;
 	
-	
 	var filepath = "untitled.js";
 	
 	var dont_update_first = false;
@@ -418,16 +418,18 @@
 		$('#newFolderTitle img').css('visibility', 'hidden');
 /*getSession  */
 		
+		
+		
 		$.ajaxSetup({ async:false });
 		$.post('/getSession',  function(data){
-		
+			
 			username = data.result.user;
 			auth = data.result.auth;
 			pname = data.result.pname;
 			pdate = data.result.pdate;
 			pid = data.result.pid;
 			$('#userId').html(username);
-			$('#userTemplateId').html(username);
+	
 			
 			$('.projectPath').html("/" + pname);
 			$('#projectAuth').html(auth);
@@ -445,20 +447,26 @@
 				$('#userImg').attr("src", "/stylesheets/images/default.png");
 			}
 			 */
-			 
-			$.post('/existUserImg', {userimg : '/home/yoon/kjs/userimg/' + username} , function(data){
-				
-				if(data == false){
-					$('#userImg').attr("src", "/home/" + "default.png");
-					
-				}else{
-					$('#userImg').attr("src", "/home/" + data.split("/")[5]);
-				}
-			});
+
 			 
 		});		
 		
 		$.ajaxSetup({ async:true });
+		$.post('/existUserImg', {userimg : '/home/yoon/kjs/userimg/' + username} , function(data){
+			 console.log("v",username);
+			 console.log("va",data);
+			if(data == false){
+				$('#userImg').attr("src", "/home/" + "default.png");
+				 console.log("vc");
+			}else{
+				 console.log("v221");
+				$('#userImg').attr("src", "/home/" + data.split("/")[5]);
+			}
+		});
+		
+		$.getJSON('/checkPro', {pid : pid}, function(data){
+			$('#userTemplateId').html(data[0].UID);
+		});
 		
 /*kendo*/
 	   $('#projectPath').val('/home/yoon/kjs/' + pname);
@@ -719,12 +727,14 @@
 		
 		editor.num = 0;
 		editor.currentFile = '/home/yoon/kjs/' + pname + '/' + "newFile.html";
+		editor.currentProject = pname;
 		editor.init();
-		editor.load();
+		editor.firstload();	
 		
-		collaboration.projectEach = "newFile.html";
+		collaboration.projectEach = pname;
 		collaboration.username = username;
-		
+		var aa = "newFile.html"
+		collaboration.CollaboFileName = aa;
 		collaboration.init();
 		collaboration.join(); 
 		 
@@ -753,10 +763,7 @@
 		.on('filetreechecked', function (e, data) { console.log(data); })
 		.on('filetreeunchecked', function (e, data) { console.log(data); })
 		.on('filetreeclicked', function(e, data) {
-			console.log("filetreeclicked", data);
-			
-			
-			
+		
 			$.get('/get_file_contents',  {path: data.rel}, function (result) {
 				
 				var editorB = clone(editor);
@@ -765,21 +772,65 @@
 				$('#tabViewdhtmlgoodies_tabView1_' + index).append(
 						'<textarea id =' + 'code_' + index + ' ' + 'name=' + 'code_' + index + '></textarea>'
 				); 
+				
+				
+				//collaboration.fullFileName = data.rel;
+				collaboration.CollaboFileName = data.value;
 				editorB.num = index;
 				editorB.init();
+				editorB.updateRoom(data.value);
 				
+				
+				editorB.currentFile = data.rel;
+				
+				
+				editorB.codemirror.setValue("");
 				editorB.codemirror.setValue(result);
 				editorB.codemirror.focus();
+			
+				//collaborationB.init();
+				collaboration.join();
+		/* 	
 				
 				
-				collaborationB.projectEach = data.value;
+		
+				collaboration.init();
+				collaboration.join();
+ */
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				/* 	
+			
+			
+			
+			
+				this.filepath = data.rel;
+				collaboration.init();
+				collaboration.join();
+				
+				//collaborationB.projectEach = pname;
+				//collaborationB.CollaboFileName =  data.rel;
+				collaborationB.init();
 				collaborationB.join();
+				
+				
+				collaborationB.collaboInit(); */
+				
+				
 				index++;
 				});
 			
-				editor.currentFile = data.rel;
+				
 				currentEditor_file = data.rel;
-			createNewTab('dhtmlgoodies_tabView1', data.value, '', '',true);
+			createNewTab('dhtmlgoodies_tabView1', data.value, data.rel, '',true);
 			});
 		});
 		</script>
@@ -935,12 +986,12 @@
 				callback : function(key, options) {
 					var m = "clicked: " + key + " on " + $(this).attr('id');
 					
-					console.log("여기", m);
+			/* 		console.log("여기", m);
 					//window.console && console.log(m) || alert(m);
 					console.log("aa",$(this).attr('id'));
 					console.log("bb",this[0].getElementsByTagName('A')[0].text);
 					console.log("cc",$(this).attr('id').split(this[0].getElementsByTagName('A')[0].text)[0]);
-					
+					 */
 					var treeFull = $(this).attr('id');
 					var treeText = this[0].getElementsByTagName('A')[0].text;
 					var treeSplit = treeFull.split(treeText)[0];					
