@@ -71,8 +71,8 @@ public class CollaboControl {
     resultMap.put("memberNo",memberNo);
     resultMap.put("collabos", collaboService.getlist(uid));
     
-    System.out.println(resultMap.get("collabos") + "콜라보스");
-    System.out.println("리턴전");
+    System.out.println("콜라보"+resultMap.get("collabos"));
+    System.out.println("1");
     return resultMap;
   }
   

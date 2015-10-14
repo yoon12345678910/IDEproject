@@ -53,7 +53,7 @@ public class CollaboService {
 	
 	
 	public List<?> getlist(String uid){
-		System.out.println("getlist 내부");
+		System.out.println("getlist 내부2");
 		return collaboDao.collaboProject(uid);
 		
 	}

@@ -28,9 +28,16 @@
   <select id="totalMember" parameterType="String" resultType="int">
     SELECT count(PID) FROM COLLABO WHERE UID=#{value}
   </select>
-   <select id="collaboProject" parameterType="String" resultMap="collaboList">
+ <!--   <select id="collaboProject" parameterType="String" resultMap="collaboList">
   	SELECT T1.UID,T1.PID,T1.AUTH,T2.PNAME,T2.PDATE FROM COLLABO T1 LEFT OUTER JOIN PROJECTS T2 USING(PID) WHERE UID=#{value}
-  </select>
+  </select> -->
+  
+  <select id="collaboProject" parameterType="String" resultMap="collaboList">
+  	 SELECT T1.UID,T1.PID,T1.AUTH,T2.PNAME,T2.PDATE, (select UID FROM COLLABO WHERE AUTH ="MASTER" AND PID = T1.PID) AS MASTER FROM COLLABO T1 LEFT OUTER JOIN PROJECTS T2 USING(PID) WHERE UID=#{value}
+  	
+  	 </select>
+  
+  
   <select id="myAuth" parameterType="Map" resultType="String">
   	SELECT AUTH FROM COLLABO WHERE UID=#{uid} AND PID=#{pid}
   </select>
